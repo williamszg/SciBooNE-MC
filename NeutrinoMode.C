@@ -100,8 +100,27 @@ void NeutrinoMode::Loop()
             if((npart == StdHepN - 1) && tfstate == 2) //Are there only two particles in the final state in this interaction? And are you done slewing over all of the particles in this event?
                {
                
-               angle = acos (((StdHepP4[nppart][0]*StdHepP4[nmpart][0]) + (StdHepP4[nppart][1]*StdHepP4[nmpart][1]) + (StdHepP4[nppart][2]*StdHepP4[nmpart][2])) / sqrt ((((StdHepP4[nppart][0]*StdHepP4[nppart][0]) + (StdHepP4[nppart][1]*StdHepP4[nppart][1]) + (StdHepP4[nppart][2]*StdHepP4[nppart][2]))*((StdHepP4[nmpart][0]*StdHepP4[nmpart][0]) + (StdHepP4[nmpart][1]*StdHepP4[nmpart][1]) + (StdHepP4[nmpart][2]*StdHepP4[nmpart][2]))))); //This is the angle between the momentum vectors of the muon and the pion found through a dot product
+               angle1 = acos (((StdHepP4[nppart][0]*StdHepP4[nmpart][0]) + (StdHepP4[nppart][1]*StdHepP4[nmpart][1]) + (StdHepP4[nppart][2]*StdHepP4[nmpart][2])) / sqrt ((((StdHepP4[nppart][0]*StdHepP4[nppart][0]) + (StdHepP4[nppart][1]*StdHepP4[nppart][1]) + (StdHepP4[nppart][2]*StdHepP4[nppart][2]))*((StdHepP4[nmpart][0]*StdHepP4[nmpart][0]) + (StdHepP4[nmpart][1]*StdHepP4[nmpart][1]) + (StdHepP4[nmpart][2]*StdHepP4[nmpart][2]))))); //This is the first attempt to find the angle between the momentum vectors of the muon and the pion using the brute force dot product by definition
                
+
+               //############################################################
+               //### This is a different method for the angle calculation ###
+               //############################################################
+
+               double x1 = StdHepP4[nppart][0]*StdHepP4[nmpart][0]; //x-component of dot product between muon and pion
+               double y1 = StdHepP4[nppart][1]*StdHepP4[nmpart][1]; //y-component of dot product between muon and pion
+               double z1 = StdHepP4[nppart][2]*StdHepP4[nmpart][2]; //z-component of dot product between muon and pion
+               double x2 = StdHepP4[nmpart][0]*StdHepP4[nmpart][0]; //x-component of muon momentum magnitude
+               double y2 = StdHepP4[nmpart][1]*StdHepP4[nmpart][1]; //y-component of muon momentum magnitude
+               double z2 = StdHepP4[nmpart][2]*StdHepP4[nmpart][2]; //z-component of muon momentum magnitude
+               double x3 = StdHepP4[nppart][0]*StdHepP4[nppart][0]; //x-component of pion momentum magnitude
+               double y3 = StdHepP4[nppart][1]*StdHepP4[nppart][1]; //y-component of pion momentum magnitude
+               double z3 = StdHepP4[nppart][2]*StdHepP4[nppart][2]; //z-component of pion momentum magnitude
+               double dot1 = x1 + y1 + z1; //This is the dot product between the muon and pion momentum
+               double mag1 = sqrt(x2 + y2 + z2); //This is the magnitude of the muon momentum
+               double mag2 = sqrt(x3 + y3 + z3); //This is the magnitude of the pion momentum
+               double angle2 = acos( dot1/(mag1*mag2)); //This is the second way of finding the angle between the muon and pion momentums
+
                //std::cout<<"Muon Z Momentum"<<StdHepP4[nmpart][2]<<std::endl;
                //std::cout<<"Pion Z Momentum"<<StdHepP4[nppart][2]<<std::endl;
                //std::cout<<std::endl;
@@ -116,7 +135,7 @@ void NeutrinoMode::Loop()
                hMuonMomentumz->Fill(StdHepP4[nmpart][2] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
                hMuonEnergy->Fill(StdHepP4[nmpart][3] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
 
-               hAngles->Fill(angle); //This fills the Opening Angles histogram with the angle between the two momentums
+               hAngles->Fill(angle2); //This fills the Opening Angles histogram with the angle between the two momentums
 
                nppresent = 0;
                nmpresent = 0;
