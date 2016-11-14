@@ -20,11 +20,11 @@ TH1D *hPionMomentumy = new TH1D("hPionMomentumy", "Pion Y Momentum", 500, -2500,
 TH1D *hPionMomentumz = new TH1D("hPionMomentumz", "Pion Z Momentum", 500, -2500, 2500); //This is the histogram for the Pion Z Momentum
 TH1D *hPionEnergy = new TH1D("hPionEnergy", "Pion Energy", 500, 0, 5000); //This is the histogram for the Pion Energy
 
-TH1D *hAngles = new TH1D("hAngles", "Opening Angles", 500, 0, 2*PI); //This is the histogram for the opening angles between the muon and the pion
+TH1D *hAngles1 = new TH1D("hAngles1", "Opening Angles", 500, 0, 360); //This is the histogram for the opening angles between the muon and the pion
 
-TH1D *h1 = new TH1D("h1", "X Vertex Distribution",100,0,3);
-TH1D *h2 = new TH1D("h2", "Y Vertex Distribution",100,0,3);
-TH1D *h3 = new TH1D("h3", "Z Vertex Distribution",100,0,3);
+TH1D *h1 = new TH1D("h1", "X Vertex Distribution", 100, 0, 3.0);
+TH1D *h2 = new TH1D("h2", "Y Vertex Distribution", 100, 0, 3.0);
+TH1D *h3 = new TH1D("h3", "Z Vertex Distribution", 100, 0, 1.7);
 
 // Define a function
 
@@ -44,7 +44,8 @@ void NeutrinoMode::Loop()
    int nmpart = 0;
    int nppart = 0;
    int tfstate = 0;
-   double angle = 0;
+   double rm1 = 0;
+   double rp1 = 0;
 
    for (Long64_t jentry=0; jentry<nentries;jentry++) 
    {
@@ -56,12 +57,13 @@ void NeutrinoMode::Loop()
       TRandom3 *flat = new TRandom3();
       rand->SetSeed(jentry);
       flat->SetSeed(jentry);
-      double Xpos = rand->Gaus(1.5,2.5);
-      double Ypos = rand->Gaus(1.5,2.5);
-      double Zpos = flat->Uniform(0,3);
+      double Xpos = rand->Gaus(1.5,3.5);
+      double Ypos = rand->Gaus(1.5,3.5);
+      double Zpos = flat->Uniform(0,1.7);
       h1->Fill(Xpos);
       h2->Fill(Ypos);
       h3->Fill(Zpos);
+
       for(int npart = 0; npart < StdHepN; npart++)
       {
 
@@ -97,16 +99,14 @@ void NeutrinoMode::Loop()
          if(nppresent == 1) //Is the total number of pions in the event one?
             {
 
-            if((npart == StdHepN - 1) && tfstate == 2) //Are there only two particles in the final state in this interaction? And are you done slewing over all of the particles in this event?
+            if((npart == StdHepN - 1) && tfstate == 2 && StdHepP4[nmpart][2]>0 && StdHepP4[nppart][2]>0) //Are there only two particles in the final state in this interaction? And are you done slewing over all of the particles in this event?
                {
                
-               angle1 = acos (((StdHepP4[nppart][0]*StdHepP4[nmpart][0]) + (StdHepP4[nppart][1]*StdHepP4[nmpart][1]) + (StdHepP4[nppart][2]*StdHepP4[nmpart][2])) / sqrt ((((StdHepP4[nppart][0]*StdHepP4[nppart][0]) + (StdHepP4[nppart][1]*StdHepP4[nppart][1]) + (StdHepP4[nppart][2]*StdHepP4[nppart][2]))*((StdHepP4[nmpart][0]*StdHepP4[nmpart][0]) + (StdHepP4[nmpart][1]*StdHepP4[nmpart][1]) + (StdHepP4[nmpart][2]*StdHepP4[nmpart][2]))))); //This is the first attempt to find the angle between the momentum vectors of the muon and the pion using the brute force dot product by definition
-               
+               double angle1 = (180/PI)*acos (((StdHepP4[nppart][0]*StdHepP4[nmpart][0]) + (StdHepP4[nppart][1]*StdHepP4[nmpart][1]) + (StdHepP4[nppart][2]*StdHepP4[nmpart][2])) / sqrt ((((StdHepP4[nppart][0]*StdHepP4[nppart][0]) + (StdHepP4[nppart][1]*StdHepP4[nppart][1]) + (StdHepP4[nppart][2]*StdHepP4[nppart][2]))*((StdHepP4[nmpart][0]*StdHepP4[nmpart][0]) + (StdHepP4[nmpart][1]*StdHepP4[nmpart][1]) + (StdHepP4[nmpart][2]*StdHepP4[nmpart][2]))))); //This is the first attempt to find the angle between the momentum vectors of the muon and the pion using the brute force dot product by definition
 
                //############################################################
                //### This is a different method for the angle calculation ###
                //############################################################
-
                double x1 = StdHepP4[nppart][0]*StdHepP4[nmpart][0]; //x-component of dot product between muon and pion
                double y1 = StdHepP4[nppart][1]*StdHepP4[nmpart][1]; //y-component of dot product between muon and pion
                double z1 = StdHepP4[nppart][2]*StdHepP4[nmpart][2]; //z-component of dot product between muon and pion
@@ -119,13 +119,13 @@ void NeutrinoMode::Loop()
                double dot1 = x1 + y1 + z1; //This is the dot product between the muon and pion momentum
                double mag1 = sqrt(x2 + y2 + z2); //This is the magnitude of the muon momentum
                double mag2 = sqrt(x3 + y3 + z3); //This is the magnitude of the pion momentum
-               double angle2 = acos( dot1/(mag1*mag2)); //This is the second way of finding the angle between the muon and pion momentums
+               double angle2 = (180/PI)*acos( dot1/(mag1*mag2) ); //This is the second way of finding the angle between the muon and pion momentums
 
                //std::cout<<"Muon Z Momentum"<<StdHepP4[nmpart][2]<<std::endl;
                //std::cout<<"Pion Z Momentum"<<StdHepP4[nppart][2]<<std::endl;
                //std::cout<<std::endl;
 
-               hPionMomentumx->Fill(StdHepP4[nppart][0] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
+               /* hPionMomentumx->Fill(StdHepP4[nppart][0] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
                hPionMomentumy->Fill(StdHepP4[nppart][1] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
                hPionMomentumz->Fill(StdHepP4[nppart][2] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
                hPionEnergy->Fill(StdHepP4[nppart][3] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
@@ -135,14 +135,56 @@ void NeutrinoMode::Loop()
                hMuonMomentumz->Fill(StdHepP4[nmpart][2] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
                hMuonEnergy->Fill(StdHepP4[nmpart][3] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
 
-               hAngles->Fill(angle2); //This fills the Opening Angles histogram with the angle between the two momentums
+               hAngles1->Fill(angle1); //This fills the first Opening Angles histogram with the angle between the two momentums
 
                nppresent = 0;
                nmpresent = 0;
                nmpart = 0;
                nppart = 0;
                nMAPevents++;
-               tfstate = 0;
+               tfstate = 0; */
+
+               double b1 = (1.7 - Zpos)/StdHepP4[nmpart][2]; //This is the time for the evolution for the muon
+               double b2 = (1.7 - Zpos)/StdHepP4[nppart][2]; //This is the time for the evolution for the pion
+               double m1 = Xpos + StdHepP4[nmpart][0]*b1; //This is the evolution of the x position of the muon
+               double p1 = Xpos + StdHepP4[nppart][0]*b2; //This is the evolution of the x position of the pion
+               double m2 = Ypos + StdHepP4[nmpart][1]*b1; //This is the evolution of the y position of the muon
+               double p2 = Ypos + StdHepP4[nppart][1]*b2; //This is the evolution of the y position of the pion
+               double b3 = (1.7 + 0.55 + 1.375 - Zpos)/StdHepP4[nmpart][2]; //This is the time for the evolution of the muon through the MRD
+               double b4 = (1.7 + 0.55 + 1.375 - Zpos)/StdHepP4[nppart][2]; //This is the time for the evolution of the pion through the MRD
+               double m12 = Xpos + StdHepP4[nmpart][0]*b3; //This is the evolution of the x position of the muon
+               double p12 = Xpos + StdHepP4[nppart][0]*b4; //This is the evolution of the x position of the pion
+               double m22 = Ypos + StdHepP4[nmpart][1]*b3; //This is the evolution of the y position of the muon
+               double p22 = Ypos + StdHepP4[nppart][1]*b4; //This is the evolution of the y position of the pion
+               double rm1 = 100*sqrt(((1.7 - Zpos)*(1.7 - Zpos)) + ((m1 - Xpos)*(m1 - Xpos)) + ((m2 - Ypos)*(m2 - Ypos))); //This is the length that the muon traveled from beginning to end of SciBar Detector
+               double rp1 = 100*sqrt(((1.7 - Zpos)*(1.7 - Zpos)) + ((p1 - Xpos)*(p1 - Xpos)) + ((p2 - Ypos)*(p2 - Ypos))); //This is the length that the muon traveled from beginning to end of SciBar Detector
+               double dE1 = 2.04*rm1; //This is the energy lost in MeV by the muon traveling through the SciBar Detector
+               double dE2 = 2.04*rp1; //This is the energy lost in MeV by the pion traveling through the SciBar Detector
+                
+
+               if(p2<3.0 && m2<3.0 && p1<3.0 && m1<3.0 && p22<2.8 && m22<2.8 && p12<3.0 && m12<3.0)
+                  {
+                  
+                  hPionMomentumx->Fill(StdHepP4[nppart][0] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
+                  hPionMomentumy->Fill(StdHepP4[nppart][1] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
+                  hPionMomentumz->Fill(StdHepP4[nppart][2] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
+                  hPionEnergy->Fill(StdHepP4[nppart][3] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
+
+                  hMuonMomentumx->Fill(StdHepP4[nmpart][0] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
+                  hMuonMomentumy->Fill(StdHepP4[nmpart][1] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
+                  hMuonMomentumz->Fill(StdHepP4[nmpart][2] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
+                  hMuonEnergy->Fill(StdHepP4[nmpart][3] * 1000); //Note: We multiply by 1000 to convert between GeV to MeV
+
+                  hAngles1->Fill(angle1); //This fills the first Opening Angles histogram with the angle between the two momentums
+
+                  nppresent = 0;
+                  nmpresent = 0;
+                  nmpart = 0;
+                  nppart = 0;
+                  nMAPevents++;
+                  tfstate = 0;
+
+                  } //<---End if statement that checks if the event was contained within the SciBar detector.
 
                }
 
@@ -519,7 +561,6 @@ void NeutrinoMode::Loop()
 
 
 
-
    // ### Making a TCanvas ###
    TCanvas *c8= new TCanvas("c8","Muon Momentum Z");
    c8->SetTicks();
@@ -574,22 +615,22 @@ void NeutrinoMode::Loop()
    c12->SetFillColor(kWhite);
 
    // === Histogram Drawing Settings ===
-   hAngles->SetLineColor(kRed);
-   hAngles->SetLineStyle(0);
-   hAngles->SetLineWidth(3);
-   hAngles->SetMarkerStyle(8);
-   hAngles->SetMarkerSize(0.9);
+   hAngles1->SetLineColor(kRed);
+   hAngles1->SetLineStyle(0);
+   hAngles1->SetLineWidth(3);
+   hAngles1->SetMarkerStyle(8);
+   hAngles1->SetMarkerSize(0.9);
 
    // ### Labeling the X axis ###
-   hAngles->GetXaxis()->SetTitle("Opening Angles");
-   hAngles->GetXaxis()->CenterTitle();
+   hAngles1->GetXaxis()->SetTitle("Opening Angles (Degrees)");
+   hAngles1->GetXaxis()->CenterTitle();
 
    // ### Labeling the Y axis ###
-   hAngles->GetYaxis()->SetTitle("Events");
-   hAngles->GetYaxis()->CenterTitle();
+   hAngles1->GetYaxis()->SetTitle("Events");
+   hAngles1->GetYaxis()->CenterTitle();
 
    // ### Drawing ###
-   hAngles->Draw();
+   hAngles1->Draw();
 
    // ############################
    // # Setting the Latex Header #
@@ -612,8 +653,10 @@ void NeutrinoMode::Loop()
    leg12->SetFillColor(kWhite);
    leg12->SetLineColor(kWhite);
    leg12->SetShadowColor(kWhite);
-   leg12->AddEntry(hAngles, "Opening Angles");
+   leg12->AddEntry(hAngles1, "Opening Angles");
    leg12->Draw();
+
+
 
 
    // ###############################
