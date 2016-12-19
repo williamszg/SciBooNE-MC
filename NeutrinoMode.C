@@ -927,6 +927,4 @@ void NeutrinoMode::Loop()
    TMuonInfo->Close();
 
 
-   h3->Draw();
-
 }//<---End void loop
