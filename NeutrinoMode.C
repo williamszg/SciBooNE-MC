@@ -22,11 +22,38 @@ TH1D *hPionEnergy = new TH1D("hPionEnergy", "Pion Energy", 500, 0, 5000); //This
 
 TH1D *hAngles1 = new TH1D("hAngles1", "Opening Angles", 500, 0, 360); //This is the histogram for the opening angles between the muon and the pion
 
+
+TH1D *h1 = new TH1D("h1", "X Vertex Distribution", 117, -0.25, 3.25);
+TH1D *h2 = new TH1D("h2", "Y Vertex Distribution", 117, -0.25, 3.25);
+TH1D *h3 = new TH1D("h3", "Z Vertex Distribution", 116, -0.25, 1.95);
+
+TH2D *hMuonxy1 = new TH2D("hMuonxy1", "xy1", 100, 0, 3.0, 100, 0, 3.0); //At end of the SciBar Detector
+TH2D *hMuonxz1 = new TH2D("hMuonxz1", "xz1", 100, 0, 3.0, 100, 1.5, 1.9); //At end of the SciBar Detector
+TH2D *hMuonyz1 = new TH2D("hMuonyz1", "yz1", 100, 0, 3.0, 100, 1.5, 1.9); //At end of the SciBar Detector
+
+TH2D *hMuonxy2 = new TH2D("hMuonxy2", "xy2", 100, 0, 3.0, 100, 0.2, 2.8); //At beginning of the MRD Detector
+TH2D *hMuonxz2 = new TH2D("hMuonxz2", "xz2", 100, 0, 3.0, 100, 2.05, 2.45); //At beginning of the MRD Detector
+TH2D *hMuonyz2 = new TH2D("hMuonyz2", "yz2", 100, 0.1, 2.9, 100, 2.05, 2.45); //At beginning of the MRD Detector
+
+TH1D *h4 = new TH1D("h4", "Layer Distribution", 26, 0, 26); //This is the histogram for which layer the muon stopped in in the steel layers
+
+TH1D *h5 = new TH1D("h5", "Total CC Muon Momentum", 40, 0, 2000); //This is the histogram for the total number of CC events of the muon momentum
+TH1D *h6 = new TH1D("h6", "Good CC Muon Momentum Stopped", 40, 0, 2000); //This is the histogram for the CC events that passed our cuts of the muon momentum
+TH1D *h7 = new TH1D("h7", "Total CC Muon Angle", 40, 0, 180); //This is the histogram for the total number of CC events of the muon angle
+TH1D *h8 = new TH1D("h8", "Good CC Muon Angle Stopped", 40, 0, 180); //This is the histogram for the CC events that passed our cuts of the muon angle
+
+TH1D *h9 = new TH1D("h9", "Good CC Muon Momentum Non-Stopped", 40, 0, 2000); //This is the histogram for the good number of CC events of the muon momentum that did not stop within the muon detector
+TH1D *h10 = new TH1D("h10", "Good CC Muon Angle Non-Stopped", 40, 0, 180); //This is the histogram for the good number of CC events of the muon angle that did not stop within the muon detector
+
+TH1D *h11 = new TH1D("h11", "Total Good CC Events for Muon Momentum", 40, 0, 2000); //This is the stopped and nonstopped good sample of CC events for muon momentum
+TH1D *h12 = new TH1D("h12", "Total Good CC Events for Muon Angle", 40, 0, 180); //This is the stopped and nonstopped good sample of CC events for muon angle
+=======
 TH1D *h1 = new TH1D("h1", "X Vertex Distribution", 100, 0, 3.0);
 TH1D *h2 = new TH1D("h2", "Y Vertex Distribution", 100, 0, 3.0);
 TH1D *h3 = new TH1D("h3", "Z Vertex Distribution", 100, 0, 1.7);
 
 // Define a function
+
 
 void NeutrinoMode::Loop()
 {
@@ -46,9 +73,19 @@ void NeutrinoMode::Loop()
    int tfstate = 0;
    double rm1 = 0;
    double rp1 = 0;
+<<<<<<< HEAD
+   double cA = 0;
+   int stopped = 0;
+   int nstopped = 0;
+   int gevents = 0;
+
+   for (Long64_t jentry=0; jentry<nentries;jentry++) 
+      {
+=======
 
    for (Long64_t jentry=0; jentry<nentries;jentry++) 
    {
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
 
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;
@@ -57,17 +94,33 @@ void NeutrinoMode::Loop()
       TRandom3 *flat = new TRandom3();
       rand->SetSeed(jentry);
       flat->SetSeed(jentry);
+<<<<<<< HEAD
+      double Xpos = rand->Gaus(1.5,1.3);
+      while (Xpos<0 || Xpos>3.0) { Xpos = rand->Gaus(1.5,1.3); }
+      double Ypos = rand->Gaus(1.5,1.05);
+      while (Ypos<0 || Ypos>3.0) { Ypos = rand->Gaus(1.5,1.05); }
+=======
       double Xpos = rand->Gaus(1.5,3.5);
       double Ypos = rand->Gaus(1.5,3.5);
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
       double Zpos = flat->Uniform(0,1.7);
       h1->Fill(Xpos);
       h2->Fill(Ypos);
       h3->Fill(Zpos);
+<<<<<<< HEAD
+      double mangle = 0; //This is the angle of the muon in the xy and z plane (theta)
+
+      for (int npart = 0; npart < StdHepN; npart++)
+      {
+
+      if ((StdHepPdg[npart] == 13 || StdHepPdg[npart] == -13) && StdHepStatus[npart] == 1)
+=======
 
       for(int npart = 0; npart < StdHepN; npart++)
       {
 
       if((StdHepPdg[npart] == 13 || StdHepPdg[npart] == -13) && StdHepStatus[npart] == 1)
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
          {
 
          mpresent = 1;
@@ -76,7 +129,11 @@ void NeutrinoMode::Loop()
 
          } //<---End counting of muon in single event
 
+<<<<<<< HEAD
+      if ((StdHepPdg[npart] == 211 || StdHepPdg[npart] == -211) && mpresent == 1 && StdHepStatus[npart] == 1)
+=======
       if((StdHepPdg[npart] == 211 || StdHepPdg[npart] == -211) && (mpresent == 1 && StdHepStatus[npart] == 1))
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
          {
 
          nMPevents++;
@@ -86,13 +143,26 @@ void NeutrinoMode::Loop()
 
          } //<---End checking for both a muon and a pion in an event
 
+<<<<<<< HEAD
+      if (StdHepStatus[npart] == 1)
+=======
       if(StdHepStatus[npart] == 1)
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
          {
 
          tfstate++;
 
          } //<---End checking for the total number of final state particles coming from the interaction
 
+<<<<<<< HEAD
+      if (nmpresent == 1) //Is the total number of muons in the event one?
+         {
+         
+         if (nppresent == 1) //Is the total number of pions in the event one?
+            {
+
+            if ((npart == StdHepN - 1) && tfstate == 2 && StdHepP4[nmpart][2]>0 && StdHepP4[nppart][2]>0) //Are there only two particles in the final state in this interaction? And are you done slewing over all of the particles in this event?
+=======
       if(nmpresent == 1) //Is the total number of muons in the event one?
          {
          
@@ -100,6 +170,7 @@ void NeutrinoMode::Loop()
             {
 
             if((npart == StdHepN - 1) && tfstate == 2 && StdHepP4[nmpart][2]>0 && StdHepP4[nppart][2]>0) //Are there only two particles in the final state in this interaction? And are you done slewing over all of the particles in this event?
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
                {
                
                double angle1 = (180/PI)*acos (((StdHepP4[nppart][0]*StdHepP4[nmpart][0]) + (StdHepP4[nppart][1]*StdHepP4[nmpart][1]) + (StdHepP4[nppart][2]*StdHepP4[nmpart][2])) / sqrt ((((StdHepP4[nppart][0]*StdHepP4[nppart][0]) + (StdHepP4[nppart][1]*StdHepP4[nppart][1]) + (StdHepP4[nppart][2]*StdHepP4[nppart][2]))*((StdHepP4[nmpart][0]*StdHepP4[nmpart][0]) + (StdHepP4[nmpart][1]*StdHepP4[nmpart][1]) + (StdHepP4[nmpart][2]*StdHepP4[nmpart][2]))))); //This is the first attempt to find the angle between the momentum vectors of the muon and the pion using the brute force dot product by definition
@@ -120,6 +191,16 @@ void NeutrinoMode::Loop()
                double mag1 = sqrt(x2 + y2 + z2); //This is the magnitude of the muon momentum
                double mag2 = sqrt(x3 + y3 + z3); //This is the magnitude of the pion momentum
                double angle2 = (180/PI)*acos( dot1/(mag1*mag2) ); //This is the second way of finding the angle between the muon and pion momentums
+<<<<<<< HEAD
+               
+               cA = z2/mag1; //This is the cosine of the muon angle
+               mangle = (180/PI)*acos(cA); //This is the theta angle of the muon in degrees
+
+               h5->Fill(mag1*1000); //Fill the h5 histogram in MeV
+               h7->Fill(mangle); //Fill the h7 histogram with the angle
+
+               nMAPevents++; //Count the number of muon and pion as the only end products events
+=======
 
                //std::cout<<"Muon Z Momentum"<<StdHepP4[nmpart][2]<<std::endl;
                //std::cout<<"Pion Z Momentum"<<StdHepP4[nppart][2]<<std::endl;
@@ -143,6 +224,7 @@ void NeutrinoMode::Loop()
                nppart = 0;
                nMAPevents++;
                tfstate = 0; */
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
 
                double b1 = (1.7 - Zpos)/StdHepP4[nmpart][2]; //This is the time for the evolution for the muon
                double b2 = (1.7 - Zpos)/StdHepP4[nppart][2]; //This is the time for the evolution for the pion
@@ -150,16 +232,135 @@ void NeutrinoMode::Loop()
                double p1 = Xpos + StdHepP4[nppart][0]*b2; //This is the evolution of the x position of the pion
                double m2 = Ypos + StdHepP4[nmpart][1]*b1; //This is the evolution of the y position of the muon
                double p2 = Ypos + StdHepP4[nppart][1]*b2; //This is the evolution of the y position of the pion
+<<<<<<< HEAD
+               double b3 = (1.7 + 0.55 - Zpos)/StdHepP4[nmpart][2]; //This is the time for the evolution of the muon to the beginning of the MRD
+               double b4 = (1.7 + 0.55 - Zpos)/StdHepP4[nppart][2]; //This is the time for the evolution of the pion to the beginning of the  MRD
+               double m12 = Xpos + StdHepP4[nmpart][0]*b3; //This is the evolution of the x position of the muon to the beginning of the MRD
+               double p12 = Xpos + StdHepP4[nppart][0]*b4; //This is the evolution of the x position of the pion to the beginning of the MRD
+               double m22 = Ypos + StdHepP4[nmpart][1]*b3; //This is the evolution of the y position of the muon to the beginning of the MRD
+               double p22 = Ypos + StdHepP4[nppart][1]*b4; //This is the evolution of the y position of the pion to the beginning of the MRD
+               double b5 = (1.7 + 0.55 + 1.375 - Zpos)/StdHepP4[nmpart][2]; //This is the time for the evolution of the muon through the MRD
+               double b6 = (1.7 + 0.55 + 1.375 - Zpos)/StdHepP4[nppart][2]; //This is the time for the evolution of the pion through the MRD
+               double m13 = Xpos + StdHepP4[nmpart][0]*b5; //This is the evolution of the x position of the muon through the MRD
+               double p13 = Xpos + StdHepP4[nppart][0]*b6; //This is the evolution of the x position of the pion through the MRD
+               double m23 = Ypos + StdHepP4[nmpart][1]*b5; //This is the evolution of the y position of the muon through the MRD
+               double p23 = Ypos + StdHepP4[nppart][1]*b6; //This is the evolution of the y position of the pion through the MRD
+               double b7 = (.006/StdHepP4[nmpart][2])*StdHepP4[nmpart][0]; //This is the distance traveled through a scintillator layer added to the x direction
+               double b8 = (.006/StdHepP4[nmpart][2])*StdHepP4[nmpart][1]; //This is the distance traveled through a scintillator layer added to the y direction
+               double b9 = (.0508/StdHepP4[nmpart][2])*StdHepP4[nmpart][0]; //This is the distance traveled through a steel layer added to the x direction
+               double b10 = (.0508/StdHepP4[nmpart][2])*StdHepP4[nmpart][1]; //This is the distance traveled through a steel layer added to the y direction
+=======
                double b3 = (1.7 + 0.55 + 1.375 - Zpos)/StdHepP4[nmpart][2]; //This is the time for the evolution of the muon through the MRD
                double b4 = (1.7 + 0.55 + 1.375 - Zpos)/StdHepP4[nppart][2]; //This is the time for the evolution of the pion through the MRD
                double m12 = Xpos + StdHepP4[nmpart][0]*b3; //This is the evolution of the x position of the muon
                double p12 = Xpos + StdHepP4[nppart][0]*b4; //This is the evolution of the x position of the pion
                double m22 = Ypos + StdHepP4[nmpart][1]*b3; //This is the evolution of the y position of the muon
                double p22 = Ypos + StdHepP4[nppart][1]*b4; //This is the evolution of the y position of the pion
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
                double rm1 = 100*sqrt(((1.7 - Zpos)*(1.7 - Zpos)) + ((m1 - Xpos)*(m1 - Xpos)) + ((m2 - Ypos)*(m2 - Ypos))); //This is the length that the muon traveled from beginning to end of SciBar Detector
                double rp1 = 100*sqrt(((1.7 - Zpos)*(1.7 - Zpos)) + ((p1 - Xpos)*(p1 - Xpos)) + ((p2 - Ypos)*(p2 - Ypos))); //This is the length that the muon traveled from beginning to end of SciBar Detector
                double dE1 = 2.04*rm1; //This is the energy lost in MeV by the muon traveling through the SciBar Detector
                double dE2 = 2.04*rp1; //This is the energy lost in MeV by the pion traveling through the SciBar Detector
+<<<<<<< HEAD
+               double E1 = StdHepP4[nmpart][3]*1000 - dE1; //This is the change in energy of the muon up to the end of the SciBar Detector
+
+               if (m2>0.2 && m2<2.8 && m1>0 && m1<3.0 && m12>0 && m12<3.0 && m22>0.2 && m22<2.8 && E1>=0)
+                  {
+
+                  double Emf1 = E1; //Defining the muon final energy variable
+                  double dE3 = 0; //Defining the variable to be used for the scintillator change calculations
+                  double dE4 = 0; //Defining the variable to be used for the steel change calculations
+                  int layer = 0; //Defining the layer of scintillation the muon went to
+                  int n = 0; //Defining the layer of steel the muon went to
+                  double rm3 = 0;
+                  double rm4 = 0;
+                  double m14 = 0;
+                  double m24 = 0;
+                  double m15 = m12;
+                  double m25 = m22;
+
+                  while (Emf1>0) 
+                     {
+
+                     layer++;
+                     m15 = m12 + layer*b7 + n*b9; //This is increasing the muon x position for a scintillator layer
+                     m25 = m22 + layer*b8 + n*b10; //This is increasing the muon y position for a scintillator layer
+                     rm3 = 100*sqrt((.006)*(.006) + (b7)*(b7) + (b8)*(b8)); //Path length the muon traveled through scintillator
+                     dE3 = 2.04*rm3; //This is the amount the energy will change from traveling through the scintillator layer
+                     Emf1 = Emf1 - dE3; //Losing energy due to scintillator
+
+                     if (Emf1>0)
+                        {
+                        
+                        n++;
+                        m14 = m15 + b9; //This is increasing the muon x position for a steel layer
+                        m24 = m25 + b10; //This is increasing the muon y position for a steel layer
+                        rm4 = 100*sqrt((.0508)*(.0508) + (b9)*(b9) + (b10)*(b10)); //Path length the muon traveled through steel
+                        dE4 = 11.43*rm4; //This is the amount the energy will change from traveling through the steel layer
+                        Emf1 = Emf1 - dE4; //Losing energy due to steel
+
+                        } //<---End if statement within the while loop
+
+                     } //<---End while statement
+
+                  if (Emf1<=0)
+                     {
+
+                     h11->Fill(mag1*1000); //Fill the total good histogram with the muon momentum in MeV
+                     h12->Fill(mangle); //Fill the total good histogram with the muon angle
+                     gevents++; //Increases the number counted for the total good events classification
+
+                     }
+
+                  if (Emf1<=0 && layer<=25 && n<25 && m15>=0 && m25>=0.2 && m15<=3 && m25<=2.8 && m14>0 && m14<3 && m24<2.8 && m24>0.2)
+                     {
+
+                     hPionMomentumx->Fill(StdHepP4[nppart][0] * 1000); //Note: We multiply by 1000 to convert from GeV to MeV
+                     hPionMomentumy->Fill(StdHepP4[nppart][1] * 1000); //Note: We multiply by 1000 to convert from GeV to MeV
+                     hPionMomentumz->Fill(StdHepP4[nppart][2] * 1000); //Note: We multiply by 1000 to convert from GeV to MeV
+                     hPionEnergy->Fill(StdHepP4[nppart][3] * 1000); //Note: We multiply by 1000 to convert from GeV to MeV
+
+                     hMuonMomentumx->Fill(StdHepP4[nmpart][0] * 1000); //Note: We multiply by 1000 to convert from GeV to MeV
+                     hMuonMomentumy->Fill(StdHepP4[nmpart][1] * 1000); //Note: We multiply by 1000 to convert from GeV to MeV
+                     hMuonMomentumz->Fill(StdHepP4[nmpart][2] * 1000); //Note: We multiply by 1000 to convert from GeV to MeV
+                     hMuonEnergy->Fill(StdHepP4[nmpart][3] * 1000); //Note: We multiply by 1000 to convert from GeV to MeV
+
+                     hAngles1->Fill(angle1); //This fills the first Opening Angles histogram with the angle between the two momentums
+
+                     hMuonxy1->Fill(m1, m2); //Fill the hMuonxy1 histogram end of SciBar Detector
+                     hMuonxz1->Fill(m1, 1.7); //Fill the hMuonxz1 histogram end of SciBar Detector
+                     hMuonyz1->Fill(m2, 1.7); //Fill the hMuonyz1 histogram end of SciBar Detector
+
+                     hMuonxy2->Fill(m12, m22); //Fill the hMuonxy2 histogram beginning of MRD
+                     hMuonxz2->Fill(m12, 2.25); //Fill the hMuonxz2 histogram beginning of MRD
+                     hMuonyz2->Fill(m22, 2.25); //Fill the hMuonyz2 histogram beginning of MRD
+
+                     h4->Fill(layer);
+                  
+                     h6->Fill(mag1*1000); //Fill the h6 histogram with the good CC muon momentum
+                     h8->Fill(mangle); //Fill the h8 histogram with the good CC muon angle
+
+                     nppresent = 0;
+                     nmpresent = 0;
+                     nmpart = 0;
+                     nppart = 0;
+                     tfstate = 0;
+                     stopped++;
+
+                     } else {
+
+                            if (Emf1<=0) {
+
+                                         h9->Fill(mag1*1000); //Fill the nonstopped histogram with the muon momentum in MeV
+                                         h10->Fill(mangle); //Fill the nonstopped histogram with the muon angle
+                                         nstopped++;
+
+                                         }
+
+                            }
+
+                  } //<---End if statement that checks if the event was a good event
+=======
                 
 
                if(p2<3.0 && m2<3.0 && p1<3.0 && m1<3.0 && p22<2.8 && m22<2.8 && p12<3.0 && m12<3.0)
@@ -185,6 +386,7 @@ void NeutrinoMode::Loop()
                   tfstate = 0;
 
                   } //<---End if statement that checks if the event was contained within the SciBar detector.
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
 
                }
 
@@ -204,7 +406,13 @@ void NeutrinoMode::Loop()
    std::cout<<"Total Number of Simulated Events = "<<1000000<<std::endl; //Print out the total number of simulated events.
    std::cout<<"Number of Events Containing a Muon and a Pion = "<<nMPevents<<std::endl; //Print out the number of events containing a Muon and a Pion
    std::cout<<"Number of Events Containing a Muon and a Pion, exclusively = "<<nMAPevents<<std::endl; //Print out the number of events that only have a Muon and a Pion
+<<<<<<< HEAD
+   std::cout<<"Number of ''Good'' Events That Happen both Non-Stopped and Stopped = "<<gevents<<std::endl; //Print out the number of good events in total that occured. The good classification means it at least entered one layer of the MRD
+   std::cout<<"Number of CC Events Completely Contained in MRD with our cuts = "<<stopped<<std::endl; //Print out the number of events that stopped within MRD
+   std::cout<<"Number of CC Events Not Completely Contained in MRD with our cuts = "<<nstopped<<std::endl; //Print out the number of events that did not stop within the MRD
+=======
    
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
    
 
    // ### Making a TCanvas ###
@@ -665,16 +873,175 @@ void NeutrinoMode::Loop()
    TCanvas *c9= new TCanvas("c9","X Vertex Distribution");
    c9->SetTicks();
    c9->SetFillColor(kWhite);
+<<<<<<< HEAD
+   h1->GetXaxis()->SetTitle("Length (meters)");
+   h1->GetXaxis()->CenterTitle();
+   h1->GetYaxis()->SetTitle("Events (#/.03m)");
+   h1->GetYaxis()->CenterTitle();
+=======
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
    h1->Draw();
 
    TCanvas *c10= new TCanvas("c10","Y Vertex Distribution");
    c10->SetTicks();
    c10->SetFillColor(kWhite);
+<<<<<<< HEAD
+   h2->GetXaxis()->SetTitle("Length (meters)");
+   h2->GetXaxis()->CenterTitle();
+   h2->GetYaxis()->SetTitle("Events (#/.03m)");
+   h2->GetYaxis()->CenterTitle();
+=======
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
    h2->Draw();
 
    TCanvas *c11= new TCanvas("c11","Z Vertex Distribution");
    c11->SetTicks();
    c11->SetFillColor(kWhite);
+<<<<<<< HEAD
+   h3->GetXaxis()->SetTitle("Length (meters)");
+   h3->GetXaxis()->CenterTitle();
+   h3->GetYaxis()->SetTitle("Events (#/.017m)");
+   h3->GetYaxis()->CenterTitle();
    h3->Draw();
 
+   // ##########################
+   // # Detector Hits in Plane #
+   // ##########################
+   TCanvas *c13= new TCanvas("c13", "Muon XY at end of SciBar");
+   c13->SetTicks();
+   c13->SetFillColor(kWhite);
+   hMuonxy1->Draw();
+
+   TCanvas *c14= new TCanvas("c14", "Muon XZ at end of SciBar");
+   c14->SetTicks();
+   c14->SetFillColor(kWhite);
+   hMuonxz1->Draw();
+
+   TCanvas *c15= new TCanvas("c15", "Muon YZ at end of SciBar");
+   c15->SetTicks();
+   c15->SetFillColor(kWhite);
+   hMuonyz1->Draw();
+
+   TCanvas *c16= new TCanvas("c16", "Muon XY at Beginning of MRD");
+   c16->SetTicks();
+   c16->SetFillColor(kWhite);
+   hMuonxy2->Draw();
+
+   TCanvas *c17= new TCanvas("c17", "Muon XZ at Beginning of MRD");
+   c17->SetTicks();
+   c17->SetFillColor(kWhite);
+   hMuonxz2->Draw();
+
+   TCanvas *c18= new TCanvas("c18", "Muon YZ at Beginning of MRD");
+   c18->SetTicks();
+   c18->SetFillColor(kWhite);
+   hMuonyz2->Draw();
+
+   TCanvas *c19 = new TCanvas("c19", "Layer the Muon Stopped In");
+   c19->SetTicks();
+   c19->SetFillColor(kWhite);
+   h4->Draw();
+
+   TCanvas *c20 = new TCanvas("c20", "Total CC Muon Momentum");
+   c20->SetTicks();
+   c20->SetFillColor(kWhite);
+   h5->SetLineColor(kBlack);
+   h5->GetXaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
+   h5->GetXaxis()->CenterTitle();
+   h5->GetYaxis()->SetTitle("Events (#/50MeV)");
+   h5->GetYaxis()->CenterTitle();
+   h5->Draw();
+
+   TCanvas *c21 = new TCanvas("c21", "Good CC Muon Momentum Stopped");
+   c21->SetTicks();
+   c21->SetFillColor(kWhite);
+   h6->SetLineColor(kBlue);
+   h6->GetXaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
+   h6->GetXaxis()->CenterTitle();
+   h6->GetYaxis()->SetTitle("Events (#/50MeV)");
+   h6->GetYaxis()->CenterTitle();
+   h6->Draw();
+
+   TCanvas *c22 = new TCanvas("c22", "Total CC Muon Angle");
+   c22->SetTicks();
+   c22->SetFillColor(kWhite);
+   h7->SetLineColor(kBlack);
+   h7->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+   h7->GetXaxis()->CenterTitle();
+   h7->GetYaxis()->SetTitle("Events (#/4.5Degrees)");
+   h7->GetYaxis()->CenterTitle();
+   h7->Draw();
+
+   TCanvas *c23 = new TCanvas("c23", "Good CC Muon Angle Stopped");
+   c23->SetTicks();
+   c23->SetFillColor(kWhite);
+   h8->SetLineColor(kBlue);
+   h8->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+   h8->GetXaxis()->CenterTitle();
+   h8->GetYaxis()->SetTitle("Events (#/4.5Degrees)");
+   h8->GetYaxis()->CenterTitle();
+   h8->Draw();
+
+   TCanvas *c24 = new TCanvas("c24", "Total Non-Stopped CC Muon Momentum");
+   c24->SetTicks();
+   c24->SetFillColor(kWhite);
+   h9->SetLineColor(kRed);
+   h9->GetXaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
+   h9->GetXaxis()->CenterTitle();
+   h9->GetYaxis()->SetTitle("Events (#/50MeV)");
+   h9->GetYaxis()->CenterTitle();
+   h9->Draw();
+
+   TCanvas *c25 = new TCanvas("c25", "Good Non-Stopped CC Muon Angle");
+   c25->SetTicks();
+   c25->SetFillColor(kWhite);
+   h10->SetLineColor(kRed);
+   h10->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+   h10->GetXaxis()->CenterTitle();
+   h10->GetYaxis()->SetTitle("Events (#/4.5Degrees)");
+   h10->GetYaxis()->CenterTitle();
+   h10->Draw();
+
+   TCanvas *c26 = new TCanvas("c26", "Total Good CC Muon Momentum");
+   c26->SetTicks();
+   c26->SetFillColor(kWhite);
+   h11->SetLineColor(kMagenta+3);
+   h11->GetXaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
+   h11->GetXaxis()->CenterTitle();
+   h11->GetYaxis()->SetTitle("Events (#/50Mev)");
+   h11->GetYaxis()->CenterTitle();
+   h11->Draw();
+
+   TCanvas *c27 = new TCanvas("c27", "Total Good CC Muon Angle");
+   c27->SetTicks();
+   c27->SetFillColor(kWhite);
+   h12->SetLineColor(kMagenta+3);
+   h12->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+   h12->GetXaxis()->CenterTitle();
+   h12->GetYaxis()->SetTitle("Events (#/4.5Degrees)");
+   h12->GetYaxis()->CenterTitle();
+   h12->Draw();
+
+
+
+   //#################################
+   //# Saving the Data to Root Files #
+   //#################################
+   TFile *TMuonInfo = new TFile("./ROOTFILES/totalmuoninfo.root", "RECREATE");
+   h5->Write("TMuonMom_1");
+   h6->Write("GMuonMomS_1");
+   h7->Write("TMuonCos_1");
+   h8->Write("GMuonCosS_1");
+   h9->Write("GMuonMomNS_1");
+   h10->Write("GMuonCosNS_1");
+   h11->Write("TGMuonMom_1");
+   h12->Write("TGMuonCos_1");
+   TMuonInfo->Write();
+   TMuonInfo->Close();
+
+
+=======
+   h3->Draw();
+
+>>>>>>> eeb4e8558344d1819e793972f86146ed2ceafcac
 }//<---End void loop
