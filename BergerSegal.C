@@ -909,7 +909,7 @@ void BergerSegal::Loop()
    //#################################
    //# Saving the Data to Root Files #
    //#################################
-   TFile *TMuonInfo = new TFile("./ROOTFILES/totalmuoninfo_bergersegal.root", "CREATE");
+   TFile *TMuonInfo = new TFile("./ROOTFILES/totalmuoninfoBS.root", "CREATE");
    h5->Write("TMuonMom_1");
    h6->Write("GMuonMomS_1");
    h7->Write("TMuonCos_1");

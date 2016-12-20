@@ -914,7 +914,7 @@ void NeutrinoMode::Loop()
    //#################################
    //# Saving the Data to Root Files #
    //#################################
-   TFile *TMuonInfo = new TFile("./ROOTFILES/totalmuoninfo.root", "RECREATE");
+   TFile *TMuonInfo = new TFile("./ROOTFILES/totalmuoninfoRS.root", "CREATE");
    h5->Write("TMuonMom_1");
    h6->Write("GMuonMomS_1");
    h7->Write("TMuonCos_1");
