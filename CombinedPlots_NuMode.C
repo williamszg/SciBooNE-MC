@@ -4,11 +4,11 @@
 // ####################
 
 // =======================================================================================
-//                ### Berger Sehgal Files for Anti-Neutrino Mode ###
+//                     ### Berger Sehgal Files for Neutrino Mode ###
 // =======================================================================================
 
 
-TFile *f1 = new TFile("./ROOTFILES/totalmuoninfoBSBar.root"); //Load Total Muon Info File
+TFile *f1 = new TFile("./ROOTFILES/totalmuoninfoBS.root"); //Load Total Muon Info File
 
 TH1D *hTotalPNewBS = (TH1D*)f1->Get("TMuonMom_1"); //Make a clone of the h5 histogram from the NeutrinoMode.C file for total muon momentum
 TH1D *hTotalGoodPNewBS = (TH1D*)f1->Get("TGMuonMom_1"); //Make a clone of the h11 histogram from the NeutrinoMode.C file for total good muon momentum
@@ -44,12 +44,14 @@ RatioPBS->Divide(hTotalGoodPNewBS, hTotalPNewBS);
 RatioCBS->Divide(hTotalGoodCosNewBS, hTotalCosNewBS);
 
 
+
+
 // =======================================================================================
 //                ### Rein Sehgal Files for Anti-Neutrino Mode ###
 // =======================================================================================
 
 
-TFile *f2 = new TFile("./ROOTFILES/totalmuoninfoRSBar.root"); //Load Total Muon Info File
+TFile *f2 = new TFile("./ROOTFILES/totalmuoninfoRS.root"); //Load Total Muon Info File
 
 TH1D *hTotalPNewRS = (TH1D*)f2->Get("TMuonMom_1"); //Make a clone of the h5 histogram from the NeutrinoMode.C file for total muon momentum
 TH1D *hTotalGoodPNewRS = (TH1D*)f2->Get("TGMuonMom_1"); //Make a clone of the h11 histogram from the NeutrinoMode.C file for total good muon momentum
@@ -88,6 +90,49 @@ RatioCRS->Divide(hTotalGoodCosNewRS, hTotalCosNewRS);
 
 
 
+// =======================================================================================
+//                  ### Old Berger Sehgal Files for Neutrino Mode ###
+// =======================================================================================
+
+
+TFile *f3 = new TFile("./ROOTFILES/totalmuoninfoOBS.root"); //Load Total Muon Info File
+
+TH1D *hTotalPNewOBS = (TH1D*)f3->Get("TMuonMom_1"); //Make a clone of the h5 histogram from the NeutrinoMode.C file for total muon momentum
+TH1D *hTotalGoodPNewOBS = (TH1D*)f3->Get("TGMuonMom_1"); //Make a clone of the h11 histogram from the NeutrinoMode.C file for total good muon momentum
+
+TH1D *hTotalCosNewOBS = (TH1D*)f3->Get("TMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
+TH1D *hTotalGoodCosNewOBS = (TH1D*)f3->Get("TGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
+
+hTotalPNewOBS->Sumw2();
+hTotalGoodPNewOBS->Sumw2();
+hTotalCosNewOBS->Sumw2();
+hTotalGoodCosNewOBS->Sumw2();
+
+// ### Defining the ratio histogram ###
+TH1D *RatioPOBS = new TH1D("RatioPOBS", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioCOBS = new TH1D("RatioCOBS", "Efficiencies for Angles", 40, 0, 180);
+
+// ### Formatting the plot ###
+RatioPOBS->SetLineColor(kGreen);
+RatioPOBS->GetXaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
+RatioPOBS->GetXaxis()->CenterTitle();
+RatioPOBS->GetYaxis()->SetTitle("Efficiency");
+RatioPOBS->GetYaxis()->CenterTitle();
+
+// ### Formatting the plot ###
+RatioCOBS->SetLineColor(kGreen);
+RatioCOBS->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+RatioCOBS->GetXaxis()->CenterTitle();
+RatioCOBS->GetYaxis()->SetTitle("Efficiency");
+RatioCOBS->GetYaxis()->CenterTitle();
+
+
+RatioPOBS->Divide(hTotalGoodPNewOBS, hTotalPNewOBS);
+RatioCOBS->Divide(hTotalGoodCosNewOBS, hTotalCosNewOBS);
+
+
+
+
 // ##############################################
 // # Drawing the Momentum Efficiency Histograms #
 // ##############################################
@@ -98,6 +143,7 @@ c1->SetFillColor(kWhite);
 
 RatioPBS->Draw("E1");
 RatioPRS->Draw("E1same");
+RatioPOBS->Draw("E1same");
 
 // ### Defining the legend for the plot ###
 TLegend *leg = new TLegend();
@@ -108,8 +154,9 @@ leg->SetFillColor(kWhite);
 leg->SetLineColor(kWhite);
 leg->SetShadowColor(kWhite);
 leg->SetHeader("SciBooNE MC");
-leg->AddEntry(RatioPRS,"R-S Model");
-leg->AddEntry(RatioPBS,"B-S Model"); 
+leg->AddEntry(RatioPRS,"New R-S Model");
+leg->AddEntry(RatioPBS,"New B-S Model");
+leg->AddEntry(RatioPOBS, "Old B-S Model");
 leg->Draw();
 
 
@@ -125,6 +172,7 @@ c6->SetFillColor(kWhite);
 
 RatioCBS->Draw("E1");
 RatioCRS->Draw("E1same");
+RatioCOBS->Draw("E1same");
 
 // ### Defining the legend for the plot ###
 TLegend *leg5 = new TLegend();
@@ -135,8 +183,9 @@ leg5->SetFillColor(kWhite);
 leg5->SetLineColor(kWhite);
 leg5->SetShadowColor(kWhite);
 leg5->SetHeader("SciBooNE MC");
-leg5->AddEntry(RatioCRS,"R-S Model");
-leg5->AddEntry(RatioCBS,"B-S Model");
+leg5->AddEntry(RatioCRS,"New R-S Model");
+leg5->AddEntry(RatioCBS,"New B-S Model");
+leg5->AddEntry(RatioCOBS, "Old B-S Model");
 leg5->Draw();
 
 
@@ -155,14 +204,20 @@ hTotalPNewRS->Scale(1/hTotalPNewRS->Integral());
 
 hTotalPNewBS->Scale(1/hTotalPNewBS->Integral());
 
+hTotalPNewOBS->Scale(1/hTotalPNewOBS->Integral());
+
 hTotalPNewRS->SetLineColor(kBlue);
 hTotalPNewRS->SetLineWidth(2);
 
 hTotalPNewBS->SetLineColor(kRed);
 hTotalPNewBS->SetLineWidth(2);
 
-hTotalPNewBS->Draw("histo");
+hTotalPNewOBS->SetLineColor(kGreen);
+hTotalPNewOBS->SetLineWidth(2);
+
+hTotalPNewOBS->Draw("histo");
 hTotalPNewRS->Draw("histosame");
+hTotalPNewBS->Draw("histosame");
 
 
 // ### Defining the legend for the plot ###
@@ -174,9 +229,11 @@ leg1->SetFillColor(kWhite);
 leg1->SetLineColor(kWhite);
 leg1->SetShadowColor(kWhite);
 leg1->SetHeader("SciBooNE MC");
-leg1->AddEntry(hTotalPNewRS,"R-S Model");
-leg1->AddEntry(hTotalPNewBS,"B-S Model"); 
+leg1->AddEntry(hTotalPNewRS,"New R-S Model");
+leg1->AddEntry(hTotalPNewBS,"New B-S Model");
+leg1->AddEntry(hTotalPNewOBS,"Old B-S Model");
 leg1->Draw();
+
 
 
 
@@ -193,14 +250,20 @@ hTotalCosNewRS->Scale(1/hTotalCosNewRS->Integral());
 
 hTotalCosNewBS->Scale(1/hTotalCosNewBS->Integral());
 
+hTotalCosNewOBS->Scale(1/hTotalCosNewOBS->Integral());
+
 hTotalCosNewRS->SetLineColor(kBlue);
 hTotalCosNewRS->SetLineWidth(2);
 
 hTotalCosNewBS->SetLineColor(kRed);
 hTotalCosNewBS->SetLineWidth(2);
 
+hTotalCosNewOBS->SetLineColor(kGreen);
+hTotalCosNewOBS->SetLineWidth(2);
+
 hTotalCosNewBS->Draw("histo");
 hTotalCosNewRS->Draw("histosame");
+hTotalCosNewOBS->Draw("histosame");
 
 
 // ### Defining the legend for the plot ###
@@ -212,9 +275,11 @@ leg2->SetFillColor(kWhite);
 leg2->SetLineColor(kWhite);
 leg2->SetShadowColor(kWhite);
 leg2->SetHeader("SciBooNE MC");
-leg2->AddEntry(hTotalCosNewRS,"R-S Model");
-leg2->AddEntry(hTotalCosNewBS,"B-S Model");
+leg2->AddEntry(hTotalCosNewRS,"New R-S Model");
+leg2->AddEntry(hTotalCosNewBS,"New B-S Model");
+leg2->AddEntry(hTotalCosNewOBS, "Old B-S Model");
 leg2->Draw();
+
 
 
 
@@ -231,14 +296,20 @@ hTotalGoodPNewRS->Scale(1/hTotalGoodPNewRS->Integral());
 
 hTotalGoodPNewBS->Scale(1/hTotalGoodPNewBS->Integral());
 
+hTotalGoodPNewOBS->Scale(1/hTotalGoodPNewOBS->Integral());
+
 hTotalGoodPNewRS->SetLineColor(kBlue);
 hTotalGoodPNewRS->SetLineWidth(2);
 
 hTotalGoodPNewBS->SetLineColor(kRed);
 hTotalGoodPNewBS->SetLineWidth(2);
 
+hTotalGoodPNewOBS->SetLineColor(kGreen);
+hTotalGoodPNewOBS->SetLineWidth(2);
+
 hTotalGoodPNewBS->Draw("histo");
 hTotalGoodPNewRS->Draw("histosame");
+hTotalGoodPNewOBS->Draw("histosame");
 
 
 // ### Defining the legend for the plot ###
@@ -250,9 +321,11 @@ leg3->SetFillColor(kWhite);
 leg3->SetLineColor(kWhite);
 leg3->SetShadowColor(kWhite);
 leg3->SetHeader("SciBooNE MC");
-leg3->AddEntry(hTotalGoodPNewRS,"R-S Model");
-leg3->AddEntry(hTotalGoodPNewBS,"B-S Model");
+leg3->AddEntry(hTotalGoodPNewRS,"New R-S Model");
+leg3->AddEntry(hTotalGoodPNewBS,"New B-S Model");
+leg3->AddEntry(hTotalGoodPNewOBS, "Old B-S Model");
 leg3->Draw();
+
 
 
 
@@ -269,14 +342,20 @@ hTotalGoodCosNewRS->Scale(1/hTotalGoodCosNewRS->Integral());
 
 hTotalGoodCosNewBS->Scale(1/hTotalGoodCosNewBS->Integral());
 
+hTotalGoodCosNewOBS->Scale(1/hTotalGoodCosNewOBS->Integral());
+
 hTotalGoodCosNewRS->SetLineColor(kBlue);
 hTotalGoodCosNewRS->SetLineWidth(2);
 
 hTotalGoodCosNewBS->SetLineColor(kRed);
 hTotalGoodCosNewBS->SetLineWidth(2);
 
-hTotalGoodCosNewBS->Draw("histo");
+hTotalGoodCosNewOBS->SetLineColor(kGreen);
+hTotalGoodCosNewOBS->SetLineWidth(2);
+
+hTotalGoodCosNewOBS->Draw("histo");
 hTotalGoodCosNewRS->Draw("histosame");
+hTotalGoodCosNewBS->Draw("histosame");
 
 
 // ### Defining the legend for the plot ###
@@ -288,9 +367,12 @@ leg4->SetFillColor(kWhite);
 leg4->SetLineColor(kWhite);
 leg4->SetShadowColor(kWhite);
 leg4->SetHeader("SciBooNE MC");
-leg4->AddEntry(hTotalGoodCosNewRS,"R-S Model");
-leg4->AddEntry(hTotalGoodCosNewBS,"B-S Model");
+leg4->AddEntry(hTotalGoodCosNewRS,"New R-S Model");
+leg4->AddEntry(hTotalGoodCosNewBS,"New B-S Model");
+leg4->AddEntry(hTotalGoodCosNewOBS, "Old B-S Model");
 leg4->Draw();
+
+
 
 
 }
