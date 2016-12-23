@@ -113,14 +113,14 @@ TH1D *RatioPOBS = new TH1D("RatioPOBS", "Efficiencies for Momentums", 40, 0, 200
 TH1D *RatioCOBS = new TH1D("RatioCOBS", "Efficiencies for Angles", 40, 0, 180);
 
 // ### Formatting the plot ###
-RatioPOBS->SetLineColor(kGreen);
+RatioPOBS->SetLineColor(kBlack);
 RatioPOBS->GetXaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
 RatioPOBS->GetXaxis()->CenterTitle();
 RatioPOBS->GetYaxis()->SetTitle("Efficiency");
 RatioPOBS->GetYaxis()->CenterTitle();
 
 // ### Formatting the plot ###
-RatioCOBS->SetLineColor(kGreen);
+RatioCOBS->SetLineColor(kBlack);
 RatioCOBS->GetXaxis()->SetTitle("Muon Angle (Degrees)");
 RatioCOBS->GetXaxis()->CenterTitle();
 RatioCOBS->GetYaxis()->SetTitle("Efficiency");
@@ -212,7 +212,7 @@ hTotalPNewRS->SetLineWidth(2);
 hTotalPNewBS->SetLineColor(kRed);
 hTotalPNewBS->SetLineWidth(2);
 
-hTotalPNewOBS->SetLineColor(kGreen);
+hTotalPNewOBS->SetLineColor(kBlack);
 hTotalPNewOBS->SetLineWidth(2);
 
 hTotalPNewOBS->Draw("histo");
@@ -258,7 +258,7 @@ hTotalCosNewRS->SetLineWidth(2);
 hTotalCosNewBS->SetLineColor(kRed);
 hTotalCosNewBS->SetLineWidth(2);
 
-hTotalCosNewOBS->SetLineColor(kGreen);
+hTotalCosNewOBS->SetLineColor(kBlack);
 hTotalCosNewOBS->SetLineWidth(2);
 
 hTotalCosNewBS->Draw("histo");
@@ -304,7 +304,7 @@ hTotalGoodPNewRS->SetLineWidth(2);
 hTotalGoodPNewBS->SetLineColor(kRed);
 hTotalGoodPNewBS->SetLineWidth(2);
 
-hTotalGoodPNewOBS->SetLineColor(kGreen);
+hTotalGoodPNewOBS->SetLineColor(kBlack);
 hTotalGoodPNewOBS->SetLineWidth(2);
 
 hTotalGoodPNewBS->Draw("histo");
@@ -350,7 +350,7 @@ hTotalGoodCosNewRS->SetLineWidth(2);
 hTotalGoodCosNewBS->SetLineColor(kRed);
 hTotalGoodCosNewBS->SetLineWidth(2);
 
-hTotalGoodCosNewOBS->SetLineColor(kGreen);
+hTotalGoodCosNewOBS->SetLineColor(kBlack);
 hTotalGoodCosNewOBS->SetLineWidth(2);
 
 hTotalGoodCosNewOBS->Draw("histo");
