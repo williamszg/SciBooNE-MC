@@ -161,6 +161,9 @@ hTotalPNewRS->SetLineWidth(2);
 hTotalPNewBS->SetLineColor(kRed);
 hTotalPNewBS->SetLineWidth(2);
 
+hTotalPNewBS->GetYaxis()->SetTitle("Normalized Events (/ 50MeV)");
+hTotalPNewBS->GetYaxis()->CenterTitle();
+
 hTotalPNewBS->Draw("histo");
 hTotalPNewRS->Draw("histosame");
 
@@ -198,6 +201,9 @@ hTotalCosNewRS->SetLineWidth(2);
 
 hTotalCosNewBS->SetLineColor(kRed);
 hTotalCosNewBS->SetLineWidth(2);
+
+hTotalCosNewBS->GetYaxis()->SetTitle("Normalized Events (/ 4.5Degrees)");
+hTotalCosNewBS->GetYaxis()->CenterTitle();
 
 hTotalCosNewBS->Draw("histo");
 hTotalCosNewRS->Draw("histosame");
@@ -237,6 +243,9 @@ hTotalGoodPNewRS->SetLineWidth(2);
 hTotalGoodPNewBS->SetLineColor(kRed);
 hTotalGoodPNewBS->SetLineWidth(2);
 
+hTotalGoodPNewBS->GetYaxis()->SetTitle("Normalized Events (/ 50MeV)");
+hTotalGoodPNewBS->GetYaxis()->CenterTitle();
+
 hTotalGoodPNewBS->Draw("histo");
 hTotalGoodPNewRS->Draw("histosame");
 
@@ -274,6 +283,9 @@ hTotalGoodCosNewRS->SetLineWidth(2);
 
 hTotalGoodCosNewBS->SetLineColor(kRed);
 hTotalGoodCosNewBS->SetLineWidth(2);
+
+hTotalGoodCosNewBS->GetYaxis()->SetTitle("Normalized Events (/ 4.5Degrees)");
+hTotalGoodCosNewBS->GetYaxis()->CenterTitle();
 
 hTotalGoodCosNewBS->Draw("histo");
 hTotalGoodCosNewRS->Draw("histosame");
