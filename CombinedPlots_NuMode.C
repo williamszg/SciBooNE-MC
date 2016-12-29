@@ -16,10 +16,21 @@ TH1D *hTotalGoodPNewBS = (TH1D*)f1->Get("TGMuonMom_1"); //Make a clone of the h1
 TH1D *hTotalCosNewBS = (TH1D*)f1->Get("TMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
 TH1D *hTotalGoodCosNewBS = (TH1D*)f1->Get("TGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
 
+TH1D *hGoodStoppedPNewBS = (TH1D*)f1->Get("GMuonMomS_1"); //Make a clone of the h6 histogram from the BergerSegal.C file for the good stopped muon momentum
+TH1D *hGoodStoppedCosNewBS = (TH1D*)f1->Get("GMuonCosS_1"); //Make a clone of the h8 histogram from the BergerSegal.C file for the good stopped muon angle
+
+TH1D *hGoodNonStoppedPNewBS = (TH1D*)f1->Get("GMuonMomNS_1"); //Make a clone of the h9 histogram from the BergerSegal.C file for the good nonstopped muon momentum
+TH1D *hGoodNonStoppedCosNewBS = (TH1D*)f1->Get("GMuonCosNS_1"); //Make a clone of the h10 histogram from the BergerSegal.C file for the good nonstopped muon angle
+
+
 hTotalPNewBS->Sumw2();
 hTotalGoodPNewBS->Sumw2();
 hTotalCosNewBS->Sumw2();
 hTotalGoodCosNewBS->Sumw2();
+hGoodStoppedPNewBS->Sumw2();
+hGoodStoppedCosNewBS->Sumw2();
+hGoodNonStoppedPNewBS->Sumw2();
+hGoodNonStoppedCosNewBS->Sumw2();
 
 // ### Defining the ratio histogram ###
 TH1D *RatioPBS = new TH1D("RatioPBS", "Efficiencies for Momentums", 40, 0, 2000);
@@ -47,7 +58,7 @@ RatioCBS->Divide(hTotalGoodCosNewBS, hTotalCosNewBS);
 
 
 // =======================================================================================
-//                ### Rein Sehgal Files for Anti-Neutrino Mode ###
+//                    ### Rein Sehgal Files for Neutrino Mode ###
 // =======================================================================================
 
 
@@ -59,11 +70,21 @@ TH1D *hTotalGoodPNewRS = (TH1D*)f2->Get("TGMuonMom_1"); //Make a clone of the h1
 TH1D *hTotalCosNewRS = (TH1D*)f2->Get("TMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
 TH1D *hTotalGoodCosNewRS = (TH1D*)f2->Get("TGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
 
+TH1D *hGoodStoppedPNewRS = (TH1D*)f2->Get("GMuonMomS_1"); //Make a clone of the h6 histogram from the BergerSegal.C file for the good stopped muon momentum
+TH1D *hGoodStoppedCosNewRS = (TH1D*)f2->Get("GMuonCosS_1"); //Make a clone of the h8 histogram from the BergerSegal.C file for the good stopped muon angle
+
+TH1D *hGoodNonStoppedPNewRS = (TH1D*)f2->Get("GMuonMomNS_1"); //Make a clone of the h9 histogram from the BergerSegal.C file for the good nonstopped muon momentum
+TH1D *hGoodNonStoppedCosNewRS = (TH1D*)f2->Get("GMuonCosNS_1"); //Make a clone of the h10 histogram from the BergerSegal.C file for the good nonstopped muon angle
+
+
 hTotalPNewRS->Sumw2();
 hTotalGoodPNewRS->Sumw2();
 hTotalCosNewRS->Sumw2();
 hTotalGoodCosNewRS->Sumw2();
-
+hGoodStoppedPNewRS->Sumw2();
+hGoodStoppedCosNewRS->Sumw2();
+hGoodNonStoppedPNewRS->Sumw2();
+hGoodNonStoppedCosNewRS->Sumw2();
 
 // ### Defining the ratio histogram ###
 TH1D *RatioPRS = new TH1D("RatioPRS", "Efficiencies for Momentums", 40, 0, 2000);
@@ -103,10 +124,22 @@ TH1D *hTotalGoodPNewOBS = (TH1D*)f3->Get("TGMuonMom_1"); //Make a clone of the h
 TH1D *hTotalCosNewOBS = (TH1D*)f3->Get("TMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
 TH1D *hTotalGoodCosNewOBS = (TH1D*)f3->Get("TGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
 
+TH1D *hGoodStoppedPNewOBS = (TH1D*)f3->Get("GMuonMomS_1"); //Make a clone of the h6 histogram from the BergerSegal.C file for the good stopped muon momentum
+TH1D *hGoodStoppedCosNewOBS = (TH1D*)f3->Get("GMuonCosS_1"); //Make a clone of the h8 histogram from the BergerSegal.C file for the good stopped muon angle
+
+TH1D *hGoodNonStoppedPNewOBS = (TH1D*)f3->Get("GMuonMomNS_1"); //Make a clone of the h9 histogram from the BergerSegal.C file for the good nonstopped muon momentum
+TH1D *hGoodNonStoppedCosNewOBS = (TH1D*)f3->Get("GMuonCosNS_1"); //Make a clone of the h10 histogram from the BergerSegal.C file for the good nonstopped muon angle
+
+
 hTotalPNewOBS->Sumw2();
 hTotalGoodPNewOBS->Sumw2();
 hTotalCosNewOBS->Sumw2();
 hTotalGoodCosNewOBS->Sumw2();
+hGoodStoppedPNewOBS->Sumw2();
+hGoodStoppedCosNewOBS->Sumw2();
+hGoodNonStoppedPNewOBS->Sumw2();
+hGoodNonStoppedCosNewOBS->Sumw2();
+
 
 // ### Defining the ratio histogram ###
 TH1D *RatioPOBS = new TH1D("RatioPOBS", "Efficiencies for Momentums", 40, 0, 2000);
@@ -386,5 +419,198 @@ leg4->Draw();
 
 
 
+
+// ###################################
+// # Drawing the Momentum Histograms #
+// ###################################
+
+TCanvas *c10 = new TCanvas("c10", "Muon Momentums");
+c10->SetTicks();
+c10->SetFillColor(kWhite);
+
+// Area normalzing the plot 
+hGoodStoppedPNewRS->Scale(1/hGoodStoppedPNewRS->Integral());
+
+hGoodStoppedPNewBS->Scale(1/hGoodStoppedPNewBS->Integral());
+
+hGoodStoppedPNewOBS->Scale(1/hGoodStoppedPNewOBS->Integral());
+
+hGoodStoppedPNewRS->SetLineColor(kBlue);
+hGoodStoppedPNewRS->SetLineWidth(2);
+
+hGoodStoppedPNewBS->SetLineColor(kRed);
+hGoodStoppedPNewBS->SetLineWidth(2);
+
+hGoodStoppedPNewOBS->SetLineColor(kBlack);
+hGoodStoppedPNewOBS->SetLineWidth(2);
+
+hGoodStoppedPNewBS->GetYaxis()->SetTitle("Normalized Events (/ 50MeV)");
+hGoodStoppedPNewBS->GetYaxis()->CenterTitle();
+
+hGoodStoppedPNewBS->Draw("histo");
+hGoodStoppedPNewRS->Draw("histosame");
+hGoodStoppedPNewOBS->Draw("histosame");
+
+
+// ### Defining the legend for the plot ###
+TLegend *leg9 = new TLegend();
+leg9 = new TLegend(0.58,0.65,0.88,0.88);
+leg9->SetTextSize(0.04);
+leg9->SetTextAlign(12);
+leg9->SetFillColor(kWhite);
+leg9->SetLineColor(kWhite);
+leg9->SetShadowColor(kWhite);
+leg9->SetHeader("SciBooNE MC");
+leg9->AddEntry(hGoodStoppedPNewRS,"New R-S Model");
+leg9->AddEntry(hGoodStoppedPNewBS,"New B-S Model");
+leg9->AddEntry(hGoodStoppedPNewOBS,"Old B-S Model");
+leg9->Draw();
+
+
+
+
+// ###################################
+// # Drawing the Momentum Histograms #
+// ###################################
+
+TCanvas *c7 = new TCanvas("c7", "Muon Momentums");
+c7->SetTicks();
+c7->SetFillColor(kWhite);
+
+// Area normalzing the plot 
+hGoodNonStoppedPNewRS->Scale(1/hGoodNonStoppedPNewRS->Integral());
+
+hGoodNonStoppedPNewBS->Scale(1/hGoodNonStoppedPNewBS->Integral());
+
+hGoodNonStoppedPNewOBS->Scale(1/hGoodNonStoppedPNewOBS->Integral());
+
+hGoodNonStoppedPNewRS->SetLineColor(kBlue);
+hGoodNonStoppedPNewRS->SetLineWidth(2);
+
+hGoodNonStoppedPNewBS->SetLineColor(kRed);
+hGoodNonStoppedPNewBS->SetLineWidth(2);
+
+hGoodNonStoppedPNewOBS->SetLineColor(kBlack);
+hGoodNonStoppedPNewOBS->SetLineWidth(2);
+
+hGoodNonStoppedPNewBS->GetYaxis()->SetTitle("Normalized Events (/ 50MeV)");
+hGoodNonStoppedPNewBS->GetYaxis()->CenterTitle();
+
+hGoodNonStoppedPNewBS->Draw("histo");
+hGoodNonStoppedPNewRS->Draw("histosame");
+hGoodNonStoppedPNewOBS->Draw("histosame");
+
+
+// ### Defining the legend for the plot ###
+TLegend *leg6 = new TLegend();
+leg6 = new TLegend(0.58,0.65,0.88,0.88);
+leg6->SetTextSize(0.04);
+leg6->SetTextAlign(12);
+leg6->SetFillColor(kWhite);
+leg6->SetLineColor(kWhite);
+leg6->SetShadowColor(kWhite);
+leg6->SetHeader("SciBooNE MC");
+leg6->AddEntry(hGoodNonStoppedPNewRS,"New R-S Model");
+leg6->AddEntry(hGoodNonStoppedPNewBS,"New B-S Model");
+leg6->AddEntry(hGoodNonStoppedPNewOBS,"Old B-S Model");
+leg6->Draw();
+
+
+
+
+// ###################################
+// # Drawing the Angle Histograms #
+// ###################################
+
+TCanvas *c8 = new TCanvas("c8", "Muon Angles");
+c8->SetTicks();
+c8->SetFillColor(kWhite);
+
+// Area normalzing the plot 
+hGoodNonStoppedCosNewRS->Scale(1/hGoodNonStoppedCosNewRS->Integral());
+
+hGoodNonStoppedCosNewBS->Scale(1/hGoodNonStoppedCosNewBS->Integral());
+
+hGoodNonStoppedCosNewOBS->Scale(1/hGoodNonStoppedCosNewOBS->Integral());
+
+hGoodNonStoppedCosNewRS->SetLineColor(kBlue);
+hGoodNonStoppedCosNewRS->SetLineWidth(2);
+
+hGoodNonStoppedCosNewBS->SetLineColor(kRed);
+hGoodNonStoppedCosNewBS->SetLineWidth(2);
+
+hGoodNonStoppedCosNewOBS->SetLineColor(kBlack);
+hGoodNonStoppedCosNewOBS->SetLineWidth(2);
+
+hGoodNonStoppedCosNewBS->GetYaxis()->SetTitle("Normalized Events (/ 4.5Degrees)");
+hGoodNonStoppedCosNewBS->GetYaxis()->CenterTitle();
+
+hGoodNonStoppedCosNewBS->Draw("histo");
+hGoodNonStoppedCosNewRS->Draw("histosame");
+hGoodNonStoppedCosNewOBS->Draw("histosame");
+
+
+// ### Defining the legend for the plot ###
+TLegend *leg7 = new TLegend();
+leg7 = new TLegend(0.58,0.65,0.88,0.88);
+leg7->SetTextSize(0.04);
+leg7->SetTextAlign(12);
+leg7->SetFillColor(kWhite);
+leg7->SetLineColor(kWhite);
+leg7->SetShadowColor(kWhite);
+leg7->SetHeader("SciBooNE MC");
+leg7->AddEntry(hGoodNonStoppedCosNewRS,"New R-S Model");
+leg7->AddEntry(hGoodNonStoppedCosNewBS,"New B-S Model");
+leg7->AddEntry(hGoodNonStoppedCosNewOBS,"Old B-S Model");
+leg7->Draw();
+
+
+
+
+// ###################################
+// # Drawing the Angle Histograms #
+// ###################################
+
+TCanvas *c9 = new TCanvas("c9", "Muon Angles");
+c9->SetTicks();
+c9->SetFillColor(kWhite);
+
+// Area normalzing the plot 
+hGoodStoppedCosNewRS->Scale(1/hGoodStoppedCosNewRS->Integral());
+
+hGoodStoppedCosNewBS->Scale(1/hGoodStoppedCosNewBS->Integral());
+
+hGoodStoppedCosNewOBS->Scale(1/hGoodStoppedCosNewOBS->Integral());
+
+hGoodStoppedCosNewRS->SetLineColor(kBlue);
+hGoodStoppedCosNewRS->SetLineWidth(2);
+
+hGoodStoppedCosNewBS->SetLineColor(kRed);
+hGoodStoppedCosNewBS->SetLineWidth(2);
+
+hGoodStoppedCosNewOBS->SetLineColor(kBlack);
+hGoodStoppedCosNewOBS->SetLineWidth(2);
+
+hGoodStoppedCosNewOBS->GetYaxis()->SetTitle("Normalized Events (/ 4.5Degrees)");
+hGoodStoppedCosNewOBS->GetYaxis()->CenterTitle();
+
+hGoodStoppedCosNewOBS->Draw("histo");
+hGoodStoppedCosNewRS->Draw("histosame");
+hGoodStoppedCosNewBS->Draw("histosame");
+
+
+// ### Defining the legend for the plot ###
+TLegend *leg8 = new TLegend();
+leg8 = new TLegend(0.58,0.65,0.88,0.88);
+leg8->SetTextSize(0.04);
+leg8->SetTextAlign(12);
+leg8->SetFillColor(kWhite);
+leg8->SetLineColor(kWhite);
+leg8->SetShadowColor(kWhite);
+leg8->SetHeader("SciBooNE MC");
+leg8->AddEntry(hGoodStoppedCosNewRS,"New R-S Model");
+leg8->AddEntry(hGoodStoppedCosNewBS,"New B-S Model");
+leg8->AddEntry(hGoodStoppedCosNewOBS,"Old B-S Model");
+leg8->Draw();
 
 }
