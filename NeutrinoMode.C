@@ -75,6 +75,15 @@ TH1D *h20 = new TH1D("h20", "Total Good CC Events for Muon Angle", 40, 0, 180); 
 
 
 
+//#####################################################################################
+//### This Defines the Histograms for the Comparison with Morgan's Acceptance Plots ###
+//#####################################################################################
+TH2D *h21 = new TH2D("h21", "2D Efficiencies for Total CC-Coh Events", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for Total CC-Coh Events
+TH2D *h22 = new TH2D("h22", "2D Efficiencies for Good CC-Coh Events", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for Good CC-Coh Events
+
+
+
+
 void NeutrinoMode::Loop()
 {
 
@@ -194,6 +203,7 @@ void NeutrinoMode::Loop()
 
                h13->Fill(mag1*1000); //Fill the h13 histogram in MeV for Total CC Events muon momentum
                h14->Fill(mangle); //Fill the h14 histogram with the angle for Total CC Events muon angle
+               h21->Fill(mangle, mag1*1000); //Fill the h21 histogram with both quantities
 
                double b1 = (1.7 - Zpos)/StdHepP4[nmpart][2]; //This is the time for the evolution for the muon
                double b2 = (1.7 - Zpos)/StdHepP4[nppart][2]; //This is the time for the evolution for the pion
@@ -286,6 +296,7 @@ void NeutrinoMode::Loop()
 
                                          h17->Fill(mag1*1000); //Fill the CC nonstopped histogram with the muon momentum in MeV
                                          h18->Fill(mangle); //Fill the CC nonstopped histogram with the muon angle
+                                         h22->Fill(mangle, mag1*1000); //Fill the 2D histogram with both quantities for total good events
                                          nCCnonstoppedevents++; //Count the number of CC Not-Stopped Events
 
                                          }
@@ -417,6 +428,7 @@ void NeutrinoMode::Loop()
 
                      h11->Fill(mag1*1000); //Fill the total good histogram with the muon momentum in MeV
                      h12->Fill(mangle); //Fill the total good histogram with the muon angle
+                    
                      gevents++; //Increases the number counted for the total good events classification
 
                      }
@@ -1220,6 +1232,8 @@ void NeutrinoMode::Loop()
    h18->Write("CCGMuonCosNS_1");
    h19->Write("CCTGMuonMom_1");
    h20->Write("CCTGMuonCos_1");
+   h21->Write("T2D_1");
+   h22->Write("G2D_1");
    TMuonInfo->Write();
    TMuonInfo->Close();
 

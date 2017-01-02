@@ -110,6 +110,9 @@ TH1D *hTotalGoodPNewRSCC = (TH1D*)f2->Get("CCTGMuonMom_1"); //Make a clone of th
 TH1D *hTotalCosNewRSCC = (TH1D*)f2->Get("CCTMuonCos_1"); //Make a clone of the h14 histogram from the NeutrinoMode.C file for total muon angle
 TH1D *hTotalGoodCosNewRSCC = (TH1D*)f2->Get("CCTGMuonCos_1"); //Make a clone of the h20 histogram from the NeutrinoMode.C file for total good muon angle
 
+TH2D *hTotalRatioRS = (TH2D*)f2->Get("T2D_1"); //Make a clone of the h21 histogram from the file
+TH2D *hGoodRatioRS = (TH2D*)f2->Get("G2D_1"); //Make a clone of the h22 histogram from the file
+
 
 hTotalPNewRS->Sumw2();
 hTotalGoodPNewRS->Sumw2();
@@ -129,6 +132,7 @@ TH1D *RatioPRS = new TH1D("RatioPRS", "Efficiencies for Momentums", 40, 0, 2000)
 TH1D *RatioCRS = new TH1D("RatioCRS", "Efficiencies for Angles", 40, 0, 180);
 TH1D *RatioPRSCC = new TH1D("RatioPRSCC", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioCRSCC = new TH1D("RatioCRSCC", "Efficiencies for Angles", 40, 0, 180);
+TH2D *Ratio2DRS = new TH2D("Ratio2DRS", "2D Efficiencies", 40, 0, 180, 40, 0, 2000);
 
 // ### Formatting the plot ###
 RatioPRS->SetLineColor(kBlue);
@@ -158,11 +162,18 @@ RatioCRSCC->GetXaxis()->CenterTitle();
 RatioCRSCC->GetYaxis()->SetTitle("Efficiency");
 RatioCRSCC->GetYaxis()->CenterTitle();
 
+// ### Formatting the plot ###
+Ratio2DRS->GetYaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
+Ratio2DRS->GetYaxis()->CenterTitle();
+Ratio2DRS->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+Ratio2DRS->GetXaxis()->CenterTitle();
+
 
 RatioPRS->Divide(hTotalGoodPNewRS, hTotalPNewRS);
 RatioCRS->Divide(hTotalGoodCosNewRS, hTotalCosNewRS);
 RatioPRSCC->Divide(hTotalGoodPNewRSCC, hTotalPNewRSCC);
 RatioCRSCC->Divide(hTotalGoodCosNewRSCC, hTotalCosNewRSCC);
+Ratio2DRS->Divide(hGoodRatioRS, hTotalRatioRS);
 
 
 
@@ -946,5 +957,20 @@ leg8->AddEntry(hGoodStoppedCosNewRS,"New R-S Model");
 leg8->AddEntry(hGoodStoppedCosNewBS,"New B-S Model");
 leg8->AddEntry(hGoodStoppedCosNewOBS,"Old B-S Model");
 leg8->Draw();
+
+
+
+
+// ###########################################
+// # Drawing the 2D RS Efficiency Histograms #
+// ###########################################
+
+TCanvas *c17 = new TCanvas("c17", "2D R-S Muon Efficiency Histogram");
+c17->SetTicks();
+c17->SetFillColor(kWhite);
+
+Ratio2DRS->Draw("colz");
+
+
 
 }
