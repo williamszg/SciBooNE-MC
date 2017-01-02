@@ -26,9 +26,20 @@ TH1D *hPionPx = new TH1D("hPionPx", "#pi P_{x}", 1750, 0, 2500);
 TH1D *hPionPy = new TH1D("hPionPy", "#pi P_{y}", 1750, 0, 2500);
 TH1D *hPionPz = new TH1D("hPionPz", "#pi P_{z}", 1750, 0, 2500);
 
+// ### Neutrino Vertex Plots ###
+TH1D *hVertexX = new TH1D("hVertexX", "Neutrino Vertex X Position", 300, -0.5, 3.5);
+TH1D *hVertexY = new TH1D("hVertexY", "Neutrino Vertex Y Position", 300, -0.5, 3.5);
+TH1D *hVertexZ = new TH1D("hVertexZ", "Neutrino Vertex Z Position", 300, -0.2, 2.0);
 
 // ### Opening angle between muon and pion (alpha) ###
 TH1D *hAlpha = new TH1D("hAlpha", "#alpha (Opening angle between muon and pion)", 360, 0, 360);
+
+TH2D *hAngleVsMuonP = new TH2D("hAngleVsMuonP", "Momentum vs Angle", 720, -360, 360, 2000, 0, 2000);
+
+// ### MRD Penetration Point ###
+TH1D *hMRDVertexX = new TH1D("hMRDVertexX", "X Position where muon penetrates the MRD", 300, -1.0, 4.0);
+TH1D *hMRDVertexY = new TH1D("hMRDVertexY", "Y Position where muon penetrates the MRD", 300, -1.0, 4.0);
+TH1D *hMRDVertexZ = new TH1D("hMRDVertexZ", "Z Position where muon penetrates the MRD", 300, 2.0, 3.0);
 
 void NuModeAsaadi::Loop()
 {
@@ -48,6 +59,8 @@ int nTotalEvents = 0;
 
 int nCohPionEvents = 0;
 
+int nCohPionEventsInMRD = 0;
+
 for (Long64_t jentry=0; jentry<nentries;jentry++) 
    {
    
@@ -63,7 +76,7 @@ for (Long64_t jentry=0; jentry<nentries;jentry++)
    nTotalEvents++;
    
    // === Outputting every nEvents to the screen ===
-   if(nTotalEvents % 500 == 0){std::cout<<"Event = "<<nTotalEvents<<std::endl;}
+   if(nTotalEvents % 1000 == 0){std::cout<<"Event = "<<nTotalEvents<<std::endl;}
    
    
    // ### Set a random seed for X and Y vertex position ###
@@ -77,10 +90,26 @@ for (Long64_t jentry=0; jentry<nentries;jentry++)
    flat->SetSeed(jentry);
    
    // ### Declaring the vertex position ###
-   double Xpos = randX->Gaus(1.5,2.5);
-   double Ypos = randY->Gaus(1.5,2.5);
-   double Zpos = flat->Uniform(0,3);
+   double Xpos = randX->Gaus(1.5,1.3);
    
+   // === Keep throwing until you get a resonable number ===
+   while (Xpos < 0 || Xpos > 3.0) { Xpos = randX->Gaus(1.5,1.3); }
+   
+   // ### Filling the X vertex histo ###
+   hVertexX->Fill(Xpos);
+   
+   double Ypos = randY->Gaus(1.5,1.05);
+   // === Keep throwing until you get a resonable number ===
+   while (Ypos < 0 || Ypos > 3.0) { Ypos = randY->Gaus(1.5,1.05); }
+   
+   // ### Filling the Y vertex histo ###
+   hVertexY->Fill(Ypos);
+   
+   double Zpos = flat->Uniform(0,1.7);
+   
+   // ### Filling the Z vertex histo ###
+   hVertexZ->Fill(Zpos);
+      
    // ### Counting the number of final state 
    int nMuons = 0;
    int nPions = 0;
@@ -94,14 +123,14 @@ for (Long64_t jentry=0; jentry<nentries;jentry++)
       {
       
       // ### Check that there is a final state muon in the event ####
-      if ( (StdHepPdg[npart] == 13 || StdHepPdg[npart] == -13) && StdHepStatus[npart] == 1 )
+      if ( (StdHepPdg[npart] == 13 || StdHepPdg[npart] == -13) && StdHepStatus[npart] == 1 && StdHepP4[npart][2]*1000 > 0)
          {
 	 nMuons++;
 	 muonNumber = npart;
 	 }//<---End checking if there is a muon
 	 
       // ### Check that there is a final state muon in the event ####
-      if ( (StdHepPdg[npart] == 211 || StdHepPdg[npart] == -211) && StdHepStatus[npart] == 1 )
+      if ( (StdHepPdg[npart] == 211 || StdHepPdg[npart] == -211) && StdHepStatus[npart] == 1 && StdHepP4[npart][2]*1000 > 0)
          {
 	 nPions++;
 	 pionNumber = npart;
@@ -116,6 +145,10 @@ for (Long64_t jentry=0; jentry<nentries;jentry++)
 	 }//<---counting all final state particles
       
       }//<---End npart loop
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    
    // ###################################################
    // ### Checking that this is a Coherent Pion Event ###
@@ -249,9 +282,30 @@ for (Long64_t jentry=0; jentry<nentries;jentry++)
       // ### Calculating the angle between Muon and Pion Track ###
       // #########################################################
       float alpha = ( acos(theUnitVector_Muon.Dot(theUnitVector_Pion)) )* (180.0/3.141592654);
-      
       hAlpha->Fill(alpha);
       
+      
+      // === Fillling the angle vs the momentum for all coherent pion events ===
+      hAngleVsMuonP->Fill(Theta_muon * (180.0/3.141592654), P_muon.Mag());
+      
+      
+      // === Calculating if this Coherent Pion Event Would intersect the MRD ===
+      
+      double b1 = Zpos - (Xpos* (  P_muon.Z()/P_muon.X()) );
+      double b2 = Zpos - (Ypos* (  P_muon.Z()/P_muon.y()) );
+      
+      
+      double LocationAtMRD_X = -b1*(P_muon.X()/P_muon.Z());
+      double LocationAtMRD_Y = -b2*(P_muon.Y()/P_muon.Z());
+      double LocationAtMRD_Z = 2.25;
+            
+      hMRDVertexX->Fill(LocationAtMRD_X);
+      hMRDVertexY->Fill(LocationAtMRD_Y);
+      hMRDVertexZ->Fill(LocationAtMRD_Z);
+      
+      
+      if( (LocationAtMRD_X > 0.2 || LocationAtMRD_X < 2.8) && (LocationAtMRD_Y > 0.2 && LocationAtMRD_Y < 2.8) )
+         {nCohPionEventsInMRD++;}
       
       
       }//<---End Coherent Pion
@@ -262,6 +316,7 @@ for (Long64_t jentry=0; jentry<nentries;jentry++)
 std::cout<<"==================================================================="<<std::endl;
 std::cout<<"Total Number of Events		= "<<nTotalEvents<<std::endl;
 std::cout<<"Total Number of Coh-Pion Events 	= "<<nCohPionEvents<<std::endl;
+std::cout<<nCohPionEventsInMRD<<std::endl;
 std::cout<<"==================================================================="<<std::endl;
 
 
@@ -279,5 +334,14 @@ hPionPx->Write();
 hPionPy->Write();
 hPionPz->Write();
 hAlpha->Write();
+hAngleVsMuonP->Write();
+
+hVertexX->Write();
+hVertexY->Write();
+hVertexZ->Write();
+
+hMRDVertexX->Write();
+hMRDVertexY->Write();
+hMRDVertexZ->Write();
 
 }
