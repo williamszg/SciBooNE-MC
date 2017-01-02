@@ -22,6 +22,12 @@ TH1D *hGoodStoppedCosNewBS = (TH1D*)f1->Get("GMuonCosS_1"); //Make a clone of th
 TH1D *hGoodNonStoppedPNewBS = (TH1D*)f1->Get("GMuonMomNS_1"); //Make a clone of the h9 histogram from the BergerSegal.C file for the good nonstopped muon momentum
 TH1D *hGoodNonStoppedCosNewBS = (TH1D*)f1->Get("GMuonCosNS_1"); //Make a clone of the h10 histogram from the BergerSegal.C file for the good nonstopped muon angle
 
+TH1D *hTotalPNewBSCC = (TH1D*)f1->Get("CCTMuonMom_1"); //Make a clone of the h13 histogram from the NeutrinoMode.C file for total muon momentum
+TH1D *hTotalGoodPNewBSCC = (TH1D*)f1->Get("CCTGMuonMom_1"); //Make a clone of the h19 histogram from the NeutrinoMode.C file for total good muon momentum
+
+TH1D *hTotalCosNewBSCC = (TH1D*)f1->Get("CCTMuonCos_1"); //Make a clone of the h14 histogram from the NeutrinoMode.C file for total muon angle
+TH1D *hTotalGoodCosNewBSCC = (TH1D*)f1->Get("CCTGMuonCos_1"); //Make a clone of the h20 histogram from the NeutrinoMode.C file for total good muon angle
+
 
 hTotalPNewBS->Sumw2();
 hTotalGoodPNewBS->Sumw2();
@@ -31,10 +37,16 @@ hGoodStoppedPNewBS->Sumw2();
 hGoodStoppedCosNewBS->Sumw2();
 hGoodNonStoppedPNewBS->Sumw2();
 hGoodNonStoppedCosNewBS->Sumw2();
+hTotalPNewBSCC->Sumw2();
+hTotalGoodPNewBSCC->Sumw2();
+hTotalCosNewBSCC->Sumw2();
+hTotalGoodCosNewBSCC->Sumw2();
 
 // ### Defining the ratio histogram ###
 TH1D *RatioPBS = new TH1D("RatioPBS", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioCBS = new TH1D("RatioCBS", "Efficiencies for Angles", 40, 0, 180);
+TH1D *RatioPBSCC = new TH1D("RatioPBSCC", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioCBSCC = new TH1D("RatioCBSCC", "Efficiencies for Angles", 40, 0, 180);
 
 // ### Formatting the plot ###
 RatioPBS->SetLineColor(kRed);
@@ -50,9 +62,25 @@ RatioCBS->GetXaxis()->CenterTitle();
 RatioCBS->GetYaxis()->SetTitle("Efficiency");
 RatioCBS->GetYaxis()->CenterTitle();
 
+// ### Formatting the plot ###
+RatioPBSCC->SetLineColor(kRed);
+RatioPBSCC->GetXaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
+RatioPBSCC->GetXaxis()->CenterTitle();
+RatioPBSCC->GetYaxis()->SetTitle("Efficiency");
+RatioPBSCC->GetYaxis()->CenterTitle();
+
+// ### Formatting the plot ###
+RatioCBSCC->SetLineColor(kRed);
+RatioCBSCC->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+RatioCBSCC->GetXaxis()->CenterTitle();
+RatioCBSCC->GetYaxis()->SetTitle("Efficiency");
+RatioCBSCC->GetYaxis()->CenterTitle();
+
 
 RatioPBS->Divide(hTotalGoodPNewBS, hTotalPNewBS);
 RatioCBS->Divide(hTotalGoodCosNewBS, hTotalCosNewBS);
+RatioPBSCC->Divide(hTotalGoodPNewBSCC, hTotalPNewBSCC);
+RatioCBSCC->Divide(hTotalGoodCosNewBSCC, hTotalCosNewBSCC);
 
 
 
@@ -76,6 +104,12 @@ TH1D *hGoodStoppedCosNewRS = (TH1D*)f2->Get("GMuonCosS_1"); //Make a clone of th
 TH1D *hGoodNonStoppedPNewRS = (TH1D*)f2->Get("GMuonMomNS_1"); //Make a clone of the h9 histogram from the BergerSegal.C file for the good nonstopped muon momentum
 TH1D *hGoodNonStoppedCosNewRS = (TH1D*)f2->Get("GMuonCosNS_1"); //Make a clone of the h10 histogram from the BergerSegal.C file for the good nonstopped muon angle
 
+TH1D *hTotalPNewRSCC = (TH1D*)f2->Get("CCTMuonMom_1"); //Make a clone of the h13 histogram from the NeutrinoMode.C file for total muon momentum
+TH1D *hTotalGoodPNewRSCC = (TH1D*)f2->Get("CCTGMuonMom_1"); //Make a clone of the h19 histogram from the NeutrinoMode.C file for total good muon momentum
+
+TH1D *hTotalCosNewRSCC = (TH1D*)f2->Get("CCTMuonCos_1"); //Make a clone of the h14 histogram from the NeutrinoMode.C file for total muon angle
+TH1D *hTotalGoodCosNewRSCC = (TH1D*)f2->Get("CCTGMuonCos_1"); //Make a clone of the h20 histogram from the NeutrinoMode.C file for total good muon angle
+
 
 hTotalPNewRS->Sumw2();
 hTotalGoodPNewRS->Sumw2();
@@ -85,10 +119,16 @@ hGoodStoppedPNewRS->Sumw2();
 hGoodStoppedCosNewRS->Sumw2();
 hGoodNonStoppedPNewRS->Sumw2();
 hGoodNonStoppedCosNewRS->Sumw2();
+hTotalPNewRSCC->Sumw2();
+hTotalGoodPNewRSCC->Sumw2();
+hTotalCosNewRSCC->Sumw2();
+hTotalGoodCosNewRSCC->Sumw2();
 
 // ### Defining the ratio histogram ###
 TH1D *RatioPRS = new TH1D("RatioPRS", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioCRS = new TH1D("RatioCRS", "Efficiencies for Angles", 40, 0, 180);
+TH1D *RatioPRSCC = new TH1D("RatioPRSCC", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioCRSCC = new TH1D("RatioCRSCC", "Efficiencies for Angles", 40, 0, 180);
 
 // ### Formatting the plot ###
 RatioPRS->SetLineColor(kBlue);
@@ -104,9 +144,25 @@ RatioCRS->GetXaxis()->CenterTitle();
 RatioCRS->GetYaxis()->SetTitle("Efficiency");
 RatioCRS->GetYaxis()->CenterTitle();
 
+// ### Formatting the plot ###
+RatioPRSCC->SetLineColor(kBlue);
+RatioPRSCC->GetXaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
+RatioPRSCC->GetXaxis()->CenterTitle();
+RatioPRSCC->GetYaxis()->SetTitle("Efficiency");
+RatioPRSCC->GetYaxis()->CenterTitle();
+
+// ### Formatting the plot ###
+RatioCRSCC->SetLineColor(kBlue);
+RatioCRSCC->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+RatioCRSCC->GetXaxis()->CenterTitle();
+RatioCRSCC->GetYaxis()->SetTitle("Efficiency");
+RatioCRSCC->GetYaxis()->CenterTitle();
+
 
 RatioPRS->Divide(hTotalGoodPNewRS, hTotalPNewRS);
 RatioCRS->Divide(hTotalGoodCosNewRS, hTotalCosNewRS);
+RatioPRSCC->Divide(hTotalGoodPNewRSCC, hTotalPNewRSCC);
+RatioCRSCC->Divide(hTotalGoodCosNewRSCC, hTotalCosNewRSCC);
 
 
 
@@ -130,6 +186,12 @@ TH1D *hGoodStoppedCosNewOBS = (TH1D*)f3->Get("GMuonCosS_1"); //Make a clone of t
 TH1D *hGoodNonStoppedPNewOBS = (TH1D*)f3->Get("GMuonMomNS_1"); //Make a clone of the h9 histogram from the BergerSegal.C file for the good nonstopped muon momentum
 TH1D *hGoodNonStoppedCosNewOBS = (TH1D*)f3->Get("GMuonCosNS_1"); //Make a clone of the h10 histogram from the BergerSegal.C file for the good nonstopped muon angle
 
+TH1D *hTotalPNewOBSCC = (TH1D*)f3->Get("CCTMuonMom_1"); //Make a clone of the h13 histogram from the NeutrinoMode.C file for total muon momentum
+TH1D *hTotalGoodPNewOBSCC = (TH1D*)f3->Get("CCTGMuonMom_1"); //Make a clone of the h19 histogram from the NeutrinoMode.C file for total good muon momentum
+
+TH1D *hTotalCosNewOBSCC = (TH1D*)f3->Get("CCTMuonCos_1"); //Make a clone of the h14 histogram from the NeutrinoMode.C file for total muon angle
+TH1D *hTotalGoodCosNewOBSCC = (TH1D*)f3->Get("CCTGMuonCos_1"); //Make a clone of the h20 histogram from the NeutrinoMode.C file for total good muon angle
+
 
 hTotalPNewOBS->Sumw2();
 hTotalGoodPNewOBS->Sumw2();
@@ -139,11 +201,16 @@ hGoodStoppedPNewOBS->Sumw2();
 hGoodStoppedCosNewOBS->Sumw2();
 hGoodNonStoppedPNewOBS->Sumw2();
 hGoodNonStoppedCosNewOBS->Sumw2();
-
+hTotalPNewOBSCC->Sumw2();
+hTotalGoodPNewOBSCC->Sumw2();
+hTotalCosNewOBSCC->Sumw2();
+hTotalGoodCosNewOBSCC->Sumw2();
 
 // ### Defining the ratio histogram ###
 TH1D *RatioPOBS = new TH1D("RatioPOBS", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioCOBS = new TH1D("RatioCOBS", "Efficiencies for Angles", 40, 0, 180);
+TH1D *RatioPOBSCC = new TH1D("RatioPOBSCC", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioCOBSCC = new TH1D("RatioCOBSCC", "Efficiencies for Angles", 40, 0, 180);
 
 // ### Formatting the plot ###
 RatioPOBS->SetLineColor(kBlack);
@@ -159,9 +226,111 @@ RatioCOBS->GetXaxis()->CenterTitle();
 RatioCOBS->GetYaxis()->SetTitle("Efficiency");
 RatioCOBS->GetYaxis()->CenterTitle();
 
+// ### Formatting the plot ###
+RatioPOBSCC->SetLineColor(kBlack);
+RatioPOBSCC->GetXaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
+RatioPOBSCC->GetXaxis()->CenterTitle();
+RatioPOBSCC->GetYaxis()->SetTitle("Efficiency");
+RatioPOBSCC->GetYaxis()->CenterTitle();
+
+// ### Formatting the plot ###
+RatioCOBSCC->SetLineColor(kBlack);
+RatioCOBSCC->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+RatioCOBSCC->GetXaxis()->CenterTitle();
+RatioCOBSCC->GetYaxis()->SetTitle("Efficiency");
+RatioCOBSCC->GetYaxis()->CenterTitle();
+
 
 RatioPOBS->Divide(hTotalGoodPNewOBS, hTotalPNewOBS);
 RatioCOBS->Divide(hTotalGoodCosNewOBS, hTotalCosNewOBS);
+RatioPOBSCC->Divide(hTotalGoodPNewOBSCC, hTotalPNewOBSCC);
+RatioCOBSCC->Divide(hTotalGoodCosNewOBSCC, hTotalCosNewOBSCC);
+
+
+
+
+// =======================================================================================
+//                ### Berger Sehgal Files for Anti-Neutrino Mode ###
+// =======================================================================================
+
+
+TFile *f4 = new TFile("./ROOTFILES/totalmuoninfoBSBar.root"); //Load Total Muon Info File
+
+TH1D *hTotalPNewBSBar = (TH1D*)f4->Get("TMuonMom_1"); //Make a clone of the h5 histogram from the NeutrinoMode.C file for total muon momentum
+TH1D *hTotalGoodPNewBSBar = (TH1D*)f4->Get("TGMuonMom_1"); //Make a clone of the h11 histogram from the NeutrinoMode.C file for total good muon momentum
+
+TH1D *hTotalCosNewBSBar = (TH1D*)f4->Get("TMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
+TH1D *hTotalGoodCosNewBSBar = (TH1D*)f4->Get("TGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
+
+
+hTotalPNewBSBar->Sumw2();
+hTotalGoodPNewBSBar->Sumw2();
+hTotalCosNewBSBar->Sumw2();
+hTotalGoodCosNewBSBar->Sumw2();
+
+// ### Defining the ratio histogram ###
+TH1D *RatioPBSBar = new TH1D("RatioPBSBar", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioCBSBar = new TH1D("RatioCBSBar", "Efficiencies for Angles", 40, 0, 180);
+
+// ### Formatting the plot ###
+RatioPBSBar->SetLineColor(kBlack);
+RatioPBSBar->GetXaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
+RatioPBSBar->GetXaxis()->CenterTitle();
+RatioPBSBar->GetYaxis()->SetTitle("Efficiency");
+RatioPBSBar->GetYaxis()->CenterTitle();
+
+// ### Formatting the plot ###
+RatioCBSBar->SetLineColor(kBlack);
+RatioCBSBar->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+RatioCBSBar->GetXaxis()->CenterTitle();
+RatioCBSBar->GetYaxis()->SetTitle("Efficiency");
+RatioCBSBar->GetYaxis()->CenterTitle();
+
+RatioPBSBar->Divide(hTotalGoodPNewBSBar, hTotalPNewBSBar);
+RatioCBSBar->Divide(hTotalGoodCosNewBSBar, hTotalCosNewBSBar);
+
+
+
+
+// =======================================================================================
+//                ### Rein Sehgal Files for Anti-Neutrino Mode ###
+// =======================================================================================
+
+
+TFile *f5 = new TFile("./ROOTFILES/totalmuoninfoRSBar.root"); //Load Total Muon Info File
+
+TH1D *hTotalPNewRSBar = (TH1D*)f5->Get("TMuonMom_1"); //Make a clone of the h5 histogram from the NeutrinoMode.C file for total muon momentum
+TH1D *hTotalGoodPNewRSBar = (TH1D*)f5->Get("TGMuonMom_1"); //Make a clone of the h11 histogram from the NeutrinoMode.C file for total good muon momentum
+
+TH1D *hTotalCosNewRSBar = (TH1D*)f5->Get("TMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
+TH1D *hTotalGoodCosNewRSBar = (TH1D*)f5->Get("TGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
+
+
+hTotalPNewRSBar->Sumw2();
+hTotalGoodPNewRSBar->Sumw2();
+hTotalCosNewRSBar->Sumw2();
+hTotalGoodCosNewRSBar->Sumw2();
+
+// ### Defining the ratio histogram ###
+TH1D *RatioPRSBar = new TH1D("RatioPRSBar", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioCRSBar = new TH1D("RatioCRSBar", "Efficiencies for Angles", 40, 0, 180);
+
+// ### Formatting the plot ###
+RatioPRSBar->SetLineColor(kMagenta);
+RatioPRSBar->GetXaxis()->SetTitle("Muon Momentum Magnitude (MeV)");
+RatioPRSBar->GetXaxis()->CenterTitle();
+RatioPRSBar->GetYaxis()->SetTitle("Efficiency");
+RatioPRSBar->GetYaxis()->CenterTitle();
+
+// ### Formatting the plot ###
+RatioCRSBar->SetLineColor(kMagenta);
+RatioCRSBar->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+RatioCRSBar->GetXaxis()->CenterTitle();
+RatioCRSBar->GetYaxis()->SetTitle("Efficiency");
+RatioCRSBar->GetYaxis()->CenterTitle();
+
+RatioPRSBar->Divide(hTotalGoodPNewRSBar, hTotalPNewRSBar);
+RatioCRSBar->Divide(hTotalGoodCosNewRSBar, hTotalCosNewRSBar);
 
 
 
@@ -220,6 +389,171 @@ leg5->AddEntry(RatioCRS,"New R-S Model");
 leg5->AddEntry(RatioCBS,"New B-S Model");
 leg5->AddEntry(RatioCOBS, "Old B-S Model");
 leg5->Draw();
+
+
+
+
+// #################################################
+// # Drawing the CC Momentum Efficiency Histograms #
+// #################################################
+
+TCanvas *c11 = new TCanvas("c11", "CC Muon Momentums Efficiencies Histogram");
+c11->SetTicks();
+c11->SetFillColor(kWhite);
+
+RatioPBSCC->Draw("E1");
+RatioPRSCC->Draw("E1same");
+RatioPOBSCC->Draw("E1same");
+
+// ### Defining the legend for the plot ###
+TLegend *leg10 = new TLegend();
+leg10 = new TLegend(0.58,0.65,0.88,0.88);
+leg10->SetTextSize(0.04);
+leg10->SetTextAlign(12);
+leg10->SetFillColor(kWhite);
+leg10->SetLineColor(kWhite);
+leg10->SetShadowColor(kWhite);
+leg10->SetHeader("SciBooNE MC");
+leg10->AddEntry(RatioPRSCC,"New R-S Model");
+leg10->AddEntry(RatioPBSCC,"New B-S Model");
+leg10->AddEntry(RatioPOBSCC, "Old B-S Model");
+leg10->Draw();
+
+
+
+
+// ###############################################
+// # Drawing the CC Angles Efficiency Histograms #
+// ###############################################
+
+TCanvas *c12 = new TCanvas("c12", "CC Muon Angles Efficiencies Histogram");
+c12->SetTicks();
+c12->SetFillColor(kWhite);
+
+RatioCBSCC->Draw("E1");
+RatioCRSCC->Draw("E1same");
+RatioCOBSCC->Draw("E1same");
+
+// ### Defining the legend for the plot ###
+TLegend *leg11 = new TLegend();
+leg11 = new TLegend(0.58,0.65,0.88,0.88);
+leg11->SetTextSize(0.04);
+leg11->SetTextAlign(12);
+leg11->SetFillColor(kWhite);
+leg11->SetLineColor(kWhite);
+leg11->SetShadowColor(kWhite);
+leg11->SetHeader("SciBooNE MC");
+leg11->AddEntry(RatioCRSCC,"New R-S Model");
+leg11->AddEntry(RatioCBSCC,"New B-S Model");
+leg11->AddEntry(RatioCOBSCC,"Old B-S Model");
+leg11->Draw();
+
+
+
+
+// ################################################################
+// # Drawing the RS Neut-Anti-Neut Momentum Efficiency Histograms #
+// ################################################################
+
+TCanvas *c13 = new TCanvas("c13", "R-S Neut-Anti-Neut Muon Momentums Efficiencies Histogram");
+c13->SetTicks();
+c13->SetFillColor(kWhite);
+
+RatioPRS->Draw("E1");
+RatioPRSBar->Draw("E1same");
+
+// ### Defining the legend for the plot ###
+TLegend *leg12 = new TLegend();
+leg12 = new TLegend(0.58,0.65,0.88,0.88);
+leg12->SetTextSize(0.04);
+leg12->SetTextAlign(12);
+leg12->SetFillColor(kWhite);
+leg12->SetLineColor(kWhite);
+leg12->SetShadowColor(kWhite);
+leg12->SetHeader("SciBooNE MC");
+leg12->AddEntry(RatioPRS,"Neut R-S Model");
+leg12->AddEntry(RatioPRSBar,"Anti-Neut R-S Model");
+leg12->Draw();
+
+
+
+
+// ##############################################################
+// # Drawing the RS Neut-Anti-Neut Angles Efficiency Histograms #
+// ##############################################################
+
+TCanvas *c14 = new TCanvas("c14", "R-S Neut-Anti-Neut Muon Angles Efficiencies Histogram");
+c14->SetTicks();
+c14->SetFillColor(kWhite);
+
+RatioCRS->Draw("E1");
+RatioCRSBar->Draw("E1same");
+
+// ### Defining the legend for the plot ###
+TLegend *leg13 = new TLegend();
+leg13 = new TLegend(0.58,0.65,0.88,0.88);
+leg13->SetTextSize(0.04);
+leg13->SetTextAlign(12);
+leg13->SetFillColor(kWhite);
+leg13->SetLineColor(kWhite);
+leg13->SetShadowColor(kWhite);
+leg13->SetHeader("SciBooNE MC");
+leg13->AddEntry(RatioCRS,"Neut R-S Model");
+leg13->AddEntry(RatioCRSBar,"Anti-Neut R-S Model");
+leg13->Draw();
+
+
+
+// ################################################################
+// # Drawing the BS Neut-Anti-Neut Momentum Efficiency Histograms #
+// ################################################################
+
+TCanvas *c15 = new TCanvas("c15", "B-S Neut-Anti-Neut Muon Momentums Efficiencies Histogram");
+c15->SetTicks();
+c15->SetFillColor(kWhite);
+
+RatioPBS->Draw("E1");
+RatioPBSBar->Draw("E1same");
+
+// ### Defining the legend for the plot ###
+TLegend *leg14 = new TLegend();
+leg14 = new TLegend(0.58,0.65,0.88,0.88);
+leg14->SetTextSize(0.04);
+leg14->SetTextAlign(12);
+leg14->SetFillColor(kWhite);
+leg14->SetLineColor(kWhite);
+leg14->SetShadowColor(kWhite);
+leg14->SetHeader("SciBooNE MC");
+leg14->AddEntry(RatioPBS,"Neut B-S Model");
+leg14->AddEntry(RatioPBSBar,"Anti-Neut B-S Model");
+leg14->Draw();
+
+
+
+
+// ##############################################################
+// # Drawing the BS Neut-Anti-Neut Angles Efficiency Histograms #
+// ##############################################################
+
+TCanvas *c16 = new TCanvas("c16", "B-S Neut-Anti-Neut Muon Angles Efficiencies Histogram");
+c16->SetTicks();
+c16->SetFillColor(kWhite);
+
+RatioCBS->Draw("E1");
+RatioCBSBar->Draw("E1same");
+
+// ### Defining the legend for the plot ###
+TLegend *leg15 = new TLegend();
+leg15 = new TLegend(0.58,0.65,0.88,0.88);
+leg15->SetTextSize(0.04);
+leg15->SetTextAlign(12);
+leg15->SetFillColor(kWhite);
+leg15->SetLineColor(kWhite);
+leg15->SetShadowColor(kWhite);
+leg15->SetHeader("SciBooNE MC");
+leg15->AddEntry(RatioCBS,"Neut B-S Model");
+leg15->AddEntry(RatioCBSBar,"Anti-Neut B-S Model");
+leg15->Draw();
 
 
 
