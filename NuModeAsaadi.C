@@ -41,6 +41,13 @@ TH1D *hMRDVertexX = new TH1D("hMRDVertexX", "X Position where muon penetrates th
 TH1D *hMRDVertexY = new TH1D("hMRDVertexY", "Y Position where muon penetrates the MRD", 300, -1.0, 4.0);
 TH1D *hMRDVertexZ = new TH1D("hMRDVertexZ", "Z Position where muon penetrates the MRD", 300, 2.0, 3.0);
 
+// ### Muon Traveling through SciBar ###
+TH1D *hMuonDistanceTraveled = new TH1D("hMuonDistanceTraveled", "Distance Muon Travels to MRD", 100, 0, 10);
+TH1D *hMuonEnergyLoss = new TH1D("hMuonEnergyLoss", "Energy loss in SciBar (dE/dX = 2.04 MeV/cm)", 1000, 0, 1000);
+
+TH1D *hMuonNLayersOfScintillator = new TH1D("hMuonNLayersOfScintillator", "Number of Scintillator Layers the Muon penetrates", 30, 0, 30);
+TH1D *hMuonNLayersOfSteel = new TH1D("hMuonNLayersOfSteel", "Number of Steel Layers the Muon penetrates", 30, 0, 30);
+
 void NuModeAsaadi::Loop()
 {
 
@@ -294,18 +301,107 @@ for (Long64_t jentry=0; jentry<nentries;jentry++)
       double b1 = Zpos - (Xpos* (  P_muon.Z()/P_muon.X()) );
       double b2 = Zpos - (Ypos* (  P_muon.Z()/P_muon.y()) );
       
-      
+      // === The location of the muon at the face of the MRD ===
       double LocationAtMRD_X = -b1*(P_muon.X()/P_muon.Z());
       double LocationAtMRD_Y = -b2*(P_muon.Y()/P_muon.Z());
       double LocationAtMRD_Z = 2.25;
             
-      hMRDVertexX->Fill(LocationAtMRD_X);
-      hMRDVertexY->Fill(LocationAtMRD_Y);
-      hMRDVertexZ->Fill(LocationAtMRD_Z);
       
       
-      if( (LocationAtMRD_X > 0.2 || LocationAtMRD_X < 2.8) && (LocationAtMRD_Y > 0.2 && LocationAtMRD_Y < 2.8) )
-         {nCohPionEventsInMRD++;}
+      // ##################################################################################
+      // ### Only looking at events if the X position is between 0.2m and 2.8 m and the ###
+      // ###               Y position is between 0.2m and 2.8m                          ###
+      // ##################################################################################
+      if( LocationAtMRD_X > 0.2 && LocationAtMRD_X < 2.8 && LocationAtMRD_Y > 0.2 && LocationAtMRD_Y < 2.8 )
+         {
+	 // === Filling the MRD vertex location ===
+	 hMRDVertexX->Fill(LocationAtMRD_X);
+         hMRDVertexY->Fill(LocationAtMRD_Y);
+         hMRDVertexZ->Fill(LocationAtMRD_Z);
+      
+      
+         // ### Calculating the distance the muon travels ###
+         double Distance = sqrt( pow(LocationAtMRD_Z - Zpos,2) + pow(LocationAtMRD_X - Xpos,2) + pow(LocationAtMRD_Y - Ypos,2)  );
+         hMuonDistanceTraveled->Fill(Distance);
+         
+	 // ### Calculate the energy the muon loss traversing SciBar to the front face of the MRD ###
+         double EnergyLoss = (Distance*100) * 2.04;
+	 hMuonEnergyLoss->Fill(EnergyLoss);
+	 
+	 // #############################################################
+	 // ### Only looking at events which have muon energy > 0 MeV ###
+	 // #############################################################
+	 if(StdHepP4[muonNumber][3]*1000 - EnergyLoss > 0)
+	    {
+	    nCohPionEventsInMRD++;
+	    
+	    // ### Save the energy remaining once the muon is in the MRD ###
+	    double EnergyRemaining = StdHepP4[muonNumber][3]*1000 - EnergyLoss;
+	    
+	    
+	    
+	    int nScintillatorLayers = 1;
+	    int nSteelLayers = 1; 
+	    
+	    // ### Keep going as long as the energy is non-zero and we haven't ###
+	    // ###             escaped the sides of the MRD                    ###
+	    //std::cout<<std::endl;
+	    while(EnergyRemaining > 0 && nScintillatorLayers < 27 && nSteelLayers < 26)
+	       {
+	       
+	       double currentX = ( (-(LocationAtMRD_Z + (nScintillatorLayers*0.006) ))*(P_muon.X()/P_muon.Z()) ) + LocationAtMRD_X; 
+	       double currentY = ( (-(LocationAtMRD_Z + (nScintillatorLayers*0.006) ))*(P_muon.Y()/P_muon.Z()) ) + LocationAtMRD_Y;
+	       double currentZ = LocationAtMRD_Z + nScintillatorLayers*0.006;
+	       
+	       // ### Breaking out of the loop if the muon exits the side ###
+	       if(currentX < 0.2 || currentX > 2.8 || currentY < 0.2 || currentY > 2.8)
+	          {break;} 
+	       
+	       // ### Calculating the energy loss due to all the scintillator layers thus far ###
+	       // ###  ELoss = nScintillators * (thickness of scintillator) * (2.04 MeV /cm)  ###
+	       double EnergyLossToScintillator = nScintillatorLayers*0.006*0.0204;
+	       
+	       // ### Subtract off that energy ###
+	       EnergyRemaining -= EnergyLossToScintillator;
+	       
+	       // ### Break out of the loop if the energy dips below zero because of the scintillator ###
+	       if(EnergyRemaining < 0){break;}
+
+	       // Bump the counter on the number of scintillator layers
+	       nScintillatorLayers++;
+	       
+	       double currentXSteel = ( (-(currentZ + (nSteelLayers*0.0508) ))*(P_muon.X()/P_muon.Z()) ) + currentX; 
+	       double currentYSteel = ( (-(currentZ + (nSteelLayers*0.0508) ))*(P_muon.Y()/P_muon.Z()) ) + currentY;
+	       double currentZSteel = currentZ + nSteelLayers*0.0508;
+	       
+	       // ### Breaking out of the loop if the muon exits the side ###
+	       if(currentXSteel < 0.2 || currentXSteel > 2.8 || currentYSteel < 0.2 || currentYSteel > 2.8)
+	          {break;}
+	       
+	       // ### Calculating the energy loss due to all the steel layers thus far ###
+	       // ###      ELoss = nSteel * (thickness of steel) * (11.43 MeV /cm)     ###
+	       double EnergyLossToSteel = nScintillatorLayers*0.0508*0.1143;
+	       
+	       // ### Subtract off that energy ###
+	       EnergyRemaining -= EnergyLossToSteel;
+	       
+	       // ### Break out of the loop if the energy dips below zero because of the scintillator ###
+	       if(EnergyRemaining < 0){break;}
+	       
+	       nSteelLayers++;
+	       }// <--- End the while loop for the MRD layers 
+	    
+	    //if(nScintillatorLayers > 12){nScintillatorLayers = 12;}
+	    //if(nSteelLayers > 12){nSteelLayers = 12;}
+	    
+	    hMuonNLayersOfScintillator->Fill(nScintillatorLayers);
+	    hMuonNLayersOfSteel->Fill(nSteelLayers);
+	    
+	    
+	    
+	    }//<---End only looking at events which have non-zero energy as they enter the MRD
+	 
+	 }//<---Only looking at events in the fiducial boundary of the MRD
       
       
       }//<---End Coherent Pion
@@ -314,9 +410,9 @@ for (Long64_t jentry=0; jentry<nentries;jentry++)
    
    
 std::cout<<"==================================================================="<<std::endl;
-std::cout<<"Total Number of Events		= "<<nTotalEvents<<std::endl;
-std::cout<<"Total Number of Coh-Pion Events 	= "<<nCohPionEvents<<std::endl;
-std::cout<<nCohPionEventsInMRD<<std::endl;
+std::cout<<"Total Number of Events	                	= "<<nTotalEvents<<std::endl;
+std::cout<<"Total Number of Coh-Pion Events                  	= "<<nCohPionEvents<<std::endl;
+std::cout<<"Total Number of Coh-Pion Events which enter the MRD = "<<nCohPionEventsInMRD<<std::endl;
 std::cout<<"==================================================================="<<std::endl;
 
 
@@ -343,5 +439,11 @@ hVertexZ->Write();
 hMRDVertexX->Write();
 hMRDVertexY->Write();
 hMRDVertexZ->Write();
+
+hMuonDistanceTraveled->Write();
+hMuonEnergyLoss->Write();
+
+hMuonNLayersOfScintillator->Write();
+hMuonNLayersOfSteel->Write();
 
 }
