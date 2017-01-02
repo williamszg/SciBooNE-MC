@@ -41,7 +41,7 @@ TH2D *hMuonyz2 = new TH2D("hMuonyz2", "yz2", 100, 0.1, 2.9, 100, 2.05, 2.45); //
 //##############################################
 //### These are histograms for CC-Coh Events ###
 //##############################################
-TH1D *h4 = new TH1D("h4", "Layer Distribution", 26, 0, 26); //This is the histogram for which layer the muon stopped in in the steel layers
+TH1D *h4 = new TH1D("h4", "Layer Distribution", 13, 0, 13); //This is the histogram for which layer the muon stopped in in the steel layers
 
 TH1D *h5 = new TH1D("h5", "Total CC-Coh Muon Momentum", 40, 0, 2000); //This is the histogram for the total number of CC events of the muon momentum
 TH1D *h6 = new TH1D("h6", "Good CC-Coh Muon Momentum Stopped", 40, 0, 2000); //This is the histogram for the CC events that passed our cuts of the muon momentum
@@ -444,7 +444,7 @@ void BergerSegal::Loop()
                      hMuonxz2->Fill(m12, 2.25); //Fill the hMuonxz2 histogram beginning of MRD
                      hMuonyz2->Fill(m22, 2.25); //Fill the hMuonyz2 histogram beginning of MRD
 
-                     h4->Fill(layer);
+                     h4->Fill(n-1);
                   
                      h6->Fill(mag1*1000); //Fill the h6 histogram with the good CC muon momentum
                      h8->Fill(mangle); //Fill the h8 histogram with the good CC muon angle
