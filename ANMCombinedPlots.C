@@ -1262,28 +1262,6 @@ leg24->Draw();
 //                              Accessing the bin information from the histograms
 // =================================================================================================================
 /*
-std::cout<<"For the new Rein-Sehgal Model:"<<std::endl;
-for (int i=0; i<1764; i++) {
-   Double_t binContent = hTotalRatioRS->GetBinContent(i);
-   Double_t binContent1 = hGoodRatioRS->GetBinContent(i);
-   Double_t binContent2 = Ratio2DRS->GetBinContent(i);
-   //std::cout<<"For bin = "<<i<<", the content of the Good is: "<<binContent1<<", the content of the Total is: "<<binContent<<", and the content of the Ratio is: "<<binContent2<<std::endl;
-
-   std::cout<<binContent2<<std::endl;
-   }
-
-
-std::cout<<"For the new Berger-Sehgal Model:"<<std::endl;
-for (int i=0; i<1764; i++) {
-   Double_t binContent = hTotalRatioBS->GetBinContent(i);
-   Double_t binContent1 = hGoodRatioBS->GetBinContent(i);
-   Double_t binContent2 = Ratio2DBS->GetBinContent(i);
-   //std::cout<<"For bin = "<<i<<", the content of the Good is: "<<binContent1<<", the content of the Total is: "<<binContent<<", and the content of the Ratio is: "<<binContent2<<std::endl;
-
-   std::cout<<binContent2<<std::endl;
-   }
-*/
-
 for (int i=1; i<41; i++) {
    for (int j=1; j<41; j++) {
       Int_t bin = Ratio2DRS->GetBin(j,i,1);
@@ -1297,7 +1275,7 @@ for (int i=1; i<41; i++) {
 
 
    }
-
+*/
 // =================================================================================================================
 
 
