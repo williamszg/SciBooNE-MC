@@ -1,12 +1,12 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Mon Dec 19 18:11:19 2016 by ROOT version 6.06/00
+// Thu Jan  5 14:05:53 2017 by ROOT version 6.06/00
 // from TTree nRooTracker/Pure NEUT RooTracker
-// found on file: SciBooNE_numu_coh_OLDNEUT_RooTrack.root
+// found on file: SciBooNE_numu_coh_RooTrack_NEW.root
 //////////////////////////////////////////////////////////
 
-#ifndef OldBergerSehgal_h
-#define OldBergerSehgal_h
+#ifndef NewNMBergerSehgal_h
+#define NewNMBergerSehgal_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -16,7 +16,7 @@
 #include "TObjString.h"
 #include "TObject.h"
 
-class OldBergerSehgal {
+class NewNMBergerSehgal {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
@@ -30,8 +30,8 @@ public :
    TString         fString;
    Int_t           EvtNum;
    Int_t           StdHepN;
-   Int_t           StdHepPdg[22];   //[StdHepN]
-   Int_t           StdHepStatus[22];   //[StdHepN]
+   Int_t           StdHepPdg[30];   //[StdHepN]
+   Int_t           StdHepStatus[30];   //[StdHepN]
    Double_t        StdHepP4[100][4];
 
    // List of branches
@@ -44,8 +44,8 @@ public :
    TBranch        *b_StdHepStatus;   //!
    TBranch        *b_StdHepP4;   //!
 
-   OldBergerSehgal(TTree *tree=0);
-   virtual ~OldBergerSehgal();
+   NewNMBergerSehgal(TTree *tree=0);
+   virtual ~NewNMBergerSehgal();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -57,15 +57,15 @@ public :
 
 #endif
 
-#ifdef OldBergerSehgal_cxx
-OldBergerSehgal::OldBergerSehgal(TTree *tree) : fChain(0) 
+#ifdef NewNMBergerSehgal_cxx
+NewNMBergerSehgal::NewNMBergerSehgal(TTree *tree) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("SciBooNE_numu_coh_OLDNEUT_RooTrack.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("SciBooNE_numu_coh_RooTrack_NEW.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("SciBooNE_numu_coh_OLDNEUT_RooTrack.root");
+         f = new TFile("SciBooNE_numu_coh_RooTrack_NEW.root");
       }
       f->GetObject("nRooTracker",tree);
 
@@ -73,19 +73,19 @@ OldBergerSehgal::OldBergerSehgal(TTree *tree) : fChain(0)
    Init(tree);
 }
 
-OldBergerSehgal::~OldBergerSehgal()
+NewNMBergerSehgal::~NewNMBergerSehgal()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t OldBergerSehgal::GetEntry(Long64_t entry)
+Int_t NewNMBergerSehgal::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t OldBergerSehgal::LoadTree(Long64_t entry)
+Long64_t NewNMBergerSehgal::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -98,7 +98,7 @@ Long64_t OldBergerSehgal::LoadTree(Long64_t entry)
    return centry;
 }
 
-void OldBergerSehgal::Init(TTree *tree)
+void NewNMBergerSehgal::Init(TTree *tree)
 {
    // The Init() function is called when the selector needs to initialize
    // a new tree or chain. Typically here the branch addresses and branch
@@ -125,7 +125,7 @@ void OldBergerSehgal::Init(TTree *tree)
    Notify();
 }
 
-Bool_t OldBergerSehgal::Notify()
+Bool_t NewNMBergerSehgal::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -136,18 +136,18 @@ Bool_t OldBergerSehgal::Notify()
    return kTRUE;
 }
 
-void OldBergerSehgal::Show(Long64_t entry)
+void NewNMBergerSehgal::Show(Long64_t entry)
 {
 // Print contents of entry.
 // If entry is not specified, print current entry
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t OldBergerSehgal::Cut(Long64_t entry)
+Int_t NewNMBergerSehgal::Cut(Long64_t entry)
 {
 // This function may be called from Loop.
 // returns  1 if entry is accepted.
 // returns -1 otherwise.
    return 1;
 }
-#endif // #ifdef OldBergerSehgal_cxx
+#endif // #ifdef NewNMBergerSehgal_cxx

@@ -1,12 +1,12 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Mon Dec 19 16:30:37 2016 by ROOT version 6.06/00
+// Thu Jan  5 14:08:16 2017 by ROOT version 6.06/00
 // from TTree nRooTracker/Pure NEUT RooTracker
-// found on file: SciBooNE_numu_coh_RooTrack_NEW.root
+// found on file: SciBooNE_numu_coh_OLDNEUT_RooTrack.root
 //////////////////////////////////////////////////////////
 
-#ifndef BergerSegal_h
-#define BergerSegal_h
+#ifndef OldNMReinSehgal_h
+#define OldNMReinSehgal_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -16,7 +16,7 @@
 #include "TObjString.h"
 #include "TObject.h"
 
-class BergerSegal {
+class OldNMReinSehgal {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
@@ -30,8 +30,8 @@ public :
    TString         fString;
    Int_t           EvtNum;
    Int_t           StdHepN;
-   Int_t           StdHepPdg[30];   //[StdHepN]
-   Int_t           StdHepStatus[30];   //[StdHepN]
+   Int_t           StdHepPdg[22];   //[StdHepN]
+   Int_t           StdHepStatus[22];   //[StdHepN]
    Double_t        StdHepP4[100][4];
 
    // List of branches
@@ -44,8 +44,8 @@ public :
    TBranch        *b_StdHepStatus;   //!
    TBranch        *b_StdHepP4;   //!
 
-   BergerSegal(TTree *tree=0);
-   virtual ~BergerSegal();
+   OldNMReinSehgal(TTree *tree=0);
+   virtual ~OldNMReinSehgal();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -57,15 +57,15 @@ public :
 
 #endif
 
-#ifdef BergerSegal_cxx
-BergerSegal::BergerSegal(TTree *tree) : fChain(0) 
+#ifdef OldNMReinSehgal_cxx
+OldNMReinSehgal::OldNMReinSehgal(TTree *tree) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("SciBooNE_numu_coh_RooTrack_NEW.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("SciBooNE_numu_coh_OLDNEUT_RooTrack.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("SciBooNE_numu_coh_RooTrack_NEW.root");
+         f = new TFile("SciBooNE_numu_coh_OLDNEUT_RooTrack.root");
       }
       f->GetObject("nRooTracker",tree);
 
@@ -73,19 +73,19 @@ BergerSegal::BergerSegal(TTree *tree) : fChain(0)
    Init(tree);
 }
 
-BergerSegal::~BergerSegal()
+OldNMReinSehgal::~OldNMReinSehgal()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t BergerSegal::GetEntry(Long64_t entry)
+Int_t OldNMReinSehgal::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t BergerSegal::LoadTree(Long64_t entry)
+Long64_t OldNMReinSehgal::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -98,7 +98,7 @@ Long64_t BergerSegal::LoadTree(Long64_t entry)
    return centry;
 }
 
-void BergerSegal::Init(TTree *tree)
+void OldNMReinSehgal::Init(TTree *tree)
 {
    // The Init() function is called when the selector needs to initialize
    // a new tree or chain. Typically here the branch addresses and branch
@@ -125,7 +125,7 @@ void BergerSegal::Init(TTree *tree)
    Notify();
 }
 
-Bool_t BergerSegal::Notify()
+Bool_t OldNMReinSehgal::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -136,18 +136,18 @@ Bool_t BergerSegal::Notify()
    return kTRUE;
 }
 
-void BergerSegal::Show(Long64_t entry)
+void OldNMReinSehgal::Show(Long64_t entry)
 {
 // Print contents of entry.
 // If entry is not specified, print current entry
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t BergerSegal::Cut(Long64_t entry)
+Int_t OldNMReinSehgal::Cut(Long64_t entry)
 {
 // This function may be called from Loop.
 // returns  1 if entry is accepted.
 // returns -1 otherwise.
    return 1;
 }
-#endif // #ifdef BergerSegal_cxx
+#endif // #ifdef OldNMReinSehgal_cxx

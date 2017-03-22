@@ -1,12 +1,12 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Thu Sep  8 14:22:25 2016 by ROOT version 6.06/00
+// Thu Jan  5 14:04:26 2017 by ROOT version 6.06/00
 // from TTree nRooTracker/Pure NEUT RooTracker
-// found on file: SciBooNE_numu_coh_RooTrack.root
+// found on file: SciBooNE_numubar_coh_RooTrack.root
 //////////////////////////////////////////////////////////
 
-#ifndef NeutrinoMode_h
-#define NeutrinoMode_h
+#ifndef NewANMReinSehgal_h
+#define NewANMReinSehgal_h
 
 #include <TROOT.h>
 #include <TChain.h>
@@ -16,7 +16,7 @@
 #include "TObjString.h"
 #include "TObject.h"
 
-class NeutrinoMode {
+class NewANMReinSehgal {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
@@ -30,8 +30,8 @@ public :
    TString         fString;
    Int_t           EvtNum;
    Int_t           StdHepN;
-   Int_t           StdHepPdg[34];   //[StdHepN]
-   Int_t           StdHepStatus[34];   //[StdHepN]
+   Int_t           StdHepPdg[22];   //[StdHepN]
+   Int_t           StdHepStatus[22];   //[StdHepN]
    Double_t        StdHepP4[100][4];
 
    // List of branches
@@ -44,8 +44,8 @@ public :
    TBranch        *b_StdHepStatus;   //!
    TBranch        *b_StdHepP4;   //!
 
-   NeutrinoMode(TTree *tree=0);
-   virtual ~NeutrinoMode();
+   NewANMReinSehgal(TTree *tree=0);
+   virtual ~NewANMReinSehgal();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -57,15 +57,15 @@ public :
 
 #endif
 
-#ifdef NeutrinoMode_cxx
-NeutrinoMode::NeutrinoMode(TTree *tree) : fChain(0) 
+#ifdef NewANMReinSehgal_cxx
+NewANMReinSehgal::NewANMReinSehgal(TTree *tree) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("SciBooNE_numu_coh_RooTrack.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("SciBooNE_numubar_coh_RooTrack.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("SciBooNE_numu_coh_RooTrack.root");
+         f = new TFile("SciBooNE_numubar_coh_RooTrack.root");
       }
       f->GetObject("nRooTracker",tree);
 
@@ -73,19 +73,19 @@ NeutrinoMode::NeutrinoMode(TTree *tree) : fChain(0)
    Init(tree);
 }
 
-NeutrinoMode::~NeutrinoMode()
+NewANMReinSehgal::~NewANMReinSehgal()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t NeutrinoMode::GetEntry(Long64_t entry)
+Int_t NewANMReinSehgal::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t NeutrinoMode::LoadTree(Long64_t entry)
+Long64_t NewANMReinSehgal::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -98,7 +98,7 @@ Long64_t NeutrinoMode::LoadTree(Long64_t entry)
    return centry;
 }
 
-void NeutrinoMode::Init(TTree *tree)
+void NewANMReinSehgal::Init(TTree *tree)
 {
    // The Init() function is called when the selector needs to initialize
    // a new tree or chain. Typically here the branch addresses and branch
@@ -125,7 +125,7 @@ void NeutrinoMode::Init(TTree *tree)
    Notify();
 }
 
-Bool_t NeutrinoMode::Notify()
+Bool_t NewANMReinSehgal::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -136,18 +136,18 @@ Bool_t NeutrinoMode::Notify()
    return kTRUE;
 }
 
-void NeutrinoMode::Show(Long64_t entry)
+void NewANMReinSehgal::Show(Long64_t entry)
 {
 // Print contents of entry.
 // If entry is not specified, print current entry
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t NeutrinoMode::Cut(Long64_t entry)
+Int_t NewANMReinSehgal::Cut(Long64_t entry)
 {
 // This function may be called from Loop.
 // returns  1 if entry is accepted.
 // returns -1 otherwise.
    return 1;
 }
-#endif // #ifdef NeutrinoMode_cxx
+#endif // #ifdef NewANMReinSehgal_cxx

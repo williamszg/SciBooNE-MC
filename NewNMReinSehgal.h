@@ -1,27 +1,27 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Mon Nov 14 08:04:21 2016 by ROOT version 5.34/14
+// Thu Jan  5 14:03:25 2017 by ROOT version 6.06/00
 // from TTree nRooTracker/Pure NEUT RooTracker
-// found on file: ../SciBooNE_numu_coh_RooTrack.root
+// found on file: SciBooNE_numu_coh_RooTrack.root
 //////////////////////////////////////////////////////////
 
-#ifndef NuModeAsaadi_h
-#define NuModeAsaadi_h
+#ifndef NewNMReinSehgal_h
+#define NewNMReinSehgal_h
 
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
 
 // Header file for the classes stored in the TTree if any.
-#include <TObjString.h>
-#include <TObject.h>
+#include "TObjString.h"
+#include "TObject.h"
 
-// Fixed size dimensions of array or collections stored in the TTree if any.
-
-class NuModeAsaadi {
+class NewNMReinSehgal {
 public :
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
    Int_t           fCurrent; //!current Tree number in a TChain
+
+// Fixed size dimensions of array or collections stored in the TTree if any.
 
    // Declaration of leaf types
  //TObjString      *EvtCode;
@@ -44,8 +44,8 @@ public :
    TBranch        *b_StdHepStatus;   //!
    TBranch        *b_StdHepP4;   //!
 
-   NuModeAsaadi(TTree *tree=0);
-   virtual ~NuModeAsaadi();
+   NewNMReinSehgal(TTree *tree=0);
+   virtual ~NewNMReinSehgal();
    virtual Int_t    Cut(Long64_t entry);
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
@@ -57,15 +57,15 @@ public :
 
 #endif
 
-#ifdef NuModeAsaadi_cxx
-NuModeAsaadi::NuModeAsaadi(TTree *tree) : fChain(0) 
+#ifdef NewNMReinSehgal_cxx
+NewNMReinSehgal::NewNMReinSehgal(TTree *tree) : fChain(0) 
 {
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("./SciBooNE_numu_coh_RooTrack.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("SciBooNE_numu_coh_RooTrack.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("./SciBooNE_numu_coh_RooTrack.root");
+         f = new TFile("SciBooNE_numu_coh_RooTrack.root");
       }
       f->GetObject("nRooTracker",tree);
 
@@ -73,19 +73,19 @@ NuModeAsaadi::NuModeAsaadi(TTree *tree) : fChain(0)
    Init(tree);
 }
 
-NuModeAsaadi::~NuModeAsaadi()
+NewNMReinSehgal::~NewNMReinSehgal()
 {
    if (!fChain) return;
    delete fChain->GetCurrentFile();
 }
 
-Int_t NuModeAsaadi::GetEntry(Long64_t entry)
+Int_t NewNMReinSehgal::GetEntry(Long64_t entry)
 {
 // Read contents of entry.
    if (!fChain) return 0;
    return fChain->GetEntry(entry);
 }
-Long64_t NuModeAsaadi::LoadTree(Long64_t entry)
+Long64_t NewNMReinSehgal::LoadTree(Long64_t entry)
 {
 // Set the environment to read one entry
    if (!fChain) return -5;
@@ -98,7 +98,7 @@ Long64_t NuModeAsaadi::LoadTree(Long64_t entry)
    return centry;
 }
 
-void NuModeAsaadi::Init(TTree *tree)
+void NewNMReinSehgal::Init(TTree *tree)
 {
    // The Init() function is called when the selector needs to initialize
    // a new tree or chain. Typically here the branch addresses and branch
@@ -125,7 +125,7 @@ void NuModeAsaadi::Init(TTree *tree)
    Notify();
 }
 
-Bool_t NuModeAsaadi::Notify()
+Bool_t NewNMReinSehgal::Notify()
 {
    // The Notify() function is called when a new file is opened. This
    // can be either for a new TTree in a TChain or when when a new TTree
@@ -136,18 +136,18 @@ Bool_t NuModeAsaadi::Notify()
    return kTRUE;
 }
 
-void NuModeAsaadi::Show(Long64_t entry)
+void NewNMReinSehgal::Show(Long64_t entry)
 {
 // Print contents of entry.
 // If entry is not specified, print current entry
    if (!fChain) return;
    fChain->Show(entry);
 }
-Int_t NuModeAsaadi::Cut(Long64_t entry)
+Int_t NewNMReinSehgal::Cut(Long64_t entry)
 {
 // This function may be called from Loop.
 // returns  1 if entry is accepted.
 // returns -1 otherwise.
    return 1;
 }
-#endif // #ifdef NuModeAsaadi_cxx
+#endif // #ifdef NewNMReinSehgal_cxx
