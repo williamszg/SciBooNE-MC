@@ -1015,6 +1015,7 @@ RatioNSCRS->Draw("histosame");
 
 
 
+/*
 // #####################################################
 // # Drawing the Good Pion Energy Efficiency Histogram #
 // #####################################################
@@ -1254,6 +1255,7 @@ leg24->SetHeader("SciBooNE MC");
 leg24->AddEntry(PionAngleRatioNSRS,"New R-S Model");
 leg24->AddEntry(PionAngleRatioNSBS,"New B-S Model");
 leg24->Draw();
+*/
 
 
 
