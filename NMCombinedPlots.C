@@ -83,24 +83,24 @@ hCosStoppedBSCC->Sumw2();
 hCosNonStoppedBSCC->Sumw2();
 
 // ### Defining the ratio histogram ###
-TH1D *RatioPBS = new TH1D("RatioPBS", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioPBS = new TH1D("RatioPBS", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioCBS = new TH1D("RatioCBS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioSPBS = new TH1D("RatioSPBS", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioSPBS = new TH1D("RatioSPBS", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioSCBS = new TH1D("RatioSCBS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioNSPBS = new TH1D("RatioNSPBS", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioNSPBS = new TH1D("RatioNSPBS", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioNSCBS = new TH1D("RatioNSCBS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioPBSCC = new TH1D("RatioPBSCC", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioPBSCC = new TH1D("RatioPBSCC", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioCBSCC = new TH1D("RatioCBSCC", "Efficiencies for Angles", 40, 0, 180);
-TH1D *PionEnergyRatioBS = new TH1D("PionEnergyRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioBS = new TH1D("PionMomentumRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioBS = new TH1D("PionEnergyRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioBS = new TH1D("PionMomentumRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioBS = new TH1D("PionAngleRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioSBS = new TH1D("PionEnergyRatioSBS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioSBS = new TH1D("PionMomentumRatioSBS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioSBS = new TH1D("PionEnergyRatioSBS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioSBS = new TH1D("PionMomentumRatioSBS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioSBS = new TH1D("PionAngleRatioSBS", "Pion Efficiencies for Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioNSBS = new TH1D("PionEnergyRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioNSBS = new TH1D("PionMomentumRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioNSBS = new TH1D("PionEnergyRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioNSBS = new TH1D("PionMomentumRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioNSBS = new TH1D("PionAngleRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Angle", 40, 0, 180);
-TH2D *Ratio2DBS = new TH2D("Ratio2DBS", "2D Efficiencies", 40, 0, 180, 40, 0, 2000);
+TH2D *Ratio2DBS = new TH2D("Ratio2DBS", "2D Efficiencies", 40, 0, 180, 40, 0, 2500);
 
 // ### Formatting the plot ###
 PionEnergyRatioBS->SetLineColor(kRed);
@@ -321,24 +321,24 @@ hPionMomentumNonStoppedRS->Sumw2();
 hPionAngleNonStoppedRS->Sumw2();
 
 // ### Defining the ratio histogram ###
-TH1D *RatioPRS = new TH1D("RatioPRS", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioPRS = new TH1D("RatioPRS", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioCRS = new TH1D("RatioCRS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioSPRS = new TH1D("RatioSPRS", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioSPRS = new TH1D("RatioSPRS", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioSCRS = new TH1D("RatioSCRS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioNSPRS = new TH1D("RatioNSPRS", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioNSPRS = new TH1D("RatioNSPRS", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioNSCRS = new TH1D("RatioNSCRS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioPRSCC = new TH1D("RatioPRSCC", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioPRSCC = new TH1D("RatioPRSCC", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioCRSCC = new TH1D("RatioCRSCC", "Efficiencies for Angles", 40, 0, 180);
-TH1D *PionEnergyRatioRS = new TH1D("PionEnergyRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioRS = new TH1D("PionMomentumRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioRS = new TH1D("PionEnergyRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioRS = new TH1D("PionMomentumRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioRS = new TH1D("PionAngleRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioSRS = new TH1D("PionEnergyRatioSRS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioSRS = new TH1D("PionMomentumRatioSRS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioSRS = new TH1D("PionEnergyRatioSRS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioSRS = new TH1D("PionMomentumRatioSRS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioSRS = new TH1D("PionAngleRatioSRS", "Pion Efficiencies for Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioNSRS = new TH1D("PionEnergyRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioNSRS = new TH1D("PionMomentumRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioNSRS = new TH1D("PionEnergyRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioNSRS = new TH1D("PionMomentumRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioNSRS = new TH1D("PionAngleRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Angle", 40, 0, 180);
-TH2D *Ratio2DRS = new TH2D("Ratio2DRS", "2D Efficiencies", 40, 0, 180, 40, 0, 2000);
+TH2D *Ratio2DRS = new TH2D("Ratio2DRS", "2D Efficiencies", 40, 0, 180, 40, 0, 2500);
 
 // ### Formatting the plot ###
 PionEnergyRatioRS->SetLineColor(kBlue);
@@ -559,24 +559,24 @@ hPionMomentumNonStoppedOBS->Sumw2();
 hPionAngleNonStoppedOBS->Sumw2();
 
 // ### Defining the ratio histogram ###
-TH1D *RatioPOBS = new TH1D("RatioPOBS", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioPOBS = new TH1D("RatioPOBS", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioCOBS = new TH1D("RatioCOBS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioSPOBS = new TH1D("RatioSPOBS", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioSPOBS = new TH1D("RatioSPOBS", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioSCOBS = new TH1D("RatioSCOBS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioNSPOBS = new TH1D("RatioNSPOBS", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioNSPOBS = new TH1D("RatioNSPOBS", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioNSCOBS = new TH1D("RatioNSCOBS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioPOBSCC = new TH1D("RatioPOBSCC", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioPOBSCC = new TH1D("RatioPOBSCC", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioCOBSCC = new TH1D("RatioCOBSCC", "Efficiencies for Angles", 40, 0, 180);
-TH1D *PionEnergyRatioOBS = new TH1D("PionEnergyRatioOBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioOBS = new TH1D("PionMomentumRatioOBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioOBS = new TH1D("PionEnergyRatioOBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioOBS = new TH1D("PionMomentumRatioOBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioOBS = new TH1D("PionAngleRatioOBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioSOBS = new TH1D("PionEnergyRatioSOBS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioSOBS = new TH1D("PionMomentumRatioSOBS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioSOBS = new TH1D("PionEnergyRatioSOBS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioSOBS = new TH1D("PionMomentumRatioSOBS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioSOBS = new TH1D("PionAngleRatioSOBS", "Pion Efficiencies for Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioNSOBS = new TH1D("PionEnergyRatioNSOBS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioNSOBS = new TH1D("PionMomentumRatioNSOBS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioNSOBS = new TH1D("PionEnergyRatioNSOBS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioNSOBS = new TH1D("PionMomentumRatioNSOBS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioNSOBS = new TH1D("PionAngleRatioNSOBS", "Pion Efficiencies for Non-Stopped Muon Angle", 40, 0, 180);
-TH2D *Ratio2DOBS = new TH2D("Ratio2DOBS", "2D Efficiencies", 40, 0, 180, 40, 0, 2000);
+TH2D *Ratio2DOBS = new TH2D("Ratio2DOBS", "2D Efficiencies", 40, 0, 180, 40, 0, 2500);
 
 // ### Formatting the plot ###
 PionEnergyRatioOBS->SetLineColor(kBlack);
@@ -746,7 +746,7 @@ hTotalCosNewBSBar->Sumw2();
 hTotalGoodCosNewBSBar->Sumw2();
 
 // ### Defining the ratio histogram ###
-TH1D *RatioPBSBar = new TH1D("RatioPBSBar", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioPBSBar = new TH1D("RatioPBSBar", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioCBSBar = new TH1D("RatioCBSBar", "Efficiencies for Angles", 40, 0, 180);
 
 // ### Formatting the plot ###
@@ -789,7 +789,7 @@ hTotalCosNewRSBar->Sumw2();
 hTotalGoodCosNewRSBar->Sumw2();
 
 // ### Defining the ratio histogram ###
-TH1D *RatioPRSBar = new TH1D("RatioPRSBar", "Efficiencies for Momentums", 40, 0, 2000);
+TH1D *RatioPRSBar = new TH1D("RatioPRSBar", "Efficiencies for Momentums", 40, 0, 2500);
 TH1D *RatioCRSBar = new TH1D("RatioCRSBar", "Efficiencies for Angles", 40, 0, 180);
 
 // ### Formatting the plot ###

@@ -41,14 +41,14 @@ hPionMomentumNonStoppedBS->Sumw2();
 hPionAngleNonStoppedBS->Sumw2();
 
 // ### Defining the ratio histogram ###
-TH1D *PionEnergyRatioBS = new TH1D("PionEnergyRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioBS = new TH1D("PionMomentumRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioBS = new TH1D("PionEnergyRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioBS = new TH1D("PionMomentumRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioBS = new TH1D("PionAngleRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioSBS = new TH1D("PionEnergyRatioSBS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioSBS = new TH1D("PionMomentumRatioSBS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioSBS = new TH1D("PionEnergyRatioSBS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioSBS = new TH1D("PionMomentumRatioSBS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioSBS = new TH1D("PionAngleRatioSBS", "Pion Efficiencies for Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioNSBS = new TH1D("PionEnergyRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioNSBS = new TH1D("PionMomentumRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioNSBS = new TH1D("PionEnergyRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioNSBS = new TH1D("PionMomentumRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioNSBS = new TH1D("PionAngleRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Angle", 40, 0, 180);
 
 // ### Formatting the plot ###
@@ -166,14 +166,14 @@ hPionMomentumNonStoppedRS->Sumw2();
 hPionAngleNonStoppedRS->Sumw2();
 
 // ### Defining the ratio histogram ###
-TH1D *PionEnergyRatioRS = new TH1D("PionEnergyRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioRS = new TH1D("PionMomentumRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioRS = new TH1D("PionEnergyRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioRS = new TH1D("PionMomentumRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioRS = new TH1D("PionAngleRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioSRS = new TH1D("PionEnergyRatioSRS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioSRS = new TH1D("PionMomentumRatioSRS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioSRS = new TH1D("PionEnergyRatioSRS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioSRS = new TH1D("PionMomentumRatioSRS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioSRS = new TH1D("PionAngleRatioSRS", "Pion Efficiencies for Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioNSRS = new TH1D("PionEnergyRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioNSRS = new TH1D("PionMomentumRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioNSRS = new TH1D("PionEnergyRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioNSRS = new TH1D("PionMomentumRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioNSRS = new TH1D("PionAngleRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Angle", 40, 0, 180);
 
 // ### Formatting the plot ###
@@ -291,14 +291,14 @@ hPionMomentumNonStoppedOBS->Sumw2();
 hPionAngleNonStoppedOBS->Sumw2();
 
 // ### Defining the ratio histogram ###
-TH1D *PionEnergyRatioOBS = new TH1D("PionEnergyRatioOBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioOBS = new TH1D("PionMomentumRatioOBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioOBS = new TH1D("PionEnergyRatioOBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioOBS = new TH1D("PionMomentumRatioOBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioOBS = new TH1D("PionAngleRatioOBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioSOBS = new TH1D("PionEnergyRatioSOBS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioSOBS = new TH1D("PionMomentumRatioSOBS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioSOBS = new TH1D("PionEnergyRatioSOBS", "Pion Efficiencies for Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioSOBS = new TH1D("PionMomentumRatioSOBS", "Pion Efficiencies for Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioSOBS = new TH1D("PionAngleRatioSOBS", "Pion Efficiencies for Stopped Muon Angle", 40, 0, 180);
-TH1D *PionEnergyRatioNSOBS = new TH1D("PionEnergyRatioNSOBS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2000);
-TH1D *PionMomentumRatioNSOBS = new TH1D("PionMomentumRatioNSOBS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2000);
+TH1D *PionEnergyRatioNSOBS = new TH1D("PionEnergyRatioNSOBS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2500);
+TH1D *PionMomentumRatioNSOBS = new TH1D("PionMomentumRatioNSOBS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioNSOBS = new TH1D("PionAngleRatioNSOBS", "Pion Efficiencies for Non-Stopped Muon Angle", 40, 0, 180);
 
 // ### Formatting the plot ###

@@ -17,19 +17,19 @@
 //### Muon Histograms ###
 //#######################
 
-TH2D *hCCCohMuonTotal = new TH2D("hCCCohMuonTotal", "Total CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for muon angle and momentum
-TH2D *hCCCohMuonGood = new TH2D("hCCCohMuonGood", "Good CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for good muon angle and momentum
+TH2D *hCCCohMuonTotal = new TH2D("hCCCohMuonTotal", "Total CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2500); //This is the 2D histogram for muon angle and momentum
+TH2D *hCCCohMuonGood = new TH2D("hCCCohMuonGood", "Good CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2500); //This is the 2D histogram for good muon angle and momentum
 TH1D *hSteelLayer = new TH1D("hSteelLayer", "Steel Layer the Muon Stops Inside", 14, 0, 14); //This is the histogram for the steel layer that the muon stops within
-TH1D *hTotalMuonMomentum = new TH1D ("hTotalMuonMomentum", "Total CC Coh Muon Momentum", 40, 0, 2000); //This is the histogram for the total CC Coh Muon Momentum
-TH1D *hGoodMuonMomentumTotal = new TH1D("hGoodMuonMomentumTotal", "Total Good CC Coh Muon Momentum", 40, 0, 2000); //This is the good muon momentum for both stopped and nonstopped events
-TH1D *hGoodMuonMomentumStopped = new TH1D("hGoodMuonMomentumStopped", "Good CC Coh Muon Momentum Stopped", 40, 0, 2000); //This is the good muon momentum for the stopped events
-TH1D *hGoodMuonMomentumNonStopped = new TH1D("hGoodMuonMomentumNonStopped", "Good CC Coh Muon Momentum Non-Stopped", 40, 0, 2000); //This is the good muon momentum for the non-stopped events
+TH1D *hTotalMuonMomentum = new TH1D ("hTotalMuonMomentum", "Total CC Coh Muon Momentum", 40, 0, 2500); //This is the histogram for the total CC Coh Muon Momentum
+TH1D *hGoodMuonMomentumTotal = new TH1D("hGoodMuonMomentumTotal", "Total Good CC Coh Muon Momentum", 40, 0, 2500); //This is the good muon momentum for both stopped and nonstopped events
+TH1D *hGoodMuonMomentumStopped = new TH1D("hGoodMuonMomentumStopped", "Good CC Coh Muon Momentum Stopped", 40, 0, 2500); //This is the good muon momentum for the stopped events
+TH1D *hGoodMuonMomentumNonStopped = new TH1D("hGoodMuonMomentumNonStopped", "Good CC Coh Muon Momentum Non-Stopped", 40, 0, 2500); //This is the good muon momentum for the non-stopped events
 TH1D *hTotalMuonAngle = new TH1D("hTotalMuonAngle", "Total CC Coh Muon Angle", 40, 0, 180); //This is the histogram for the total CC Coh Muon Angle
 TH1D *hGoodMuonAngleTotal = new TH1D("hGoodMuonAngleTotal", "Total Good CC Coh Muon Angle", 40, 0, 180); //This is the histogram for the good muon angle both stopped and non-stopped
 TH1D *hGoodMuonAngleStopped = new TH1D("hGoodMuonAngleStopped", "Good CC Coh Muon Angle Stopped", 40, 0, 180); //This is the histogram for the good muon angle for the stopped events
 TH1D *hGoodMuonAngleNonStopped = new TH1D("hGoodMuonAngleNonStopped", "Good CC Coh Muon Angle Non-Stopped", 40, 0, 180); //This is the histogram for the good muon angle for the nonstopped events
 TH1D *hGoodMuonAngleOutSide = new TH1D("hGoodMuonAngleOutSide", "Good CC Coh Muon Angle Out the Side of the MRD", 40, 0, 180); //This is the histogram for the good muon angle for the events where the muon traveled out the side of the MRD
-TH1D *hGoodMuonMomentumOutSide = new TH1D("hGoodMuonMomentumOutSide", "Good CC Coh Muon Momentum Out the Side of the MRD", 40, 0, 2000); //This is the histogram for the good muon momentums for the events where the muon traveled out the side of the MRD
+TH1D *hGoodMuonMomentumOutSide = new TH1D("hGoodMuonMomentumOutSide", "Good CC Coh Muon Momentum Out the Side of the MRD", 40, 0, 2500); //This is the histogram for the good muon momentums for the events where the muon traveled out the side of the MRD
 TH1D *hFourMomentumBoth = new TH1D("hFourMomentumBoth", "Four Momentum of the CC Coherent Interactions Both Stopped and Non-Stopped", 40, 0, 1); //This is the histogram for the four momentum of the CC Coh Pion interactions
 TH1D *hQSquaredBoth = new TH1D("hQSquaredBoth", "Q Squared of the CC Coherent Interactions Both Stopped and Non-Stopped", 40, 0, 1); //This is the histogram for the q squared values for the different CC Coh Pion interactions
 TH1D *hFourMomentumStopped = new TH1D("hFourMomentumStopped", "Four Momentum of the CC Coherent Interactions Stopped", 40, 0, 1); //This is the histogram for the four momentum of the CC Coh Pion interactions
@@ -37,10 +37,10 @@ TH1D *hQSquaredStopped = new TH1D("hQSquaredStopped", "Q Squared of the CC Coher
 TH1D *hFourMomentumNonStopped = new TH1D("hFourMomentumNonStopped", "Four Momentum of the CC Coherent Interactions Non-Stopped", 40, 0, 1); //This is the histogram for the four momentum of the CC Coh Pion interactions
 TH1D *hQSquaredNonStopped = new TH1D("hQSquaredNonStopped", "Q Squared of the CC Coherent Interactions Non-Stopped", 40, 0, 1); //This is the histogram for the q squared values for the different CC Coh Pion interactions
 
-TH1D *hCCTotalMuonMomentum = new TH1D ("hCCTotalMuonMomentum", "Total CC Muon Momentum", 40, 0, 2000); //This is the histogram for the total CC Coh Muon Momentum
-TH1D *hCCGoodMuonMomentumTotal = new TH1D("hCCGoodMuonMomentumTotal", "Total Good CC Muon Momentum", 40, 0, 2000); //This is the good muon momentum for both stopped and nonstopped events
-TH1D *hCCGoodMuonMomentumStopped = new TH1D("hCCGoodMuonMomentumStopped", "Good CC Muon Momentum Stopped", 40, 0, 2000); //This is the good muon momentum for the stopped events
-TH1D *hCCGoodMuonMomentumNonStopped = new TH1D("hCCGoodMuonMomentumNonStopped", "Good CC Muon Momentum Non-Stopped", 40, 0, 2000); //This is the good muon momentum for the non-stopped events
+TH1D *hCCTotalMuonMomentum = new TH1D ("hCCTotalMuonMomentum", "Total CC Muon Momentum", 40, 0, 2500); //This is the histogram for the total CC Coh Muon Momentum
+TH1D *hCCGoodMuonMomentumTotal = new TH1D("hCCGoodMuonMomentumTotal", "Total Good CC Muon Momentum", 40, 0, 2500); //This is the good muon momentum for both stopped and nonstopped events
+TH1D *hCCGoodMuonMomentumStopped = new TH1D("hCCGoodMuonMomentumStopped", "Good CC Muon Momentum Stopped", 40, 0, 2500); //This is the good muon momentum for the stopped events
+TH1D *hCCGoodMuonMomentumNonStopped = new TH1D("hCCGoodMuonMomentumNonStopped", "Good CC Muon Momentum Non-Stopped", 40, 0, 2500); //This is the good muon momentum for the non-stopped events
 TH1D *hCCTotalMuonAngle = new TH1D("hCCTotalMuonAngle", "Total CC Muon Angle", 40, 0, 180); //This is the histogram for the total CC Coh Muon Angle
 TH1D *hCCGoodMuonAngleTotal = new TH1D("hCCGoodMuonAngleTotal", "Total Good CC Muon Angle", 40, 0, 180); //This is the histogram for the good muon angle both stopped and non-stopped
 TH1D *hCCGoodMuonAngleStopped = new TH1D("hCCGoodMuonAngleStopped", "Good CC Muon Angle Stopped", 40, 0, 180); //This is the histogram for the good muon angle for the stopped events
@@ -60,19 +60,19 @@ TH2D *h4 = new TH2D("h4", "X-Y Vertex Distribution for Z > 1.4m", 117, -0.25, 3.
 //### Pion Histograms ###
 //#######################
 
-TH2D *hCCCohPionTotal = new TH2D("hCCCohPionTotal", "Total CC Coh Events Pion Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for pion angle and momentum
-TH2D *hCCCohPionGood = new TH2D("hCCCohPionGood", "Good CC Coh Events Pion Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for pion angle and momentum of the good events
-TH1D *hPionEnergy = new TH1D("hPionEnergy", "Energy of the Pion in Total CC Coh Events", 40, 0, 2000); //This is the energy of pions that are for CC Events
-TH1D *hPionMomentum = new TH1D("hPionMomentum", "Momentum of the Pion in Total CC Coh Events", 40, 0, 2000); //This is the histogram for the Pion Momentum that are for CC Events
+TH2D *hCCCohPionTotal = new TH2D("hCCCohPionTotal", "Total CC Coh Events Pion Information", 40, 0, 180, 40, 0, 2500); //This is the 2D histogram for pion angle and momentum
+TH2D *hCCCohPionGood = new TH2D("hCCCohPionGood", "Good CC Coh Events Pion Information", 40, 0, 180, 40, 0, 2500); //This is the 2D histogram for pion angle and momentum of the good events
+TH1D *hPionEnergy = new TH1D("hPionEnergy", "Energy of the Pion in Total CC Coh Events", 40, 0, 2500); //This is the energy of pions that are for CC Events
+TH1D *hPionMomentum = new TH1D("hPionMomentum", "Momentum of the Pion in Total CC Coh Events", 40, 0, 2500); //This is the histogram for the Pion Momentum that are for CC Events
 TH1D *hPionAngle = new TH1D("hPionAngle", "Angle of the Pion in Total CC Coh Events", 40, 0, 180); //This is the histogram for the Pion Angle that are for CC Events
-TH1D *hPionEnergyStopped = new TH1D("hPionEnergyStopped", "Energy of the Pions for the Stopped Muons", 40, 0, 2000); //This is the energy of the pions from the stopped muon interactions
-TH1D *hPionMomentumStopped = new TH1D("hPionMomentumStopped", "Momentum of the Pion in the Stopped Muon Events", 40, 0, 2000); //This is the histogram for the Pion Momentums in the stopped muon events
+TH1D *hPionEnergyStopped = new TH1D("hPionEnergyStopped", "Energy of the Pions for the Stopped Muons", 40, 0, 2500); //This is the energy of the pions from the stopped muon interactions
+TH1D *hPionMomentumStopped = new TH1D("hPionMomentumStopped", "Momentum of the Pion in the Stopped Muon Events", 40, 0, 2500); //This is the histogram for the Pion Momentums in the stopped muon events
 TH1D *hPionAngleStopped = new TH1D("hPionAngleStopped", "Angle of the Pion in the Stopped Muon Events", 40, 0, 180); //This is the histogram for the Pion Angles for the stopped muon events
-TH1D *hPionEnergyNonStopped = new TH1D("hPionEnergyNonStopped", "Energy of the Pions for the Non-Stopped Muons", 40, 0, 2000); //This is the energy of the pions from the non-stopped muon interactions
-TH1D *hPionMomentumNonStopped = new TH1D("hPionMomentumNonStopped", "Momentum of the Pion in the Non-Stopped Muon Events", 40, 0, 2000); //This is the histogram for the Pion Momentums in the non-stopped muon events
+TH1D *hPionEnergyNonStopped = new TH1D("hPionEnergyNonStopped", "Energy of the Pions for the Non-Stopped Muons", 40, 0, 2500); //This is the energy of the pions from the non-stopped muon interactions
+TH1D *hPionMomentumNonStopped = new TH1D("hPionMomentumNonStopped", "Momentum of the Pion in the Non-Stopped Muon Events", 40, 0, 2500); //This is the histogram for the Pion Momentums in the non-stopped muon events
 TH1D *hPionAngleNonStopped = new TH1D("hPionAngleNonStopped", "Angle of the Pion in the Non-Stopped Muon Events", 40, 0, 180); //This is the histogram for the Pion Angles for the non-stopped muon events
-TH1D *hPionEnergyGood = new TH1D("hPionEnergyGood", "Energy of the Pion in Good CC Coh Events", 40, 0, 2000); //This is the energy of pions that are for Good CC Events
-TH1D *hPionMomentumGood = new TH1D("hPionMomentumGood", "Momentum of the Pion in Good CC Coh Events", 40, 0, 2000); //This is the histogram for the Pion Momentum that are for Good CC Events
+TH1D *hPionEnergyGood = new TH1D("hPionEnergyGood", "Energy of the Pion in Good CC Coh Events", 40, 0, 2500); //This is the energy of pions that are for Good CC Events
+TH1D *hPionMomentumGood = new TH1D("hPionMomentumGood", "Momentum of the Pion in Good CC Coh Events", 40, 0, 2500); //This is the histogram for the Pion Momentum that are for Good CC Events
 TH1D *hPionAngleGood = new TH1D("hPionAngleGood", "Angle of the Pion in Good CC Coh Events", 40, 0, 180); //This is the histogram for the Pion Angle that are for Good CC Events
 
 //------------------------------------------------------------------------
