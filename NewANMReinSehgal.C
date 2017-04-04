@@ -17,8 +17,8 @@
 //### Muon Histograms ###
 //#######################
 
-TH2D *hCCCohMuonTotal = new TH2D("hCCCohMuonTotal", "Total CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2500); //This is the 2D histogram for muon angle and momentum
-TH2D *hCCCohMuonGood = new TH2D("hCCCohMuonGood", "Good CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2500); //This is the 2D histogram for good muon angle and momentum
+TH2D *hCCCohMuonTotal = new TH2D("hCCCohMuonTotal", "Total CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for muon angle and momentum
+TH2D *hCCCohMuonGood = new TH2D("hCCCohMuonGood", "Good CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for good muon angle and momentum
 TH1D *hSteelLayer = new TH1D("hSteelLayer", "Steel Layer the Muon Stops Inside", 14, 0, 14); //This is the histogram for the steel layer that the muon stops within
 TH1D *hTotalMuonMomentum = new TH1D ("hTotalMuonMomentum", "Total CC Coh Muon Momentum", 40, 0, 2500); //This is the histogram for the total CC Coh Muon Momentum
 TH1D *hGoodMuonMomentumTotal = new TH1D("hGoodMuonMomentumTotal", "Total Good CC Coh Muon Momentum", 40, 0, 2500); //This is the good muon momentum for both stopped and nonstopped events
