@@ -51,9 +51,9 @@ TH1D *hTy = new TH1D("hTy", "|t| y component", 40, 0, 1);
 TH1D *hTz = new TH1D("hTz", "|t| z component", 40, 0, 1);
 TH1D *hTE = new TH1D("hTE", "|t| E component", 40, 0, 1);
 
-TH1D *h1 = new TH1D("h1", "X Vertex Distribution", 117, -0.25, 3.25);
-TH1D *h2 = new TH1D("h2", "Y Vertex Distribution", 117, -0.25, 3.25);
-TH1D *h3 = new TH1D("h3", "Z Vertex Distribution", 116, -0.25, 1.95);
+TH1D *h1 = new TH1D("h1", "X Vertex Distribution", 40, -25, 325);
+TH1D *h2 = new TH1D("h2", "Y Vertex Distribution", 40, -25, 325);
+TH1D *h3 = new TH1D("h3", "Z Vertex Distribution", 40, -25, 195);
 TH2D *h4 = new TH2D("h4", "X-Y Vertex Distribution for Z > 1.4m", 117, -0.25, 3.25, 117, -0.25, 3.25);
 
 //#######################
@@ -426,9 +426,9 @@ void NewANMReinSehgal::Loop()
                            hPionEnergyNonStopped->Fill(StdHepP4[PionCallNumber][3]*1000);
                            hFourMomentumNonStopped->Fill(t);
                            hQSquaredNonStopped->Fill(q);
-                           h1->Fill(Xpos);
-                           h2->Fill(Ypos);
-                           h3->Fill(Zpos);
+                           h1->Fill(Xpos*100);
+                           h2->Fill(Ypos*100);
+                           h3->Fill(Zpos*100);
                            if (Zpos >= 1.4) {
                               h4->Fill(Xpos,Ypos);
                            }
@@ -486,9 +486,9 @@ void NewANMReinSehgal::Loop()
                         hPionEnergyStopped->Fill(StdHepP4[PionCallNumber][3]*1000);
                         hFourMomentumStopped->Fill(t);
                         hQSquaredStopped->Fill(q);
-                        h1->Fill(Xpos);
-                        h2->Fill(Ypos);
-                        h3->Fill(Zpos);
+                        h1->Fill(Xpos*100);
+                        h2->Fill(Ypos*100);
+                        h3->Fill(Zpos*100);
                         if (Zpos >= 1.4) {
                            h4->Fill(Xpos,Ypos);
                         }
@@ -591,7 +591,7 @@ void NewANMReinSehgal::Loop()
    TCanvas *c5 = new TCanvas("c5", "X Vertex Distribution");
    c5->SetTicks();
    c5->SetFillColor(kWhite);
-   h1->GetXaxis()->SetTitle("Muon Initial X Position (m)");
+   h1->GetXaxis()->SetTitle("Muon Initial X Position (cm)");
    h1->GetXaxis()->CenterTitle();
    h1->GetYaxis()->SetTitle("Events");
    h1->GetYaxis()->CenterTitle();
@@ -600,7 +600,7 @@ void NewANMReinSehgal::Loop()
    TCanvas *c6 = new TCanvas("c6", "Y Vertex Distribution");
    c6->SetTicks();
    c6->SetFillColor(kWhite);
-   h2->GetXaxis()->SetTitle("Muon Initial Y Position (m)");
+   h2->GetXaxis()->SetTitle("Muon Initial Y Position (cm)");
    h2->GetXaxis()->CenterTitle();
    h2->GetYaxis()->SetTitle("Events");
    h2->GetYaxis()->CenterTitle();
@@ -609,7 +609,7 @@ void NewANMReinSehgal::Loop()
    TCanvas *c7 = new TCanvas("c7", "Z Vertex Distribution");
    c7->SetTicks();
    c7->SetFillColor(kWhite);
-   h3->GetXaxis()->SetTitle("Muon Initial Z Position (m)");
+   h3->GetXaxis()->SetTitle("Muon Initial Z Position (cm)");
    h3->GetXaxis()->CenterTitle();
    h3->GetYaxis()->SetTitle("Events");
    h3->GetYaxis()->CenterTitle();
