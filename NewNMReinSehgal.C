@@ -173,7 +173,7 @@ void NewNMReinSehgal::Loop()
          Double_t m1 = v1.Mag(); //Get the magnitude of the muon momentum
          Double_t m2 = v2.Mag(); //Get the magnitude of the pion momentum
 
-         hCCCohMuonTotal->Fill(t1, m1*1000); //Fill the 2D Muon Total Information Histogram
+         //hCCCohMuonTotal->Fill(t1, m1*1000); //Fill the 2D Muon Total Information Histogram
          if (NumberPionsPresent >= 1) {
             hCCCohPionTotal->Fill(t2, m2*1000); //Fill the 2D Muon Total Information Histogram
          }
@@ -257,7 +257,7 @@ void NewNMReinSehgal::Loop()
                            CCNumberNotStopped++;
                            hCCGoodMuonMomentumNonStopped->Fill(m1*1000); //Fill the nonstopped histogram with good nonstopped muon events for muon momentum
                            hCCGoodMuonAngleNonStopped->Fill(t1); //Fill the nonstopped histogram with good nonstopped muon events for muon angle
-                           hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram 
+                           //hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram 
                            if (NumberPionsPresent >= 1 && StdHepP4[PionCallNumber][2]>0) {
                               hCCCohPionGood->Fill(t2, m2*1000);
                            }
@@ -286,7 +286,7 @@ void NewNMReinSehgal::Loop()
 
                         hCCGoodMuonMomentumStopped->Fill(m1*1000); //Fill the good muon momentum histogram for the stopped events
                         hCCGoodMuonAngleStopped->Fill(t1); //Fill the good muon angle histogram for the stopped events
-                        hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram
+                        //hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram
                         if (NumberPionsPresent >= 1 && StdHepP4[PionCallNumber][2]>0) {
                            hCCCohPionGood->Fill(t2, m2*1000);
                         }
@@ -343,6 +343,8 @@ void NewNMReinSehgal::Loop()
                   hPionAngle->Fill(t2); //Fill the Pion Angle histogram with the angle of the pion
                   hTotalMuonMomentum->Fill(m1*1000); //Fill the total muon momentum histogram
                   hTotalMuonAngle->Fill(t1); //Fill the total muon angle histogram
+
+                  hCCCohMuonTotal->Fill(t1, m1*1000); //Fill the 2D Muon Total Information Histogram
 
                   double muontimeZ1 = (1.7 - v3.Z())/v1.Z(); //This is the time for the muon to reach the back of the SciBar Detector
                   double piontimeZ1 = (1.7 - v3.Z())/v2.Z(); //This is the time for the pion to reach the back of the SciBar Detector
@@ -419,6 +421,7 @@ void NewNMReinSehgal::Loop()
 
                         if (fString == "16" && layerScint == 26 && Emuonf2>=0 && muonXevo6>=0.2 && muonXevo6<=2.8 && muonYevo6>=0.2 && muonYevo6<=2.8) {
                            NumberNotStopped++;
+                           hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram
                            hGoodMuonMomentumNonStopped->Fill(m1*1000); //Fill the nonstopped histogram with good nonstopped muon events for muon momentum
                            hGoodMuonAngleNonStopped->Fill(t1); //Fill the nonstopped histogram with good nonstopped muon events for muon angle
                            hPionMomentumNonStopped->Fill(m2*1000);
@@ -474,7 +477,7 @@ void NewNMReinSehgal::Loop()
                            layerSteel = 13; //This sets the steel layer to 12 if the muon did not stop in the first 12 layers
                         }
 
-
+                        hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram
                         hSteelLayer->Fill(layerSteel); //Fill the steel layer histogram with what steel layer the muon stopped within
                         NumberMuonsPresent = 0;
                         NumberPionsPresent = 0;
