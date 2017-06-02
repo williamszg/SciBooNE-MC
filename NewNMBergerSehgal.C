@@ -17,6 +17,8 @@
 //### Muon Histograms ###
 //#######################
 
+TH2D *hCCIncMuonTotal = new TH2D("hCCIncMuonTotal", "Total CC Inclusive Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for muon angle and momentum
+TH2D *hCCIncMuonGood = new TH2D("hCCIncMuonGood", "Good CC Inclusive Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for good muon angle and momentum
 TH2D *hCCCohMuonTotal = new TH2D("hCCCohMuonTotal", "Total CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for muon angle and momentum
 TH2D *hCCCohMuonGood = new TH2D("hCCCohMuonGood", "Good CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for good muon angle and momentum
 TH1D *hSteelLayer = new TH1D("hSteelLayer", "Steel Layer the Muon Stops Inside", 14, 0, 14); //This is the histogram for the steel layer that the muon stops within
@@ -60,8 +62,10 @@ TH2D *h4 = new TH2D("h4", "X-Y Vertex Distribution for Z > 1.4m", 117, -0.25, 3.
 //### Pion Histograms ###
 //#######################
 
-TH2D *hCCCohPionTotal = new TH2D("hCCCohPionTotal", "Total CC Coh Events Pion Information", 40, 0, 180, 40, 0, 2500); //This is the 2D histogram for pion angle and momentum
-TH2D *hCCCohPionGood = new TH2D("hCCCohPionGood", "Good CC Coh Events Pion Information", 40, 0, 180, 40, 0, 2500); //This is the 2D histogram for pion angle and momentum of the good events
+TH2D *hCCIncPionTotal = new TH2D("hCCIncPionTotal", "Total CC Inclusive Events Pion Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for pion angle and momentum
+TH2D *hCCIncPionGood = new TH2D("hCCIncPionGood", "Good CC Inclusive Events Pion Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for pion angle and momentum of the good events
+TH2D *hCCCohPionTotal = new TH2D("hCCCohPionTotal", "Total CC Coh Events Pion Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for pion angle and momentum
+TH2D *hCCCohPionGood = new TH2D("hCCCohPionGood", "Good CC Coh Events Pion Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for pion angle and momentum of the good events
 TH1D *hPionEnergy = new TH1D("hPionEnergy", "Energy of the Pion in Total CC Coh Events", 40, 0, 2500); //This is the energy of pions that are for CC Events
 TH1D *hPionMomentum = new TH1D("hPionMomentum", "Momentum of the Pion in Total CC Coh Events", 40, 0, 2500); //This is the histogram for the Pion Momentum that are for CC Events
 TH1D *hPionAngle = new TH1D("hPionAngle", "Angle of the Pion in Total CC Coh Events", 40, 0, 180); //This is the histogram for the Pion Angle that are for CC Events
@@ -173,9 +177,9 @@ void NewNMBergerSehgal::Loop()
          Double_t m1 = v1.Mag(); //Get the magnitude of the muon momentum
          Double_t m2 = v2.Mag(); //Get the magnitude of the pion momentum
 
-         //hCCCohMuonTotal->Fill(t1, m1*1000); //Fill the 2D Muon Total Information Histogram
+         hCCIncMuonTotal->Fill(t1, m1*1000); //Fill the 2D Muon Total Information Histogram
          if (NumberPionsPresent >= 1) {
-            hCCCohPionTotal->Fill(t2, m2*1000); //Fill the 2D Muon Total Information Histogram
+            hCCIncPionTotal->Fill(t2, m2*1000); //Fill the 2D Muon Total Information Histogram
          }
 
 
@@ -257,9 +261,9 @@ void NewNMBergerSehgal::Loop()
                            CCNumberNotStopped++;
                            hCCGoodMuonMomentumNonStopped->Fill(m1*1000); //Fill the nonstopped histogram with good nonstopped muon events for muon momentum
                            hCCGoodMuonAngleNonStopped->Fill(t1); //Fill the nonstopped histogram with good nonstopped muon events for muon angle
-                           //hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram 
+                           hCCIncMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram 
                            if (NumberPionsPresent >= 1 && StdHepP4[PionCallNumber][2]>0) {
-                              hCCCohPionGood->Fill(t2, m2*1000);
+                              hCCIncPionGood->Fill(t2, m2*1000);
                            }
 
 
@@ -286,9 +290,9 @@ void NewNMBergerSehgal::Loop()
 
                         hCCGoodMuonMomentumStopped->Fill(m1*1000); //Fill the good muon momentum histogram for the stopped events
                         hCCGoodMuonAngleStopped->Fill(t1); //Fill the good muon angle histogram for the stopped events
-                        //hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram
+                        hCCIncMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram
                         if (NumberPionsPresent >= 1 && StdHepP4[PionCallNumber][2]>0) {
-                           hCCCohPionGood->Fill(t2, m2*1000);
+                           hCCIncPionGood->Fill(t2, m2*1000);
                         }
 
 
@@ -345,6 +349,9 @@ void NewNMBergerSehgal::Loop()
                   hTotalMuonAngle->Fill(t1); //Fill the total muon angle histogram
 
                   hCCCohMuonTotal->Fill(t1, m1*1000); //Fill the 2D Muon Total Information Histogram
+                  if (NumberPionsPresent >= 1) {
+                     hCCCohPionTotal->Fill(t2, m2*1000); //Fill the 2D Muon Total Information Histogram
+                  }
 
                   double muontimeZ1 = (1.7 - v3.Z())/v1.Z(); //This is the time for the muon to reach the back of the SciBar Detector
                   double piontimeZ1 = (1.7 - v3.Z())/v2.Z(); //This is the time for the pion to reach the back of the SciBar Detector
@@ -422,6 +429,11 @@ void NewNMBergerSehgal::Loop()
                         if (fString == "16" && layerScint == 26 && Emuonf2>=0 && muonXevo6>=0.2 && muonXevo6<=2.8 && muonYevo6>=0.2 && muonYevo6<=2.8) {
                            NumberNotStopped++;
                            hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram
+                           if (NumberPionsPresent >= 1 && StdHepP4[PionCallNumber][2]>0) {
+                              hCCCohPionGood->Fill(t2, m2*1000);
+                           }
+
+
                            hGoodMuonMomentumNonStopped->Fill(m1*1000); //Fill the nonstopped histogram with good nonstopped muon events for muon momentum
                            hGoodMuonAngleNonStopped->Fill(t1); //Fill the nonstopped histogram with good nonstopped muon events for muon angle
                            hPionMomentumNonStopped->Fill(m2*1000);
@@ -477,8 +489,12 @@ void NewNMBergerSehgal::Loop()
                            layerSteel = 13; //This sets the steel layer to 12 if the muon did not stop in the first 12 layers
                         }
 
-
                         hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram
+                        if (NumberPionsPresent >= 1 && StdHepP4[PionCallNumber][2]>0) {
+                           hCCCohPionGood->Fill(t2, m2*1000);
+                        }
+
+
                         hSteelLayer->Fill(layerSteel); //Fill the steel layer histogram with what steel layer the muon stopped within
                         NumberMuonsPresent = 0;
                         NumberPionsPresent = 0;
@@ -546,43 +562,69 @@ void NewNMBergerSehgal::Loop()
    //### Preparing the histogram canvases ###
    //########################################
 
-   TCanvas *c1 = new TCanvas("c1", "Total CC Coh Muon Information");
+   TCanvas *c1 = new TCanvas("c1", "Total CC Inclusive Muon Information");
    c1->SetTicks();
    c1->SetFillColor(kWhite);
+   hCCIncMuonTotal->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+   hCCIncMuonTotal->GetXaxis()->CenterTitle();
+   hCCIncMuonTotal->GetYaxis()->SetTitle("Muon Momentum (MeV)");
+   hCCIncMuonTotal->GetYaxis()->CenterTitle();
+   hCCIncMuonTotal->Draw("colz");
+
+   TCanvas *c2 = new TCanvas("c2", "Good CC Inclusive Muon Information");
+   c2->SetTicks();
+   c2->SetFillColor(kWhite);
+   hCCIncMuonGood->GetXaxis()->SetTitle("Muon Angle (Degrees)");
+   hCCIncMuonGood->GetXaxis()->CenterTitle();
+   hCCIncMuonGood->GetYaxis()->SetTitle("Muon Momentum (MeV)");
+   hCCIncMuonGood->GetYaxis()->CenterTitle();
+   hCCIncMuonGood->Draw("colz");
+
+   TCanvas *c3 = new TCanvas("c3", "Total CC Inclusive Pion Information");
+   c3->SetTicks();
+   c3->SetFillColor(kWhite);
+   hCCIncPionTotal->GetXaxis()->SetTitle("Pion Angle (Degrees)");
+   hCCIncPionTotal->GetXaxis()->CenterTitle();
+   hCCIncPionTotal->GetYaxis()->SetTitle("Pion Momentum (MeV)");
+   hCCIncPionTotal->GetYaxis()->CenterTitle();
+   hCCIncPionTotal->Draw("colz");
+ 
+   TCanvas *c4 = new TCanvas("c4", "Good CC Inclusive Pion Information");
+   c4->SetTicks();
+   c4->SetFillColor(kWhite);
+   hCCIncPionGood->GetXaxis()->SetTitle("Pion Angle (Degrees)");
+   hCCIncPionGood->GetXaxis()->CenterTitle();
+   hCCIncPionGood->GetYaxis()->SetTitle("Pion Momentum (MeV)");
+   hCCIncPionGood->GetYaxis()->CenterTitle();
+   hCCIncPionGood->Draw("colz");
+
+   TCanvas *c5 = new TCanvas("c5", "Total CC Coh Muon Information");
+   c5->SetTicks();
+   c5->SetFillColor(kWhite);
    hCCCohMuonTotal->GetXaxis()->SetTitle("Muon Angle (Degrees)");
    hCCCohMuonTotal->GetXaxis()->CenterTitle();
    hCCCohMuonTotal->GetYaxis()->SetTitle("Muon Momentum (MeV)");
    hCCCohMuonTotal->GetYaxis()->CenterTitle();
    hCCCohMuonTotal->Draw("colz");
-   
-   TCanvas *c2 = new TCanvas("c2", "Total CC Coh Pion Information");
-   c2->SetTicks();
-   c2->SetFillColor(kWhite);
-   hCCCohPionTotal->GetXaxis()->SetTitle("Pion Angle (Degrees)");
-   hCCCohPionTotal->GetXaxis()->CenterTitle();
-   hCCCohPionTotal->GetYaxis()->SetTitle("Pion Momentum (MeV)");
-   hCCCohPionTotal->GetYaxis()->CenterTitle();
-   hCCCohPionTotal->Draw("colz");
 
-   TCanvas *c3 = new TCanvas("c3", "Steel Layer Imbedding");
-   c3->SetTicks();
-   c3->SetFillColor(kWhite);
-   hSteelLayer->GetXaxis()->SetTitle("Layer Stopped In (Layer)");
-   hSteelLayer->GetXaxis()->CenterTitle();
-   hSteelLayer->GetYaxis()->SetTitle("Number Stopped (/13 Layers)");
-   hSteelLayer->GetYaxis()->CenterTitle();
-   hSteelLayer->SetLineColor(kBlue);
-   hSteelLayer->Draw();
-
-   TCanvas *c4 = new TCanvas("c4", "Good CC Coh Muon Information");
-   c4->SetTicks();
-   c4->SetFillColor(kWhite);
+   TCanvas *c6 = new TCanvas("c6", "Good CC Coh Muon Information");
+   c6->SetTicks();
+   c6->SetFillColor(kWhite);
    hCCCohMuonGood->GetXaxis()->SetTitle("Muon Angle (Degrees)");
    hCCCohMuonGood->GetXaxis()->CenterTitle();
    hCCCohMuonGood->GetYaxis()->SetTitle("Muon Momentum (MeV)");
    hCCCohMuonGood->GetYaxis()->CenterTitle();
    hCCCohMuonGood->Draw("colz");
 
+   TCanvas *c7 = new TCanvas("c7", "Total CC Coh Pion Information");
+   c7->SetTicks();
+   c7->SetFillColor(kWhite);
+   hCCCohPionTotal->GetXaxis()->SetTitle("Pion Angle (Degrees)");
+   hCCCohPionTotal->GetXaxis()->CenterTitle();
+   hCCCohPionTotal->GetYaxis()->SetTitle("Pion Momentum (MeV)");
+   hCCCohPionTotal->GetYaxis()->CenterTitle();
+   hCCCohPionTotal->Draw("colz");
+ 
    TCanvas *c8 = new TCanvas("c8", "Good CC Coh Pion Information");
    c8->SetTicks();
    c8->SetFillColor(kWhite);
@@ -592,41 +634,51 @@ void NewNMBergerSehgal::Loop()
    hCCCohPionGood->GetYaxis()->CenterTitle();
    hCCCohPionGood->Draw("colz");
 
-   TCanvas *c5 = new TCanvas("c5", "X Vertex Distribution");
-   c5->SetTicks();
-   c5->SetFillColor(kWhite);
+   TCanvas *c9 = new TCanvas("c9", "Steel Layer Imbedding");
+   c9->SetTicks();
+   c9->SetFillColor(kWhite);
+   hSteelLayer->GetXaxis()->SetTitle("Layer Stopped In (Layer)");
+   hSteelLayer->GetXaxis()->CenterTitle();
+   hSteelLayer->GetYaxis()->SetTitle("Number Stopped (/13 Layers)");
+   hSteelLayer->GetYaxis()->CenterTitle();
+   hSteelLayer->SetLineColor(kBlue);
+   hSteelLayer->Draw();
+
+   TCanvas *c10 = new TCanvas("c10", "X Vertex Distribution");
+   c10->SetTicks();
+   c10->SetFillColor(kWhite);
    h1->GetXaxis()->SetTitle("Muon Initial X Position (cm)");
    h1->GetXaxis()->CenterTitle();
-   h1->GetYaxis()->SetTitle("Events");
+   h1->GetYaxis()->SetTitle("Events/Bin (0.133 events/cm)");
    h1->GetYaxis()->CenterTitle();
    h1->Draw();
 
-   TCanvas *c6 = new TCanvas("c6", "Y Vertex Distribution");
-   c6->SetTicks();
-   c6->SetFillColor(kWhite);
+   TCanvas *c11 = new TCanvas("c11", "Y Vertex Distribution");
+   c11->SetTicks();
+   c11->SetFillColor(kWhite);
    h2->GetXaxis()->SetTitle("Muon Initial Y Position (cm)");
    h2->GetXaxis()->CenterTitle();
-   h2->GetYaxis()->SetTitle("Events");
+   h2->GetYaxis()->SetTitle("Events/Bin (0.133 events/cm)");
    h2->GetYaxis()->CenterTitle();
    h2->Draw();
 
-   TCanvas *c7 = new TCanvas("c7", "Z Vertex Distribution");
-   c7->SetTicks();
-   c7->SetFillColor(kWhite);
+   TCanvas *c12 = new TCanvas("c12", "Z Vertex Distribution");
+   c12->SetTicks();
+   c12->SetFillColor(kWhite);
    h3->GetXaxis()->SetTitle("Muon Initial Z Position (cm)");
    h3->GetXaxis()->CenterTitle();
-   h3->GetYaxis()->SetTitle("Events");
+   h3->GetYaxis()->SetTitle("Events/Bin (0.235 events/cm)");
    h3->GetYaxis()->CenterTitle();
    h3->Draw();
 
-   TCanvas *c9 = new TCanvas("c9", "X-Y Vertex Distribution for Z > 1.4m");
-   c9->SetTicks();
-   c9->SetFillColor(kWhite);
+   /*TCanvas *c13 = new TCanvas("c13", "X-Y Vertex Distribution for Z > 1.4m");
+   c13->SetTicks();
+   c13->SetFillColor(kWhite);
    h4->GetXaxis()->SetTitle("Initial X Position (meters)");
    h4->GetXaxis()->CenterTitle();
    h4->GetYaxis()->SetTitle("Initial Y Position (meters)");
    h4->GetYaxis()->CenterTitle();
-   h4->Draw();
+   h4->Draw();*/
 
 
    //################################################
@@ -636,6 +688,8 @@ void NewNMBergerSehgal::Loop()
    TFile *TMuonInfo = new TFile("./ROOTFILES/totalmuoninfoBS.root", "RECREATE");
    hCCCohMuonTotal->Write("T2D_1");
    hCCCohMuonGood->Write("G2D_1");
+   hCCIncMuonTotal->Write("T2D_2");
+   hCCIncMuonGood->Write("G2D_2");
    hTotalMuonMomentum->Write("TMuonMom_1");
    hGoodMuonMomentumTotal->Write("TGMuonMom_1");
    hGoodMuonMomentumStopped->Write("GMuonMomS_1");
@@ -652,8 +706,10 @@ void NewNMBergerSehgal::Loop()
    hCCGoodMuonAngleNonStopped->Write("CCGMuonCosNS_1");
    hCCGoodMuonMomentumTotal->Write("CCTGMuonMom_1");
    hCCGoodMuonAngleTotal->Write("CCTGMuonCos_1");
-   hCCCohPionTotal->Write("T2D_2");
-   hCCCohPionGood->Write("G2D_2");
+   hCCCohPionTotal->Write("T2D_3");
+   hCCCohPionGood->Write("G2D_3");
+   hCCIncPionTotal->Write("T2D_4");
+   hCCIncPionGood->Write("G2D_4");
    hPionEnergy->Write("TPionEnergy");
    hPionMomentum->Write("TPionMom");
    hPionAngle->Write("TPionAngle");
