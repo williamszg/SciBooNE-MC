@@ -126,9 +126,9 @@ leg1->SetFillColor(kWhite);
 leg1->SetLineColor(kWhite);
 leg1->SetShadowColor(kWhite);
 leg1->SetHeader("SciBooNE MC");
-leg1->AddEntry(hFourMomentumBothRS,"New R-S Model");
-leg1->AddEntry(hFourMomentumBothBS,"New B-S Model");
-leg1->AddEntry(hFourMomentumBothOBS,"Old R-S Model");
+leg1->AddEntry(hFourMomentumBothRS,"NEUT v5.3.6 Rein-Sehgal");
+leg1->AddEntry(hFourMomentumBothBS,"NEUT v5.3.6 Berger-Sehgal");
+leg1->AddEntry(hFourMomentumBothOBS,"NEUT v5.0.1 Rein-Sehgal");
 leg1->Draw();
 // ===========================================
 
@@ -173,9 +173,9 @@ leg2->SetFillColor(kWhite);
 leg2->SetLineColor(kWhite);
 leg2->SetShadowColor(kWhite);
 leg2->SetHeader("SciBooNE MC");
-leg2->AddEntry(hQSquaredBothRS,"New R-S Model");
-leg2->AddEntry(hQSquaredBothBS,"New B-S Model");
-leg2->AddEntry(hQSquaredBothOBS,"Old R-S Model");
+leg2->AddEntry(hQSquaredBothRS,"NEUT v5.3.6 Rein-Sehgal");
+leg2->AddEntry(hQSquaredBothBS,"NEUT v5.3.6 Berger-Sehgal");
+leg2->AddEntry(hQSquaredBothOBS,"NEUT v5.0.1 Rein-Sehgal");
 leg2->Draw();
 // ===========================================
 
@@ -229,9 +229,9 @@ leg3->SetFillColor(kWhite);
 leg3->SetLineColor(kWhite);
 leg3->SetShadowColor(kWhite);
 leg3->SetHeader("SciBooNE MC");
-leg3->AddEntry(hFourMomentumStoppedRS,"New R-S Model");
-leg3->AddEntry(hFourMomentumStoppedBS,"New B-S Model");
-leg3->AddEntry(hFourMomentumStoppedOBS,"Old R-S Model");
+leg3->AddEntry(hFourMomentumStoppedRS,"NEUT v5.3.6 Rein-Sehgal");
+leg3->AddEntry(hFourMomentumStoppedBS,"NEUT v5.3.6 Berger-Sehgal");
+leg3->AddEntry(hFourMomentumStoppedOBS,"NEUT v5.0.1 Rein-Sehgal");
 leg3->Draw();
 // ==============================================
 
@@ -276,9 +276,9 @@ leg4->SetFillColor(kWhite);
 leg4->SetLineColor(kWhite);
 leg4->SetShadowColor(kWhite);
 leg4->SetHeader("SciBooNE MC");
-leg4->AddEntry(hQSquaredStoppedRS,"New R-S Model");
-leg4->AddEntry(hQSquaredStoppedBS,"New B-S Model");
-leg4->AddEntry(hQSquaredStoppedOBS,"Old R-S Model");
+leg4->AddEntry(hQSquaredStoppedRS,"NEUT v5.3.6 Rein-Sehgal");
+leg4->AddEntry(hQSquaredStoppedBS,"NEUT v5.3.6 Berger-Sehgal");
+leg4->AddEntry(hQSquaredStoppedOBS,"NEUT v5.0.1 Rein-Sehgal");
 leg4->Draw();
 // ==============================================
 
@@ -332,9 +332,9 @@ leg5->SetFillColor(kWhite);
 leg5->SetLineColor(kWhite);
 leg5->SetShadowColor(kWhite);
 leg5->SetHeader("SciBooNE MC");
-leg5->AddEntry(hFourMomentumNonStoppedRS,"New R-S Model");
-leg5->AddEntry(hFourMomentumNonStoppedBS,"New B-S Model");
-leg5->AddEntry(hFourMomentumNonStoppedOBS,"Old R-S Model");
+leg5->AddEntry(hFourMomentumNonStoppedRS,"NEUT v5.3.6 Rein-Sehgal");
+leg5->AddEntry(hFourMomentumNonStoppedBS,"NEUT v5.3.6 Berger-Sehgal");
+leg5->AddEntry(hFourMomentumNonStoppedOBS,"NEUT v5.0.1 Rein-Sehgal");
 leg5->Draw();
 // ==================================================
 
@@ -379,9 +379,9 @@ leg6->SetFillColor(kWhite);
 leg6->SetLineColor(kWhite);
 leg6->SetShadowColor(kWhite);
 leg6->SetHeader("SciBooNE MC");
-leg6->AddEntry(hQSquaredNonStoppedRS,"New R-S Model");
-leg6->AddEntry(hQSquaredNonStoppedBS,"New B-S Model");
-leg6->AddEntry(hQSquaredNonStoppedOBS,"Old R-S Model");
+leg6->AddEntry(hQSquaredNonStoppedRS,"NEUT v5.3.6 Rein-Sehgal");
+leg6->AddEntry(hQSquaredNonStoppedBS,"NEUT v5.3.6 Berger-Sehgal");
+leg6->AddEntry(hQSquaredNonStoppedOBS,"NEUT v5.0.1 Rein-Sehgal");
 leg6->Draw();
 // ==================================================
 

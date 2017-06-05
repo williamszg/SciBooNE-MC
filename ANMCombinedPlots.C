@@ -83,13 +83,13 @@ hCosStoppedBSCC->Sumw2();
 hCosNonStoppedBSCC->Sumw2();
 
 // ### Defining the ratio histogram ###
-TH1D *RatioPBS = new TH1D("RatioPBS", "Efficiencies for Momentums", 40, 0, 2500);
+TH1D *RatioPBS = new TH1D("RatioPBS", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioCBS = new TH1D("RatioCBS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioSPBS = new TH1D("RatioSPBS", "Efficiencies for Momentums", 40, 0, 2500);
+TH1D *RatioSPBS = new TH1D("RatioSPBS", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioSCBS = new TH1D("RatioSCBS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioNSPBS = new TH1D("RatioNSPBS", "Efficiencies for Momentums", 40, 0, 2500);
+TH1D *RatioNSPBS = new TH1D("RatioNSPBS", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioNSCBS = new TH1D("RatioNSCBS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioPBSCC = new TH1D("RatioPBSCC", "Efficiencies for Momentums", 40, 0, 2500);
+TH1D *RatioPBSCC = new TH1D("RatioPBSCC", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioCBSCC = new TH1D("RatioCBSCC", "Efficiencies for Angles", 40, 0, 180);
 TH1D *PionEnergyRatioBS = new TH1D("PionEnergyRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2500);
 TH1D *PionMomentumRatioBS = new TH1D("PionMomentumRatioBS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2500);
@@ -321,13 +321,13 @@ hPionMomentumNonStoppedRS->Sumw2();
 hPionAngleNonStoppedRS->Sumw2();
 
 // ### Defining the ratio histogram ###
-TH1D *RatioPRS = new TH1D("RatioPRS", "Efficiencies for Momentums", 40, 0, 2500);
+TH1D *RatioPRS = new TH1D("RatioPRS", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioCRS = new TH1D("RatioCRS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioSPRS = new TH1D("RatioSPRS", "Efficiencies for Momentums", 40, 0, 2500);
+TH1D *RatioSPRS = new TH1D("RatioSPRS", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioSCRS = new TH1D("RatioSCRS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioNSPRS = new TH1D("RatioNSPRS", "Efficiencies for Momentums", 40, 0, 2500);
+TH1D *RatioNSPRS = new TH1D("RatioNSPRS", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioNSCRS = new TH1D("RatioNSCRS", "Efficiencies for Angles", 40, 0, 180);
-TH1D *RatioPRSCC = new TH1D("RatioPRSCC", "Efficiencies for Momentums", 40, 0, 2500);
+TH1D *RatioPRSCC = new TH1D("RatioPRSCC", "Efficiencies for Momentums", 40, 0, 2000);
 TH1D *RatioCRSCC = new TH1D("RatioCRSCC", "Efficiencies for Angles", 40, 0, 180);
 TH1D *PionEnergyRatioRS = new TH1D("PionEnergyRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Energy", 40, 0, 2500);
 TH1D *PionMomentumRatioRS = new TH1D("PionMomentumRatioRS", "Pion Efficiencies for Stopped and Non-Stopped Muon Momentum", 40, 0, 2500);
@@ -508,8 +508,8 @@ leg->SetFillColor(kWhite);
 leg->SetLineColor(kWhite);
 leg->SetShadowColor(kWhite);
 leg->SetHeader("SciBooNE MC");
-leg->AddEntry(RatioPRS,"R-S Model");
-leg->AddEntry(RatioPBS,"B-S Model"); 
+leg->AddEntry(RatioPRS,"NEUT v5.3.6 Rein-Sehgal");
+leg->AddEntry(RatioPBS,"NEUT v5.3.6 Berger-Sehgal"); 
 leg->Draw();
 
 
@@ -535,8 +535,8 @@ leg5->SetFillColor(kWhite);
 leg5->SetLineColor(kWhite);
 leg5->SetShadowColor(kWhite);
 leg5->SetHeader("SciBooNE MC");
-leg5->AddEntry(RatioCRS,"R-S Model");
-leg5->AddEntry(RatioCBS,"B-S Model");
+leg5->AddEntry(RatioCRS,"NEUT v5.3.6 Rein-Sehgal");
+leg5->AddEntry(RatioCBS,"NEUT v5.3.6 Berger-Sehgal");
 leg5->Draw();
 
 
@@ -562,8 +562,8 @@ leg10->SetFillColor(kWhite);
 leg10->SetLineColor(kWhite);
 leg10->SetShadowColor(kWhite);
 leg10->SetHeader("SciBooNE MC");
-leg10->AddEntry(RatioPRSCC,"New R-S Model");
-leg10->AddEntry(RatioPBSCC,"New B-S Model");
+leg10->AddEntry(RatioPRSCC,"NEUT v5.3.6 Rein-Sehgal");
+leg10->AddEntry(RatioPBSCC,"NEUT v5.3.6 Berger-Sehgal");
 leg10->Draw();
 
 
@@ -589,8 +589,8 @@ leg11->SetFillColor(kWhite);
 leg11->SetLineColor(kWhite);
 leg11->SetShadowColor(kWhite);
 leg11->SetHeader("SciBooNE MC");
-leg11->AddEntry(RatioCRSCC,"New R-S Model");
-leg11->AddEntry(RatioCBSCC,"New B-S Model");
+leg11->AddEntry(RatioCRSCC,"NEUT v5.3.6 Rein-Sehgal");
+leg11->AddEntry(RatioCBSCC,"NEUT v5.3.6 Berger-Sehgal");
 leg11->Draw();
 
 
@@ -633,8 +633,8 @@ leg1->SetFillColor(kWhite);
 leg1->SetLineColor(kWhite);
 leg1->SetShadowColor(kWhite);
 leg1->SetHeader("SciBooNE MC");
-leg1->AddEntry(hTotalPNewRS,"R-S Model");
-leg1->AddEntry(hTotalPNewBS,"B-S Model"); 
+leg1->AddEntry(hTotalPNewRS,"NEUT v5.3.6 Rein-Sehgal");
+leg1->AddEntry(hTotalPNewBS,"NEUT v5.3.6 Berger-Sehgal"); 
 leg1->Draw();
 
 
@@ -676,8 +676,8 @@ leg2->SetFillColor(kWhite);
 leg2->SetLineColor(kWhite);
 leg2->SetShadowColor(kWhite);
 leg2->SetHeader("SciBooNE MC");
-leg2->AddEntry(hTotalCosNewRS,"R-S Model");
-leg2->AddEntry(hTotalCosNewBS,"B-S Model");
+leg2->AddEntry(hTotalCosNewRS,"NEUT v5.3.6 Rein-Sehgal");
+leg2->AddEntry(hTotalCosNewBS,"NEUT v5.3.6 Berger-Sehgal");
 leg2->Draw();
 
 
@@ -719,8 +719,8 @@ leg3->SetFillColor(kWhite);
 leg3->SetLineColor(kWhite);
 leg3->SetShadowColor(kWhite);
 leg3->SetHeader("SciBooNE MC");
-leg3->AddEntry(hTotalGoodPNewRS,"R-S Model");
-leg3->AddEntry(hTotalGoodPNewBS,"B-S Model");
+leg3->AddEntry(hTotalGoodPNewRS,"NEUT v5.3.6 Rein-Sehgal");
+leg3->AddEntry(hTotalGoodPNewBS,"NEUT v5.3.6 Berger-Sehgal");
 leg3->Draw();
 
 
@@ -762,8 +762,8 @@ leg4->SetFillColor(kWhite);
 leg4->SetLineColor(kWhite);
 leg4->SetShadowColor(kWhite);
 leg4->SetHeader("SciBooNE MC");
-leg4->AddEntry(hTotalGoodCosNewRS,"R-S Model");
-leg4->AddEntry(hTotalGoodCosNewBS,"B-S Model");
+leg4->AddEntry(hTotalGoodCosNewRS,"NEUT v5.3.6 Rein-Sehgal");
+leg4->AddEntry(hTotalGoodCosNewBS,"NEUT v5.3.6 Berger-Sehgal");
 leg4->Draw();
 
 
@@ -806,8 +806,8 @@ leg9->SetFillColor(kWhite);
 leg9->SetLineColor(kWhite);
 leg9->SetShadowColor(kWhite);
 leg9->SetHeader("SciBooNE MC");
-leg9->AddEntry(hGoodStoppedPNewRS,"New R-S Model");
-leg9->AddEntry(hGoodStoppedPNewBS,"New B-S Model");
+leg9->AddEntry(hGoodStoppedPNewRS,"NEUT v5.3.6 Rein-Sehgal");
+leg9->AddEntry(hGoodStoppedPNewBS,"NEUT v5.3.6 Berger-Sehgal");
 leg9->Draw();
 
 
@@ -850,8 +850,8 @@ leg6->SetFillColor(kWhite);
 leg6->SetLineColor(kWhite);
 leg6->SetShadowColor(kWhite);
 leg6->SetHeader("SciBooNE MC");
-leg6->AddEntry(hGoodNonStoppedPNewRS,"New R-S Model");
-leg6->AddEntry(hGoodNonStoppedPNewBS,"New B-S Model");
+leg6->AddEntry(hGoodNonStoppedPNewRS,"NEUT v5.3.6 Rein-Sehgal");
+leg6->AddEntry(hGoodNonStoppedPNewBS,"NEUT v5.3.6 Berger-Sehgal");
 leg6->Draw();
 
 
@@ -894,8 +894,8 @@ leg7->SetFillColor(kWhite);
 leg7->SetLineColor(kWhite);
 leg7->SetShadowColor(kWhite);
 leg7->SetHeader("SciBooNE MC");
-leg7->AddEntry(hGoodNonStoppedCosNewRS,"New R-S Model");
-leg7->AddEntry(hGoodNonStoppedCosNewBS,"New B-S Model");
+leg7->AddEntry(hGoodNonStoppedCosNewRS,"NEUT v5.3.6 Rein-Sehgal");
+leg7->AddEntry(hGoodNonStoppedCosNewBS,"NEUT v5.3.6 Berger-Sehgal");
 leg7->Draw();
 
 
@@ -938,8 +938,8 @@ leg8->SetFillColor(kWhite);
 leg8->SetLineColor(kWhite);
 leg8->SetShadowColor(kWhite);
 leg8->SetHeader("SciBooNE MC");
-leg8->AddEntry(hGoodStoppedCosNewRS,"New R-S Model");
-leg8->AddEntry(hGoodStoppedCosNewBS,"New B-S Model");
+leg8->AddEntry(hGoodStoppedCosNewRS,"NEUT v5.3.6 Rein-Sehgal");
+leg8->AddEntry(hGoodStoppedCosNewBS,"NEUT v5.3.6 Berger-Sehgal");
 leg8->Draw();
 
 
