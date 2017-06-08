@@ -49,8 +49,8 @@ TH1D *hCosStoppedBSCC = (TH1D*)f1->Get("CCGMuonCosS_1");
 TH1D *hPNonStoppedBSCC = (TH1D*)f1->Get("CCGMuonMomNS_1");
 TH1D *hCosNonStoppedBSCC = (TH1D*)f1->Get("CCGMuonCosNS_1");
 
-TH2D *hTotalRatioBS = (TH2D*)f1->Get("T2D_1"); //Make a clone of the h21 histogram from the file
-TH2D *hGoodRatioBS = (TH2D*)f1->Get("G2D_1"); //Make a clone of the h22 histogram from the file
+TH2D *hTotalRatioBS = (TH2D*)f1->Get("T2D_2"); //Make a clone of the h21 histogram from the file
+TH2D *hGoodRatioBS = (TH2D*)f1->Get("G2D_2"); //Make a clone of the h22 histogram from the file
 
 
 hTotalPNewBS->Sumw2();
@@ -291,8 +291,8 @@ TH1D *hPionEnergyNonStoppedRS = (TH1D*)f2->Get("NSPionEnergy");
 TH1D *hPionMomentumNonStoppedRS = (TH1D*)f2->Get("NSPionMom");
 TH1D *hPionAngleNonStoppedRS = (TH1D*)f2->Get("NSPionAngle");
 
-TH2D *hTotalRatioRS = (TH2D*)f2->Get("T2D_1"); //Make a clone of the h21 histogram from the file
-TH2D *hGoodRatioRS = (TH2D*)f2->Get("G2D_1"); //Make a clone of the h22 histogram from the file
+TH2D *hTotalRatioRS = (TH2D*)f2->Get("T2D_2"); //Make a clone of the h21 histogram from the file
+TH2D *hGoodRatioRS = (TH2D*)f2->Get("G2D_2"); //Make a clone of the h22 histogram from the file
 
 
 hTotalPNewRS->Sumw2();

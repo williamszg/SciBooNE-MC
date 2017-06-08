@@ -261,7 +261,7 @@ void NewANMReinSehgal::Loop()
                            CCNumberNotStopped++;
                            hCCGoodMuonMomentumNonStopped->Fill(m1*1000); //Fill the nonstopped histogram with good nonstopped muon events for muon momentum
                            hCCGoodMuonAngleNonStopped->Fill(t1); //Fill the nonstopped histogram with good nonstopped muon events for muon angle
-                           hCCIncMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram 
+                           //hCCIncMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram 
                            if (NumberPionsPresent >= 1 && StdHepP4[PionCallNumber][2]>0) {
                               hCCIncPionGood->Fill(t2, m2*1000);
                            }
