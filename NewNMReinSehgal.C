@@ -325,9 +325,9 @@ void NewNMReinSehgal::Loop()
                   double s3 = v1.Dot(v2); //Dot product between the muon and pion momentums
                   double s4 = v4.Dot(v4); //Squared magnitude of the neutrino momentum
 
-                  double t = ((v4.X()-v2.X()-v1.X())*(v4.X()-v2.X()-v1.X()) + (v4.Y()-v2.Y()-v1.Y())*(v4.Y()-v2.Y()-v1.Y()) + (v4.Z()-v2.Z()-v1.Z())*(v4.Z()-v2.Z()-v1.Z())) + (StdHepP4[NeutrinoCallNumber][3] - StdHepP4[MuonCallNumber][3] - StdHepP4[PionCallNumber][3])*(StdHepP4[NeutrinoCallNumber][3] - StdHepP4[MuonCallNumber][3] - StdHepP4[PionCallNumber][3]);
+                  double t = ((v4.X()-v2.X()-v1.X())*(v4.X()-v2.X()-v1.X()) + (v4.Y()-v2.Y()-v1.Y())*(v4.Y()-v2.Y()-v1.Y()) + (v4.Z()-v2.Z()-v1.Z())*(v4.Z()-v2.Z()-v1.Z())) - (StdHepP4[NeutrinoCallNumber][3] - StdHepP4[MuonCallNumber][3] - StdHepP4[PionCallNumber][3])*(StdHepP4[NeutrinoCallNumber][3] - StdHepP4[MuonCallNumber][3] - StdHepP4[PionCallNumber][3]);
 
-                  double q = ((v4.X()-v1.X())*(v4.X()-v1.X()) + (v4.Y()-v1.Y())*(v4.Y()-v1.Y()) + (v4.Z()-v1.Z())*(v4.Z()-v1.Z())) + (StdHepP4[NeutrinoCallNumber][3] - StdHepP4[MuonCallNumber][3])*(StdHepP4[NeutrinoCallNumber][3] - StdHepP4[MuonCallNumber][3]);
+                  double q = ((v4.X()-v1.X())*(v4.X()-v1.X()) + (v4.Y()-v1.Y())*(v4.Y()-v1.Y()) + (v4.Z()-v1.Z())*(v4.Z()-v1.Z())) - (StdHepP4[NeutrinoCallNumber][3] - StdHepP4[MuonCallNumber][3])*(StdHepP4[NeutrinoCallNumber][3] - StdHepP4[MuonCallNumber][3]);
 
                   double tx = (v4.X()-v2.X()-v1.X())*(v4.X()-v2.X()-v1.X());
                   double ty = (v4.Y()-v2.Y()-v1.Y())*(v4.Y()-v2.Y()-v1.Y());
