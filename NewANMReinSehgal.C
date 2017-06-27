@@ -17,10 +17,10 @@
 //### Muon Histograms ###
 //#######################
 
-TH2D *hCCIncMuonTotal = new TH2D("hCCIncMuonTotal", "Total CC Inclusive Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for muon angle and momentum
-TH2D *hCCIncMuonGood = new TH2D("hCCIncMuonGood", "Good CC Inclusive Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for good muon angle and momentum
-TH2D *hCCCohMuonTotal = new TH2D("hCCCohMuonTotal", "Total CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for muon angle and momentum
-TH2D *hCCCohMuonGood = new TH2D("hCCCohMuonGood", "Good CC Coh Events Muon Information", 40, 0, 180, 40, 0, 2000); //This is the 2D histogram for good muon angle and momentum
+TH2D *hCCIncMuonTotal = new TH2D("hCCIncMuonTotal", "Total CC Inclusive Events Muon Information", 36, 0, 180, 20, 0, 2000); //This is the 2D histogram for muon angle and momentum
+TH2D *hCCIncMuonGood = new TH2D("hCCIncMuonGood", "Good CC Inclusive Events Muon Information", 36, 0, 180, 20, 0, 2000); //This is the 2D histogram for good muon angle and momentum
+TH2D *hCCCohMuonTotal = new TH2D("hCCCohMuonTotal", "Total CC Coh Events Muon Information", 36, 0, 180, 20, 0, 2000); //This is the 2D histogram for muon angle and momentum
+TH2D *hCCCohMuonGood = new TH2D("hCCCohMuonGood", "Good CC Coh Events Muon Information", 36, 0, 180, 20, 0, 2000); //This is the 2D histogram for good muon angle and momentum
 TH1D *hSteelLayer = new TH1D("hSteelLayer", "Steel Layer the Muon Stops Inside", 14, 0, 14); //This is the histogram for the steel layer that the muon stops within
 TH1D *hTotalMuonMomentum = new TH1D ("hTotalMuonMomentum", "Total CC Coh Muon Momentum", 40, 0, 2500); //This is the histogram for the total CC Coh Muon Momentum
 TH1D *hGoodMuonMomentumTotal = new TH1D("hGoodMuonMomentumTotal", "Total Good CC Coh Muon Momentum", 40, 0, 2500); //This is the good muon momentum for both stopped and nonstopped events
@@ -171,6 +171,8 @@ void NewANMReinSehgal::Loop()
 
          Double_t t1 = v1.Theta(); //Get the polar angle of the muon momentum
          Double_t t2 = v2.Theta(); //Get the polar angle of the pion momentum
+	 Double_t c1 = cos(t1);
+	 c1 = sqrt(c1*c1);
          t1 = (180/PI)*t1; //Put the polar angle in degrees
          t2 = (180/PI)*t2; //Put the polar angle in degrees
 
@@ -214,8 +216,9 @@ void NewANMReinSehgal::Loop()
          double dEpion = 2.04*lengthPion; //This is the energy the pion lost traveling through the SciBar Detector
          double Emuon = StdHepP4[MuonCallNumber][3]*1000 - dEmuon; //Energy the muon has after leaving SciBar
          double Epion = StdHepP4[PionCallNumber][3]*1000 - dEpion; //Energy the pion has after leaving SciBar
+	 Emuon = Emuon - (91/c1);
          
-         if (StdHepP4[MuonCallNumber][2]>0 && muonXevo2>0.2 && muonXevo2<2.8 && muonYevo2>0.2 && muonYevo2<2.8 && Emuon>0) {
+         if (StdHepP4[MuonCallNumber][2]>0 && muonXevo2>0.2 && muonXevo2<2.8 && muonYevo2>0.2 && muonYevo2<2.4 && Emuon>0) {
             CCNumberMadeFrontMRD++;
             double Emuonf1 = Emuon; //Defining the muon final energy variable
             double dEmuonScint = 0; //This is the variable to be used for scintillator layer changes in energy
@@ -251,13 +254,13 @@ void NewANMReinSehgal::Loop()
                         }
                         
 
-                        if (layerScint <= 26 && Emuonf1>=0 && (muonXevo5>2.8 || muonXevo5<0.2 || muonYevo5>2.8 || muonYevo5<0.2 || muonXevo4>2.8 || muonXevo4<0.2 || muonYevo4>2.8 || muonYevo4<0.2)) {
+                        if (layerScint <= 13 && Emuonf1>=0 && (muonXevo5>2.8 || muonXevo5<0.2 || muonYevo5>2.4 || muonYevo5<0.2 || muonXevo4>2.8 || muonXevo4<0.2 || muonYevo4>2.4 || muonYevo4<0.2)) {
                            CCNumberOutSide++;
                            goto jmp1;
                         }
 
 
-                        if (layerScint == 26 && Emuonf2>=0 && muonXevo6>=0.2 && muonXevo6<=2.8 && muonYevo6>=0.2 && muonYevo6<=2.8) {
+                        if (layerScint == 13 && Emuonf2>=0 && muonXevo6>=0.2 && muonXevo6<=2.8 && muonYevo6>=0.2 && muonYevo6<=2.4) {
                            CCNumberNotStopped++;
                            hCCGoodMuonMomentumNonStopped->Fill(m1*1000); //Fill the nonstopped histogram with good nonstopped muon events for muon momentum
                            hCCGoodMuonAngleNonStopped->Fill(t1); //Fill the nonstopped histogram with good nonstopped muon events for muon angle
@@ -281,7 +284,7 @@ void NewANMReinSehgal::Loop()
 
 
                      jmp1:
-                     if (Emuonf1<=0 && layerScint>=4  && layerScint<=26 && layerSteel<26 && muonXevo5<=2.8 && muonXevo5>=0.2 && muonYevo5<=2.8 && muonYevo5>=0.2) {
+                     if (Emuonf1<=0 && layerScint>=4  && layerScint<=13 && layerSteel<13 && muonXevo5<=2.8 && muonXevo5>=0.2 && muonYevo5<=2.4 && muonYevo5>=0.2) {
                         CCNumberStopped++;
                         if (layerSteel>=13) {
                            layerSteel = 13; //This sets the steel layer to 12 if the muon did not stop in the first 12 layers
@@ -336,6 +339,8 @@ void NewANMReinSehgal::Loop()
 
                   Double_t t1 = v1.Theta(); //Get the polar angle of the muon momentum
                   Double_t t2 = v2.Theta(); //Get the polar angle of the pion momentum
+		  Double_t c1 = cos(t1);
+		  c1 = sqrt(c1*c1);
                   t1 = (180/PI)*t1; //Put the polar angle in degrees
                   t2 = (180/PI)*t2; //Put the polar angle in degrees
 
@@ -381,8 +386,9 @@ void NewANMReinSehgal::Loop()
                   double dEpion = 2.04*lengthPion; //This is the energy the pion lost traveling through the SciBar Detector
                   double Emuon = StdHepP4[MuonCallNumber][3]*1000 - dEmuon; //Energy the muon has after leaving SciBar
                   double Epion = StdHepP4[PionCallNumber][3]*1000 - dEpion; //Energy the pion has after leaving SciBar
+		  Emuon = Emuon - (91/c1);
 
-                  if (fString == "-16" && muonXevo2>0.2 && muonXevo2<2.8 && muonYevo2>0.2 && muonYevo2<2.8 && Emuon>0) {
+                  if (fString == "-16" && muonXevo2>0.2 && muonXevo2<2.8 && muonYevo2>0.2 && muonYevo2<2.4 && Emuon>0) {
                      NumberMadeFrontMRD++;
                      double Emuonf1 = Emuon; //Defining the muon final energy variable
                      double dEmuonScint = 0; //This is the variable to be used for scintillator layer changes in energy
@@ -418,7 +424,7 @@ void NewANMReinSehgal::Loop()
                         }
 
 
-                        if (layerScint <= 26 && Emuonf1>=0 && (muonXevo5>2.8 || muonXevo5<0.2 || muonYevo5>2.8 || muonYevo5<0.2 || muonXevo4>2.8 || muonXevo4<0.2 || muonYevo4>2.8 || muonYevo4<0.2)) {
+                        if (layerScint <= 13 && Emuonf1>=0 && (muonXevo5>2.8 || muonXevo5<0.2 || muonYevo5>2.4 || muonYevo5<0.2 || muonXevo4>2.8 || muonXevo4<0.2 || muonYevo4>2.4 || muonYevo4<0.2)) {
                            NumberOutSide++;
                            hGoodMuonMomentumOutSide->Fill(m1*1000); //Fill the good muon momentum histogram for the muons that went out the side of the MRD
                            hGoodMuonAngleOutSide->Fill(t1); //Fill the good muon angle histogram for the muons that went out the side of the MRD
@@ -426,9 +432,9 @@ void NewANMReinSehgal::Loop()
                         }
 
 
-                        if (fString == "-16" && layerScint == 26 && Emuonf2>=0 && muonXevo6>=0.2 && muonXevo6<=2.8 && muonYevo6>=0.2 && muonYevo6<=2.8) {
+                        if (fString == "-16" && layerScint == 13 && Emuonf2>=0 && muonXevo6>=0.2 && muonXevo6<=2.8 && muonYevo6>=0.2 && muonYevo6<=2.4) {
                            NumberNotStopped++;
-                           hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram
+                           //hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram
                            if (NumberPionsPresent >= 1 && StdHepP4[PionCallNumber][2]>0) {
                               hCCCohPionGood->Fill(t2, m2*1000);
                            }
@@ -483,7 +489,7 @@ void NewANMReinSehgal::Loop()
 
                      jmp:
 
-                     if (fString == "-16" && layerScint>=4 && Emuonf1<=0 && layerScint<=26 && layerSteel<26 && muonXevo5<=2.8 && muonXevo5>=0.2 && muonYevo5<=2.8 && muonYevo5>=0.2) {
+                     if (fString == "-16" && layerScint>=4 && Emuonf1<=0 && layerScint<=13 && layerSteel<13 && muonXevo5<=2.8 && muonXevo5>=0.2 && muonYevo5<=2.4 && muonYevo5>=0.2) {
                         NumberStopped++;
                         if (layerSteel>=13) {
                            layerSteel = 13; //This sets the steel layer to 12 if the muon did not stop in the first 12 layers
