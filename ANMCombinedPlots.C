@@ -49,8 +49,11 @@ TH1D *hCosStoppedBSCC = (TH1D*)f1->Get("CCGMuonCosS_1");
 TH1D *hPNonStoppedBSCC = (TH1D*)f1->Get("CCGMuonMomNS_1");
 TH1D *hCosNonStoppedBSCC = (TH1D*)f1->Get("CCGMuonCosNS_1");
 
-TH2D *hTotalRatioBS = (TH2D*)f1->Get("T2D_2"); //Make a clone of the h21 histogram from the file
-TH2D *hGoodRatioBS = (TH2D*)f1->Get("G2D_2"); //Make a clone of the h22 histogram from the file
+TH2D *hTotalRatioBS = (TH2D*)f1->Get("T2D_1"); //Make a clone of the h21 histogram from the file
+TH2D *hGoodRatioBS = (TH2D*)f1->Get("G2D_1"); //Make a clone of the h22 histogram from the file
+
+TH2D *hTotalRatioBSCC = (TH2D*)f1->Get("T2D_2"); //Make a clone of the h21 histogram from the file
+TH2D *hGoodRatioBSCC = (TH2D*)f1->Get("G2D_2"); //Make a clone of the h22 histogram from the file
 
 
 hTotalPNewBS->Sumw2();
@@ -100,7 +103,8 @@ TH1D *PionAngleRatioSBS = new TH1D("PionAngleRatioSBS", "Pion Efficiencies for S
 TH1D *PionEnergyRatioNSBS = new TH1D("PionEnergyRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2500);
 TH1D *PionMomentumRatioNSBS = new TH1D("PionMomentumRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioNSBS = new TH1D("PionAngleRatioNSBS", "Pion Efficiencies for Non-Stopped Muon Angle", 40, 0, 180);
-TH2D *Ratio2DBS = new TH2D("Ratio2DBS", "2D Efficiencies", 40, 0, 180, 40, 0, 2000);
+TH2D *Ratio2DBS = new TH2D("Ratio2DBS", "2D Efficiencies", 36, 0, 180, 20, 0, 2000);
+TH2D *Ratio2DBSCC = new TH2D("Ratio2DBSCC", "2D Efficiencies for CC Inclusive", 36, 0, 180, 20, 0, 2000);
 
 // ### Formatting the plot ###
 PionEnergyRatioBS->SetLineColor(kRed);
@@ -246,6 +250,7 @@ PionEnergyRatioNSBS->Divide(hPionEnergyNonStoppedBS, hPionEnergyGoodBS);
 PionMomentumRatioNSBS->Divide(hPionMomentumNonStoppedBS, hPionMomentumGoodBS);
 PionAngleRatioNSBS->Divide(hPionAngleNonStoppedBS, hPionAngleGoodBS);
 Ratio2DBS->Divide(hGoodRatioBS, hTotalRatioBS);
+Ratio2DBSCC->Divide(hGoodRatioBSCC, hTotalRatioBSCC);
 
 
 
@@ -291,8 +296,11 @@ TH1D *hPionEnergyNonStoppedRS = (TH1D*)f2->Get("NSPionEnergy");
 TH1D *hPionMomentumNonStoppedRS = (TH1D*)f2->Get("NSPionMom");
 TH1D *hPionAngleNonStoppedRS = (TH1D*)f2->Get("NSPionAngle");
 
-TH2D *hTotalRatioRS = (TH2D*)f2->Get("T2D_2"); //Make a clone of the h21 histogram from the file
-TH2D *hGoodRatioRS = (TH2D*)f2->Get("G2D_2"); //Make a clone of the h22 histogram from the file
+TH2D *hTotalRatioRS = (TH2D*)f2->Get("T2D_1"); //Make a clone of the h21 histogram from the file
+TH2D *hGoodRatioRS = (TH2D*)f2->Get("G2D_1"); //Make a clone of the h22 histogram from the file
+
+TH2D *hTotalRatioRSCC = (TH2D*)f2->Get("T2D_2"); //Make a clone of the h21 histogram from the file
+TH2D *hGoodRatioRSCC = (TH2D*)f2->Get("G2D_2"); //Make a clone of the h22 histogram from the file
 
 
 hTotalPNewRS->Sumw2();
@@ -338,7 +346,8 @@ TH1D *PionAngleRatioSRS = new TH1D("PionAngleRatioSRS", "Pion Efficiencies for S
 TH1D *PionEnergyRatioNSRS = new TH1D("PionEnergyRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Energy", 40, 0, 2500);
 TH1D *PionMomentumRatioNSRS = new TH1D("PionMomentumRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Momentum", 40, 0, 2500);
 TH1D *PionAngleRatioNSRS = new TH1D("PionAngleRatioNSRS", "Pion Efficiencies for Non-Stopped Muon Angle", 40, 0, 180);
-TH2D *Ratio2DRS = new TH2D("Ratio2DRS", "2D Efficiencies", 40, 0, 180, 40, 0, 2000);
+TH2D *Ratio2DRS = new TH2D("Ratio2DRS", "2D Efficiencies", 36, 0, 180, 20, 0, 2000);
+TH2D *Ratio2DRSCC = new TH2D("Ratio2DRSCC", "2D Efficiencies for CC Inclusive", 36, 0, 180, 20, 0, 2000);
 
 // ### Formatting the plot ###
 PionEnergyRatioRS->SetLineColor(kBlue);
@@ -484,6 +493,7 @@ PionEnergyRatioNSRS->Divide(hPionEnergyNonStoppedRS, hPionEnergyGoodRS);
 PionMomentumRatioNSRS->Divide(hPionMomentumNonStoppedRS, hPionMomentumGoodRS);
 PionAngleRatioNSRS->Divide(hPionAngleNonStoppedRS, hPionAngleGoodRS);
 Ratio2DRS->Divide(hGoodRatioRS, hTotalRatioRS);
+Ratio2DRSCC->Divide(hGoodRatioRSCC, hTotalRatioRSCC);
 
 
 
@@ -971,6 +981,32 @@ Ratio2DBS->Draw("colz");
 
 
 
+// ###########################################
+// # Drawing the 2D RS Efficiency Histograms #
+// ###########################################
+
+TCanvas *c25 = new TCanvas("c25", "2D R-S Muon Efficiency Histogram");
+c25->SetTicks();
+c25->SetFillColor(kWhite);
+
+Ratio2DRSCC->Draw("colz");
+
+
+
+
+// ###########################################
+// # Drawing the 2D BS Efficiency Histograms #
+// ###########################################
+
+TCanvas *c24 = new TCanvas("c24", "2D B-S Muon Efficiency Histogram");
+c24->SetTicks();
+c24->SetFillColor(kWhite);
+
+Ratio2DBSCC->Draw("colz");
+
+
+
+
 // ############################################
 // # Drawing Berger-Sehgal Mom and Cos Ratios #
 // ############################################
@@ -1303,5 +1339,12 @@ std::cout<<"|--------------------|"<<std::endl;
 
 // =================================================================================================================
 
+TFile *TAcceptanceInfo = new TFile("./ROOTFILES/2DAcceptanceHistogramsAntiNeuMode.root",       "RECREATE");
+
+Ratio2DRS->Write();
+Ratio2DBS->Write();
+
+Ratio2DRSCC->Write();
+Ratio2DBSCC->Write();
 
 }

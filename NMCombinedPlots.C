@@ -1935,5 +1935,14 @@ std::cout<<"|--------------------|"<<std::endl;
 
 // ================================================================================================================
 
+TFile *TAcceptanceInfo = new TFile("./ROOTFILES/2DAcceptanceHistogramsNeuMode.root", "RECREATE");
+
+Ratio2DRS->Write();
+Ratio2DBS->Write();
+Ratio2DOBS->Write();
+
+Ratio2DRSCC->Write();
+Ratio2DBSCC->Write();
+Ratio2DOBSCC->Write();
 
 }
