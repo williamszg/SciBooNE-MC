@@ -91,6 +91,7 @@ void NewANMBergerSehgal::Loop()
    if (fChain == 0) return;
    Long64_t nentries = fChain->GetEntriesFast();
    Long64_t nbytes = 0, nb = 0;
+   int nTotalEvents = 0;
    int NumberEvents = 0; //This is the total number of events that occured
    int NumberMuonsPresent = 0; //This is the number of muons present in the event
    int NumberPionsPresent = 0; //This is the number of pions present in the event
@@ -112,6 +113,7 @@ void NewANMBergerSehgal::Loop()
    int NeutrinoCallNumber = -99;
    int zw = 0;
 
+
    for (Long64_t jentry=0; jentry<nentries; jentry++) {
       Long64_t ientry = LoadTree(jentry);
       if (ientry < 0) break;
@@ -127,6 +129,9 @@ void NewANMBergerSehgal::Loop()
       double Ypos = randY->Gaus(1.5,1.05);
       while (Ypos<0 || Ypos>3.0) { Ypos = randY->Gaus(1.5,1.05); }
       double Zpos = flat->Uniform(0,1.7);
+
+      nTotalEvents++;
+      if (nTotalEvents%1000 == 0) {std::cout<<"Event = "<<nTotalEvents<<std::endl;}
 
       for (int npart=0; npart<StdHepN; npart++) {
          if ((StdHepPdg[npart] == 13 || StdHepPdg[npart] == -13) && StdHepStatus[npart] == 1) {
@@ -171,7 +176,7 @@ void NewANMBergerSehgal::Loop()
 
          Double_t t1 = v1.Theta(); //Get the polar angle of the muon momentum
          Double_t t2 = v2.Theta(); //Get the polar angle of the pion momentum
-	 Double_t c1 = cos(t1);
+	 Double_t c1 = cos(t1); 
 	 c1 = sqrt(c1*c1);
          t1 = (180/PI)*t1; //Put the polar angle in degrees
          t2 = (180/PI)*t2; //Put the polar angle in degrees
@@ -188,6 +193,8 @@ void NewANMBergerSehgal::Loop()
          hCCTotalMuonMomentum->Fill(m1*1000); //Fill the total muon momentum histogram
          hCCTotalMuonAngle->Fill(t1); //Fill the total muon angle histogram
 
+         int OutSideCheck = 0;
+
          double muontimeZ1 = (1.7 - v3.Z())/v1.Z(); //This is the time for the muon to reach the back of the SciBar Detector
          double piontimeZ1 = (1.7 - v3.Z())/v2.Z(); //This is the time for the pion to reach the back of the SciBar Detector
          double muonXevo1 = v3.X() + v1.X()*muontimeZ1; //This is the evolution of the x position of the muon to the back of SciBar
@@ -200,8 +207,8 @@ void NewANMBergerSehgal::Loop()
          double pionXevo2 = v3.X() + v2.X()*piontimeZ2; //This is the evolution of the x position of the pion to the MRD
          double muonYevo2 = v3.Y() + v1.Y()*muontimeZ2; //This is the evolution of the y position of the muon to the MRD
          double pionYevo2 = v3.Y() + v2.Y()*piontimeZ2; //This is the evolution of the y position of the pion to the MRD
-         double muontimeZ3 = (1.7 + 0.55 + 1.375 - v3.Z())/v1.Z(); //This is the time for the muon to reach the front of the back of the MRD  
-         double piontimeZ3 = (1.7 + 0.55 + 1.375 - v3.Z())/v2.Z(); //This is the time for the pion to reach the front of the back of the MRD
+         double muontimeZ3 = (1.7 + 0.55 + 1.402 - v3.Z())/v1.Z(); //This is the time for the muon to reach the front of the back of the MRD  
+         double piontimeZ3 = (1.7 + 0.55 + 1.402 - v3.Z())/v2.Z(); //This is the time for the pion to reach the front of the back of the MRD
          double muonXevo3 = v3.X() + v1.X()*muontimeZ3; //This is the evolution of the x position of the muon to the back of the MRD
          double pionXevo3 = v3.X() + v2.X()*piontimeZ3; //This is the evolution of the x position of the pion to the back of the MRD
          double muonYevo3 = v3.Y() + v1.Y()*muontimeZ3; //This is the evolution of the y position of the muon to the back of the MRD
@@ -210,14 +217,16 @@ void NewANMBergerSehgal::Loop()
          double yMRDscint = (.006/v1.Z())*v1.Y(); //This is the distance traveled through a scintillator layer added to the y-direction for the muon
          double xMRDsteel = (.0508/v1.Z())*v1.X(); //This is the distance traveled through a steel layer added to the x-direction for the muon
          double yMRDsteel = (.0508/v1.Z())*v1.Y(); //This is the distance traveled through a steel layer added to the y-direction for the muon
+	 double xMRDair = (.06385/v1.Z())*v1.X();
+	 double yMRDair = (.06385/v1.Z())*v1.Y();
          double lengthMuon = 100*sqrt(((1.7 - v3.Z())*(1.7 - v3.Z())) + ((muonXevo1 - v3.X())*(muonXevo1 - v3.X())) + ((muonYevo1 - v3.Y())*(muonYevo1 - v3.Y()))); //This is the length the muon traveled through the SciBar detector from beginning to end
          double lengthPion = 100*sqrt(((1.7 - v3.Z())*(1.7 - v3.Z())) + ((pionXevo1 - v3.X())*(pionXevo1 - v3.X())) + ((pionYevo1 - v3.Y())*(pionYevo1 - v3.Y()))); //This is the length the muon traveled through the SciBar detector from beginning to end
          double dEmuon = 2.04*lengthMuon; //This is the energy the muon lost traveling through the SciBar Detector
          double dEpion = 2.04*lengthPion; //This is the energy the pion lost traveling through the SciBar Detector
          double Emuon = StdHepP4[MuonCallNumber][3]*1000 - dEmuon; //Energy the muon has after leaving SciBar
          double Epion = StdHepP4[PionCallNumber][3]*1000 - dEpion; //Energy the pion has after leaving SciBar
-         Emuon = Emuon - (91/c1);
-
+	 Emuon = Emuon - (91*c1);
+         
          if (StdHepP4[MuonCallNumber][2]>0 && muonXevo2>0.2 && muonXevo2<2.8 && muonYevo2>0.2 && muonYevo2<2.4 && Emuon>0) {
             CCNumberMadeFrontMRD++;
             double Emuonf1 = Emuon; //Defining the muon final energy variable
@@ -225,42 +234,50 @@ void NewANMBergerSehgal::Loop()
             double dEmuonSteel = 0; //This is the variable to be used for steel layer changes in energy
             int layerScint = 0; //The layer of scintillator the muon made it to
             int layerSteel = 0; //The layer of steel the muon made it to
+	    int layerAir = 0;
             double lengthMuon1 = 0;
             double lengthMuon2 = 0;
             double muonXevo4 = muonXevo2;
             double muonYevo4 = muonYevo2;
             double muonXevo5 = muonXevo2;
             double muonYevo5 = muonYevo2;
-            double timeMuonZ4 = (1.7 + 0.55 + (26*.006) + (25*.0508) - v3.Z())/v1.Z();
+            double timeMuonZ4 = (1.7 + 0.55 + 1.402 - v3.Z())/v1.Z();
             double muonXevo6 = v3.X() + timeMuonZ4*v1.X();
             double muonYevo6 = v3.Y() + timeMuonZ4*v1.Y();
-            double Emuonf2 = Emuon - 2.04*26*100*sqrt((.006*.006) + (xMRDscint*xMRDscint) + (yMRDscint*yMRDscint)) - 11.43*25*100*sqrt((.0508*.0508) + (xMRDsteel*xMRDsteel) + (yMRDsteel*yMRDsteel));
+            double Emuonf2 = Emuon - 2.04*13*100*sqrt((.006*.006) + (xMRDscint*xMRDscint) + (yMRDscint*yMRDscint)) - 11.43*12*100*sqrt((.0508*.0508) + (xMRDsteel*xMRDsteel) + (yMRDsteel*yMRDsteel));
 
-                     while (Emuonf1>0) {
+                     layerScint++;
+		     layerSteel++;
+
+                     lengthMuon1 = 100*sqrt((.006)*(.006) + (xMRDscint)*(xMRDscint) + (yMRDscint)*(yMRDscint));
+                     dEmuonScint = 2.04*lengthMuon1;
+                     lengthMuon2 = 100*sqrt((.0508)*(.0508) + (xMRDsteel)*(xMRDsteel) + (yMRDsteel)*(yMRDsteel));
+                     dEmuonSteel = 11.43*lengthMuon2; 
+
+
+                     while (Emuonf1>0 && OutSideCheck == 0) {
                         layerScint++;
-                        muonXevo5 = muonXevo2 + layerScint*xMRDscint + layerSteel*xMRDsteel; //Increases the x position for a new scintillator layer
-                        muonYevo5 = muonYevo2 + layerScint*yMRDscint + layerSteel*yMRDsteel; //Increases the y position for a new scintillator layer
-                        lengthMuon1 = 100*sqrt((.006)*(.006) + (xMRDscint)*(xMRDscint) + (yMRDscint)*(yMRDscint));
-                        dEmuonScint = 2.04*lengthMuon1;
+			if (layerAir<11) {layerAir++;}
+                        muonXevo5 = muonXevo2 + layerScint*xMRDscint + layerSteel*xMRDsteel + layerAir*xMRDair; //Increases the x position for a new scintillator layer
+                        muonYevo5 = muonYevo2 + layerScint*yMRDscint + layerSteel*yMRDsteel + layerAir*yMRDair; //Increases the y position for a new scintillator layer
                         Emuonf1 = Emuon - layerScint*dEmuonScint - layerSteel*dEmuonSteel;
 
                         if (layerScint>layerSteel && Emuonf1>0) {
                            layerSteel++;
-                           muonXevo4 = muonXevo2 + layerScint*xMRDscint + layerSteel*xMRDsteel; //Increases the x position for a new steel layer
-                           muonYevo4 = muonYevo2 + layerScint*yMRDscint + layerSteel*yMRDsteel; //Increases the y position for a new steel layer
-                           lengthMuon2 = 100*sqrt((.0508)*(.0508) + (xMRDsteel)*(xMRDsteel) + (yMRDsteel)*(yMRDsteel));
-                           dEmuonSteel = 11.43*lengthMuon2;
+                           muonXevo5 = muonXevo5 + xMRDsteel; //Increases the x position for a new steel layer
+                           muonYevo5 = muonYevo5 + yMRDsteel; //Increases the y position for a new steel layer
                            Emuonf1 = Emuon - layerScint*dEmuonScint - layerSteel*dEmuonSteel;
                         }
                         
 
-                        if (layerScint <= 13 && Emuonf1>=0 && (muonXevo5>2.8 || muonXevo5<0.2 || muonYevo5>2.4 || muonYevo5<0.2 || muonXevo4>2.8 || muonXevo4<0.2 || muonYevo4>2.4 || muonYevo4<0.2)) {
+                        if (layerScint <= 13 && Emuonf1>=0 && (muonXevo5>2.8 || muonXevo5<0.2 || muonYevo5>2.4 || muonYevo5<0.2)) {
                            CCNumberOutSide++;
-                           goto jmp1;
+			   OutSideCheck = 1;
+                          
                         }
 
 
-                        if (layerScint == 13 && Emuonf2>=0 && muonXevo6>=0.2 && muonXevo6<=2.8 && muonYevo6>=0.2 && muonYevo6<=2.4) {
+                        if (OutSideCheck == 0 && layerScint == 13 && Emuonf2>=0 && muonXevo5>=0.2 && muonXevo5<=2.8 && muonYevo5>=0.2 && muonYevo5<=2.4) {
                            CCNumberNotStopped++;
                            hCCGoodMuonMomentumNonStopped->Fill(m1*1000); //Fill the nonstopped histogram with good nonstopped muon events for muon momentum
                            hCCGoodMuonAngleNonStopped->Fill(t1); //Fill the nonstopped histogram with good nonstopped muon events for muon angle
@@ -276,15 +293,15 @@ void NewANMBergerSehgal::Loop()
                      }
 
 
-                     if (Emuonf1<=0) {
+                     if (layerScint>=3 && OutSideCheck == 0 && ((Emuonf1<=0 && layerScint>=3  && layerScint<=13 && layerSteel<13 && muonXevo5<=2.8 && muonXevo5>=0.2 && muonYevo5<=2.4 && muonYevo5>=0.2) || (Emuonf2>=0 && muonXevo5>=0.2 && muonXevo5<=2.8 && muonYevo5>=0.2 && muonYevo5<=2.4))) {
                         CCNumberGoodEvents++;
                         hCCGoodMuonMomentumTotal->Fill(m1*1000); //Fill the total good muon momentum histogram
                         hCCGoodMuonAngleTotal->Fill(t1); //Fill the total good muon angle histogram
                      }
 
 
-                     jmp1:
-                     if (Emuonf1<=0 && layerScint>=4  && layerScint<=13 && layerSteel<13 && muonXevo5<=2.8 && muonXevo5>=0.2 && muonYevo5<=2.4 && muonYevo5>=0.2) {
+                 
+                     if (Emuonf1<=0 && layerScint>=3 && OutSideCheck == 0 && layerScint<=13 && layerSteel<13 && muonXevo5<=2.8 && muonXevo5>=0.2 && muonYevo5<=2.4 && muonYevo5>=0.2) {
                         CCNumberStopped++;
                         if (layerSteel>=13) {
                            layerSteel = 13; //This sets the steel layer to 12 if the muon did not stop in the first 12 layers
@@ -339,8 +356,8 @@ void NewANMBergerSehgal::Loop()
 
                   Double_t t1 = v1.Theta(); //Get the polar angle of the muon momentum
                   Double_t t2 = v2.Theta(); //Get the polar angle of the pion momentum
-		  Double_t c1 = cos(t1);
-		  c1 = sqrt(c1*c1);
+	          Double_t c1 = cos(t1);
+	          c1 = sqrt(c1*c1);
                   t1 = (180/PI)*t1; //Put the polar angle in degrees
                   t2 = (180/PI)*t2; //Put the polar angle in degrees
 
@@ -358,6 +375,8 @@ void NewANMBergerSehgal::Loop()
                      hCCCohPionTotal->Fill(t2, m2*1000); //Fill the 2D Muon Total Information Histogram
                   }
 
+                  int OutSideCheck = 0;
+
                   double muontimeZ1 = (1.7 - v3.Z())/v1.Z(); //This is the time for the muon to reach the back of the SciBar Detector
                   double piontimeZ1 = (1.7 - v3.Z())/v2.Z(); //This is the time for the pion to reach the back of the SciBar Detector
                   double muonXevo1 = v3.X() + v1.X()*muontimeZ1; //This is the evolution of the x position of the muon to the back of SciBar
@@ -370,8 +389,8 @@ void NewANMBergerSehgal::Loop()
                   double pionXevo2 = v3.X() + v2.X()*piontimeZ2; //This is the evolution of the x position of the pion to the MRD
                   double muonYevo2 = v3.Y() + v1.Y()*muontimeZ2; //This is the evolution of the y position of the muon to the MRD
                   double pionYevo2 = v3.Y() + v2.Y()*piontimeZ2; //This is the evolution of the y position of the pion to the MRD
-                  double muontimeZ3 = (1.7 + 0.55 + 1.375 - v3.Z())/v1.Z(); //This is the time for the muon to reach the front of the back of the MRD  
-                  double piontimeZ3 = (1.7 + 0.55 + 1.375 - v3.Z())/v2.Z(); //This is the time for the pion to reach the front of the back of the MRD
+                  double muontimeZ3 = (1.7 + 0.55 + 1.402 - v3.Z())/v1.Z(); //This is the time for the muon to reach the front of the back of the MRD  
+                  double piontimeZ3 = (1.7 + 0.55 + 1.402 - v3.Z())/v2.Z(); //This is the time for the pion to reach the front of the back of the MRD
                   double muonXevo3 = v3.X() + v1.X()*muontimeZ3; //This is the evolution of the x position of the muon to the back of the MRD
                   double pionXevo3 = v3.X() + v2.X()*piontimeZ3; //This is the evolution of the x position of the pion to the back of the MRD
                   double muonYevo3 = v3.Y() + v1.Y()*muontimeZ3; //This is the evolution of the y position of the muon to the back of the MRD
@@ -380,13 +399,15 @@ void NewANMBergerSehgal::Loop()
                   double yMRDscint = (.006/v1.Z())*v1.Y(); //This is the distance traveled through a scintillator layer added to the y-direction for the muon
                   double xMRDsteel = (.0508/v1.Z())*v1.X(); //This is the distance traveled through a steel layer added to the x-direction for the muon
                   double yMRDsteel = (.0508/v1.Z())*v1.Y(); //This is the distance traveled through a steel layer added to the y-direction for the muon
+		  double xMRDair = (.06385/v1.Z())*v1.X();
+		  double yMRDair = (.06385/v1.Z())*v1.Y();
                   double lengthMuon = 100*sqrt(((1.7 - v3.Z())*(1.7 - v3.Z())) + ((muonXevo1 - v3.X())*(muonXevo1 - v3.X())) + ((muonYevo1 - v3.Y())*(muonYevo1 - v3.Y()))); //This is the length the muon traveled through the SciBar detector from beginning to end
                   double lengthPion = 100*sqrt(((1.7 - v3.Z())*(1.7 - v3.Z())) + ((pionXevo1 - v3.X())*(pionXevo1 - v3.X())) + ((pionYevo1 - v3.Y())*(pionYevo1 - v3.Y()))); //This is the length the muon traveled through the SciBar detector from beginning to end
                   double dEmuon = 2.04*lengthMuon; //This is the energy the muon lost traveling through the SciBar Detector
                   double dEpion = 2.04*lengthPion; //This is the energy the pion lost traveling through the SciBar Detector
                   double Emuon = StdHepP4[MuonCallNumber][3]*1000 - dEmuon; //Energy the muon has after leaving SciBar
                   double Epion = StdHepP4[PionCallNumber][3]*1000 - dEpion; //Energy the pion has after leaving SciBar
-                  Emuon = Emuon - (91/c1);
+	          Emuon = Emuon - (91*c1);
 
                   if (fString == "-16" && muonXevo2>0.2 && muonXevo2<2.8 && muonYevo2>0.2 && muonYevo2<2.4 && Emuon>0) {
                      NumberMadeFrontMRD++;
@@ -395,44 +416,51 @@ void NewANMBergerSehgal::Loop()
                      double dEmuonSteel = 0; //This is the variable to be used for steel layer changes in energy
                      int layerScint = 0; //The layer of scintillator the muon made it to
                      int layerSteel = 0; //The layer of steel the muon made it to
+		     int layerAir = 0;
                      double lengthMuon1 = 0;
                      double lengthMuon2 = 0;
                      double muonXevo4 = muonXevo2;
                      double muonYevo4 = muonYevo2;
                      double muonXevo5 = muonXevo2;
                      double muonYevo5 = muonYevo2;
-                     double timeMuonZ4 = (1.7 + 0.55 + (26*.006) + (25*.0508) - v3.Z())/v1.Z();
+                     double timeMuonZ4 = (1.7 + 0.55 + 1.402 - v3.Z())/v1.Z();
                      double muonXevo6 = v3.X() + timeMuonZ4*v1.X();
                      double muonYevo6 = v3.Y() + timeMuonZ4*v1.Y();
-                     double Emuonf2 = Emuon - 2.04*26*100*sqrt((.006*.006) + (xMRDscint*xMRDscint) + (yMRDscint*yMRDscint)) - 11.43*25*100*sqrt((.0508*.0508) + (xMRDsteel*xMRDsteel) + (yMRDsteel*yMRDsteel));
+                     double Emuonf2 = Emuon - 2.04*13*100*sqrt((.006*.006) + (xMRDscint*xMRDscint) + (yMRDscint*yMRDscint)) - 11.43*12*100*sqrt((.0508*.0508) + (xMRDsteel*xMRDsteel) + (yMRDsteel*yMRDsteel));
 
-                     while (Emuonf1>0) {
+                     layerScint++;
+		     layerSteel++;
+
+                     lengthMuon1 = 100*sqrt((.006)*(.006) + (xMRDscint)*(xMRDscint) + (yMRDscint)*(yMRDscint));
+                     dEmuonScint = 2.04*lengthMuon1;
+                     lengthMuon2 = 100*sqrt((.0508)*(.0508) + (xMRDsteel)*(xMRDsteel) + (yMRDsteel)*(yMRDsteel));
+                     dEmuonSteel = 11.43*lengthMuon2; 
+
+
+                     while (Emuonf1>0 && OutSideCheck == 0) {
                         layerScint++;
-                        muonXevo5 = muonXevo2 + layerScint*xMRDscint + layerSteel*xMRDsteel; //Increases the x position for a new scintillator layer
-                        muonYevo5 = muonYevo2 + layerScint*yMRDscint + layerSteel*yMRDsteel; //Increases the y position for a new scintillator layer
-                        lengthMuon1 = 100*sqrt((.006)*(.006) + (xMRDscint)*(xMRDscint) + (yMRDscint)*(yMRDscint));
-                        dEmuonScint = 2.04*lengthMuon1;
+			if (layerAir<11) {layerAir++;}
+                        muonXevo5 = muonXevo2 + layerScint*xMRDscint + layerSteel*xMRDsteel + layerAir*xMRDair; //Increases the x position for a new scintillator layer
+                        muonYevo5 = muonYevo2 + layerScint*yMRDscint + layerSteel*yMRDsteel + layerAir*yMRDair; //Increases the y position for a new scintillator layer
                         Emuonf1 = Emuon - layerScint*dEmuonScint - layerSteel*dEmuonSteel;
 
                         if (layerScint>layerSteel && Emuonf1>0) {
                            layerSteel++;
-                           muonXevo4 = muonXevo2 + layerScint*xMRDscint + layerSteel*xMRDsteel; //Increases the x position for a new steel layer
-                           muonYevo4 = muonYevo2 + layerScint*yMRDscint + layerSteel*yMRDsteel; //Increases the y position for a new steel layer
-                           lengthMuon2 = 100*sqrt((.0508)*(.0508) + (xMRDsteel)*(xMRDsteel) + (yMRDsteel)*(yMRDsteel));
-                           dEmuonSteel = 11.43*lengthMuon2; 
+                           muonXevo5 = muonXevo5 + xMRDsteel; //Increases the x position for a new steel layer
+                           muonYevo5 = muonYevo5 + yMRDsteel; //Increases the y position for a new steel layer
                            Emuonf1 = Emuon - layerScint*dEmuonScint - layerSteel*dEmuonSteel;
                         }
 
 
-                        if (layerScint <= 13 && Emuonf1>=0 && (muonXevo5>2.8 || muonXevo5<0.2 || muonYevo5>2.4 || muonYevo5<0.2 || muonXevo4>2.8 || muonXevo4<0.2 || muonYevo4>2.4 || muonYevo4<0.2)) {
+                        if (layerScint <= 13 && Emuonf1>=0 && (muonXevo5>2.8 || muonXevo5<0.2 || muonYevo5>2.4 || muonYevo5<0.2)) {
                            NumberOutSide++;
                            hGoodMuonMomentumOutSide->Fill(m1*1000); //Fill the good muon momentum histogram for the muons that went out the side of the MRD
                            hGoodMuonAngleOutSide->Fill(t1); //Fill the good muon angle histogram for the muons that went out the side of the MRD
-                           goto jmp;
+                           OutSideCheck = 1;
                         }
 
 
-                        if (fString == "-16" && layerScint == 13 && Emuonf2>=0 && muonXevo6>=0.2 && muonXevo6<=2.8 && muonYevo6>=0.2 && muonYevo6<=2.4) {
+                        if (OutSideCheck == 0 && fString == "-16" && layerScint == 13 && Emuonf2>=0 && muonXevo5>=0.2 && muonXevo5<=2.8 && muonYevo5>=0.2 && muonYevo5<=2.4) {
                            NumberNotStopped++;
                            //hCCCohMuonGood->Fill(t1, m1*1000); //Fill the good muon information 2d histogram
                            if (NumberPionsPresent >= 1 && StdHepP4[PionCallNumber][2]>0) {
@@ -461,7 +489,7 @@ void NewANMBergerSehgal::Loop()
                      }
                      
 
-                     if (fString == "-16" && Emuonf1<=0 && layerScint>=4) {
+                     if (OutSideCheck == 0 && fString == "-16" && layerScint>=3 && ((Emuonf1<=0 && layerScint>=3  && layerScint<=13 && layerSteel<13 && muonXevo5<=2.8 && muonXevo5>=0.2 && muonYevo5<=2.4 && muonYevo5>=0.2) || (Emuonf2>=0 && muonXevo5>=0.2 && muonXevo5<=2.8 && muonYevo5>=0.2 && muonYevo5<=2.4))) {
                         NumberGoodEvents++;
                         hGoodMuonMomentumTotal->Fill(m1*1000); //Fill the total good muon momentum histogram
                         hGoodMuonAngleTotal->Fill(t1); //Fill the total good muon angle histogram
@@ -487,9 +515,8 @@ void NewANMBergerSehgal::Loop()
                      }
 
 
-                     jmp:
 
-                     if (fString == "-16" && layerScint>=4 && Emuonf1<=0 && layerScint<=13 && layerSteel<13 && muonXevo5<=2.8 && muonXevo5>=0.2 && muonYevo5<=2.4 && muonYevo5>=0.2) {
+                     if (OutSideCheck == 0 && fString == "-16" && layerScint>=3 && Emuonf1<=0 && layerScint<=13 && layerSteel<13 && muonXevo5<=2.8 && muonXevo5>=0.2 && muonYevo5<=2.4 && muonYevo5>=0.2) {
                         NumberStopped++;
                         if (layerSteel>=13) {
                            layerSteel = 13; //This sets the steel layer to 12 if the muon did not stop in the first 12 layers
