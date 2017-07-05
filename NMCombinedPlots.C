@@ -10,11 +10,11 @@
 
 TFile *f1 = new TFile("./ROOTFILES/totalmuoninfoBS.root"); //Load Total Muon Info File
 
-TH1D *hTotalPNewBS = (TH1D*)f1->Get("TMuonMom_1"); //Make a clone of the h5 histogram from the NeutrinoMode.C file for total muon momentum
-TH1D *hTotalGoodPNewBS = (TH1D*)f1->Get("TGMuonMom_1"); //Make a clone of the h11 histogram from the NeutrinoMode.C file for total good muon momentum
+TH1D *hTotalPNewBS = (TH1D*)f1->Get("CCTMuonMom_1"); //Make a clone of the h5 histogram from the NeutrinoMode.C file for total muon momentum
+TH1D *hTotalGoodPNewBS = (TH1D*)f1->Get("CCTGMuonMom_1"); //Make a clone of the h11 histogram from the NeutrinoMode.C file for total good muon momentum
 
-TH1D *hTotalCosNewBS = (TH1D*)f1->Get("TMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
-TH1D *hTotalGoodCosNewBS = (TH1D*)f1->Get("TGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
+TH1D *hTotalCosNewBS = (TH1D*)f1->Get("CCTMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
+TH1D *hTotalGoodCosNewBS = (TH1D*)f1->Get("CCTGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
 
 TH1D *hGoodStoppedPNewBS = (TH1D*)f1->Get("GMuonMomS_1"); //Make a clone of the h6 histogram from the BergerSegal.C file for the good stopped muon momentum
 TH1D *hGoodStoppedCosNewBS = (TH1D*)f1->Get("GMuonCosS_1"); //Make a clone of the h8 histogram from the BergerSegal.C file for the good stopped muon angle
@@ -262,11 +262,11 @@ Ratio2DBSCC->Divide(hGoodRatioBSCC, hTotalRatioBSCC);
 
 TFile *f2 = new TFile("./ROOTFILES/totalmuoninfoRS.root"); //Load Total Muon Info File
 
-TH1D *hTotalPNewRS = (TH1D*)f2->Get("TMuonMom_1"); //Make a clone of the h5 histogram from the NeutrinoMode.C file for total muon momentum
-TH1D *hTotalGoodPNewRS = (TH1D*)f2->Get("TGMuonMom_1"); //Make a clone of the h11 histogram from the NeutrinoMode.C file for total good muon momentum
+TH1D *hTotalPNewRS = (TH1D*)f2->Get("CCTMuonMom_1"); //Make a clone of the h5 histogram from the NeutrinoMode.C file for total muon momentum
+TH1D *hTotalGoodPNewRS = (TH1D*)f2->Get("CCTGMuonMom_1"); //Make a clone of the h11 histogram from the NeutrinoMode.C file for total good muon momentum
 
-TH1D *hTotalCosNewRS = (TH1D*)f2->Get("TMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
-TH1D *hTotalGoodCosNewRS = (TH1D*)f2->Get("TGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
+TH1D *hTotalCosNewRS = (TH1D*)f2->Get("CCTMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
+TH1D *hTotalGoodCosNewRS = (TH1D*)f2->Get("CCTGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
 
 TH1D *hGoodStoppedPNewRS = (TH1D*)f2->Get("GMuonMomS_1"); //Make a clone of the h6 histogram from the BergerSegal.C file for the good stopped muon momentum
 TH1D *hGoodStoppedCosNewRS = (TH1D*)f2->Get("GMuonCosS_1"); //Make a clone of the h8 histogram from the BergerSegal.C file for the good stopped muon angle
@@ -505,11 +505,11 @@ Ratio2DRSCC->Divide(hGoodRatioRSCC, hTotalRatioRSCC);
 
 TFile *f3 = new TFile("./ROOTFILES/totalmuoninfoOBS.root"); //Load Total Muon Info File
 
-TH1D *hTotalPNewOBS = (TH1D*)f3->Get("TMuonMom_1"); //Make a clone of the h5 histogram from the NeutrinoMode.C file for total muon momentum
-TH1D *hTotalGoodPNewOBS = (TH1D*)f3->Get("TGMuonMom_1"); //Make a clone of the h11 histogram from the NeutrinoMode.C file for total good muon momentum
+TH1D *hTotalPNewOBS = (TH1D*)f3->Get("CCTMuonMom_1"); //Make a clone of the h5 histogram from the NeutrinoMode.C file for total muon momentum
+TH1D *hTotalGoodPNewOBS = (TH1D*)f3->Get("CCTGMuonMom_1"); //Make a clone of the h11 histogram from the NeutrinoMode.C file for total good muon momentum
 
-TH1D *hTotalCosNewOBS = (TH1D*)f3->Get("TMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
-TH1D *hTotalGoodCosNewOBS = (TH1D*)f3->Get("TGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
+TH1D *hTotalCosNewOBS = (TH1D*)f3->Get("CCTMuonCos_1"); //Make a clone of the h7 histogram from the NeutrinoMode.C file for total muon angle
+TH1D *hTotalGoodCosNewOBS = (TH1D*)f3->Get("CCTGMuonCos_1"); //Make a clone of the h12 histogram from the NeutrinoMode.C file for total good muon angle
 
 TH1D *hGoodStoppedPNewOBS = (TH1D*)f3->Get("GMuonMomS_1"); //Make a clone of the h6 histogram from the BergerSegal.C file for the good stopped muon momentum
 TH1D *hGoodStoppedCosNewOBS = (TH1D*)f3->Get("GMuonCosS_1"); //Make a clone of the h8 histogram from the BergerSegal.C file for the good stopped muon angle
@@ -1894,13 +1894,14 @@ for (int i=1; i<41; i++) {
    }
 std::cout<<"|--------------------|"<<std::endl;
 
+
 std::cout<<" "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
 std::cout<<"  New Berger-Sehgal  "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
 for (int i=1; i<41; i++) {
    for (int j=1; j<41; j++) {
-      Int_t bin = Ratio2DRS->GetBin(j,i,1);
+      Int_t bin = Ratio2DBS->GetBin(j,i,1);
       Double_t binContent = Ratio2DBS->GetBinContent(bin);
       //std::cout<<j<<", "<<i<<", "<<bin<<", "<<binContent<<std::endl;
       //std::cout<<j<<std::endl;
@@ -1920,8 +1921,68 @@ std::cout<<"  Old Rein-Sehgal  "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
 for (int i=1; i<41; i++) {
    for (int j=1; j<41; j++) {
-      Int_t bin = Ratio2DRS->GetBin(j,i,1);
+      Int_t bin = Ratio2DOBS->GetBin(j,i,1);
       Double_t binContent = Ratio2DOBS->GetBinContent(bin);
+      //std::cout<<j<<", "<<i<<", "<<bin<<", "<<binContent<<std::endl;
+      //std::cout<<j<<std::endl;
+      //std::cout<<i<<std::endl;
+      //std::cout<<bin<<std::endl;
+      std::cout<<binContent<<std::endl;
+      }
+
+
+   }
+std::cout<<"|--------------------|"<<std::endl;
+
+
+std::cout<<" "<<std::endl;
+std::cout<<"|--------------------|"<<std::endl;
+std::cout<<"  New Rein-Sehgal CC "<<std::endl;
+std::cout<<"|--------------------|"<<std::endl;
+for (int i=1; i<41; i++) {
+   for (int j=1; j<41; j++) {
+      Int_t bin = Ratio2DRSCC->GetBin(j,i,1);
+      Double_t binContent = Ratio2DRSCC->GetBinContent(bin);
+      //std::cout<<j<<", "<<i<<", "<<bin<<", "<<binContent<<std::endl;
+      //std::cout<<j<<std::endl;
+      //std::cout<<i<<std::endl;
+      //std::cout<<bin<<std::endl;
+      std::cout<<binContent<<std::endl;
+      }
+
+
+   }
+std::cout<<"|--------------------|"<<std::endl;
+
+
+std::cout<<" "<<std::endl;
+std::cout<<"|--------------------|"<<std::endl;
+std::cout<<"  New Berger-Sehgal CC "<<std::endl;
+std::cout<<"|--------------------|"<<std::endl;
+for (int i=1; i<41; i++) {
+   for (int j=1; j<41; j++) {
+      Int_t bin = Ratio2DBSCC->GetBin(j,i,1);
+      Double_t binContent = Ratio2DBSCC->GetBinContent(bin);
+      //std::cout<<j<<", "<<i<<", "<<bin<<", "<<binContent<<std::endl;
+      //std::cout<<j<<std::endl;
+      //std::cout<<i<<std::endl;
+      //std::cout<<bin<<std::endl;
+      std::cout<<binContent<<std::endl;
+      }
+
+
+   }
+std::cout<<"|--------------------|"<<std::endl;
+
+
+std::cout<<" "<<std::endl;
+std::cout<<"|--------------------|"<<std::endl;
+std::cout<<"  Old Rein-Sehgal CC "<<std::endl;
+std::cout<<"|--------------------|"<<std::endl;
+for (int i=1; i<41; i++) {
+   for (int j=1; j<41; j++) {
+      Int_t bin = Ratio2DOBSCC->GetBin(j,i,1);
+      Double_t binContent = Ratio2DOBSCC->GetBinContent(bin);
       //std::cout<<j<<", "<<i<<", "<<bin<<", "<<binContent<<std::endl;
       //std::cout<<j<<std::endl;
       //std::cout<<i<<std::endl;
