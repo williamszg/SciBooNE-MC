@@ -1879,8 +1879,8 @@ leg24->Draw();
 std::cout<<"|--------------------|"<<std::endl;
 std::cout<<"  New Rein-Sehgal  "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
-for (int i=1; i<41; i++) {
-   for (int j=1; j<41; j++) {
+for (int i=1; i<21; i++) {
+   for (int j=1; j<37; j++) {
       Int_t bin = Ratio2DRS->GetBin(j,i,1);
       Double_t binContent = Ratio2DRS->GetBinContent(bin);
       //std::cout<<j<<", "<<i<<", "<<bin<<", "<<binContent<<std::endl;
@@ -1899,8 +1899,8 @@ std::cout<<" "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
 std::cout<<"  New Berger-Sehgal  "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
-for (int i=1; i<41; i++) {
-   for (int j=1; j<41; j++) {
+for (int i=1; i<21; i++) {
+   for (int j=1; j<37; j++) {
       Int_t bin = Ratio2DBS->GetBin(j,i,1);
       Double_t binContent = Ratio2DBS->GetBinContent(bin);
       //std::cout<<j<<", "<<i<<", "<<bin<<", "<<binContent<<std::endl;
@@ -1919,8 +1919,8 @@ std::cout<<" "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
 std::cout<<"  Old Rein-Sehgal  "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
-for (int i=1; i<41; i++) {
-   for (int j=1; j<41; j++) {
+for (int i=1; i<21; i++) {
+   for (int j=1; j<37; j++) {
       Int_t bin = Ratio2DOBS->GetBin(j,i,1);
       Double_t binContent = Ratio2DOBS->GetBinContent(bin);
       //std::cout<<j<<", "<<i<<", "<<bin<<", "<<binContent<<std::endl;
@@ -1939,8 +1939,8 @@ std::cout<<" "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
 std::cout<<"  New Rein-Sehgal CC "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
-for (int i=1; i<41; i++) {
-   for (int j=1; j<41; j++) {
+for (int i=1; i<21; i++) {
+   for (int j=1; j<37; j++) {
       Int_t bin = Ratio2DRSCC->GetBin(j,i,1);
       Double_t binContent = Ratio2DRSCC->GetBinContent(bin);
       //std::cout<<j<<", "<<i<<", "<<bin<<", "<<binContent<<std::endl;
@@ -1959,8 +1959,8 @@ std::cout<<" "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
 std::cout<<"  New Berger-Sehgal CC "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
-for (int i=1; i<41; i++) {
-   for (int j=1; j<41; j++) {
+for (int i=1; i<21; i++) {
+   for (int j=1; j<37; j++) {
       Int_t bin = Ratio2DBSCC->GetBin(j,i,1);
       Double_t binContent = Ratio2DBSCC->GetBinContent(bin);
       //std::cout<<j<<", "<<i<<", "<<bin<<", "<<binContent<<std::endl;
@@ -1979,8 +1979,8 @@ std::cout<<" "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
 std::cout<<"  Old Rein-Sehgal CC "<<std::endl;
 std::cout<<"|--------------------|"<<std::endl;
-for (int i=1; i<41; i++) {
-   for (int j=1; j<41; j++) {
+for (int i=1; i<21; i++) {
+   for (int j=1; j<37; j++) {
       Int_t bin = Ratio2DOBSCC->GetBin(j,i,1);
       Double_t binContent = Ratio2DOBSCC->GetBinContent(bin);
       //std::cout<<j<<", "<<i<<", "<<bin<<", "<<binContent<<std::endl;
