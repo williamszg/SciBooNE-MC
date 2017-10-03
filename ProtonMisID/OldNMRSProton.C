@@ -83,7 +83,24 @@ void OldNMRSProton::Loop()
 	 {
 
             nProtons++;
-	    ProtonRegister = npart;
+
+	    if (nProtons == 1)
+            {
+
+	       ProtonRegister = npart;
+
+	    } //<--- Close Initial Register set if statement
+
+
+	    if (nProtons >= 2)
+	    {
+   
+               double Check = StdHepP4[ProtonRegister][2] - StdHepP4[npart][2];
+	       //std::cout<<"Check = "<<Check<<std::endl;
+	       if (Check <= 0) {ProtonRegister = npart;}
+
+	    } //<--- Close finding most boosted proton of event if statement
+
 
 	 } //<--- Close if statement
 
@@ -91,14 +108,8 @@ void OldNMRSProton::Loop()
       } //<--- Close loop over particles in event
 
 
-      if (nProtons > 0) 
-      { 
-
-         nEventsWithProton++; 
-	 nProtons = 0;
-
-      } //<--- Close amount of events with proton loop
-
+      if (nProtons > 0) {nEventsWithProton++;}
+      nProtons = 0;
 
    } //<--- Close jentry for loop
 
