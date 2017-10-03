@@ -11,25 +11,33 @@
 //-----------------------------|
 //---       Histograms      ---|
 //-----------------------------|
-
 TH1D *h = new TH1D("h", "", 100, 0, 100);
-
 //-----------------------------|
 
 
 //-----------------------------|
 //---  Constant Parameters  ---|
 //-----------------------------|
-
 int protonpdg = 2212;
-
 //-----------------------------|
+
+
+//=============================|
+//=== Bethe-Bloch Functions ===|
+//=============================|
+double BetheBlochSteel(double p)
+{
+   
+   double f = p;
+   return f;
+
+} //<--- Close Bethe-Bloch on Steel function
+//=============================|
 
 
 //===========================================|
 //              Event Selection              |
 //===========================================|
-
 void OldNMRSProton::Loop()
 {
 
@@ -40,12 +48,10 @@ void OldNMRSProton::Loop()
    //----------------------------------------|
    //---     Event Counters/Register      ---|
    //----------------------------------------|
-
    int nEvents = 0;
    int nEventsWithProton = 0;
    int nProtons = 0;
    int ProtonRegister = 99;
-
    //----------------------------------------|
 
    for (Long64_t jentry=0; jentry<nentries; jentry++)
@@ -98,6 +104,6 @@ void OldNMRSProton::Loop()
 
 
    std::cout<<"Number of Events with at least a single proton in final state = "<<nEventsWithProton<<std::endl;
-} //<--- Close void loop
 
+} //<--- Close void loop
 //===========================================|
