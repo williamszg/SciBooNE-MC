@@ -11,7 +11,8 @@
 //-----------------------------|
 //---       Histograms      ---|
 //-----------------------------|
-TH1D *h = new TH1D("h", "", 100, 0, 100);
+TH1D *hTotalProtonEnergy = new TH1D("hTotalProtonEnergy", "The Energies of all of the Proton Events", 50, 0, 2500);
+TH1D *hTotalProtonAngle = new TH1D("hTotalProtonAngle", "The Angles of all of the Proton Events", 50, 0, 1.1*PI);
 //-----------------------------|
 
 
@@ -108,7 +109,17 @@ void OldNMRSProton::Loop()
       } //<--- Close loop over particles in event
 
 
-      if (nProtons > 0) {nEventsWithProton++;}
+      if (nProtons > 0) 
+      {
+
+         nEventsWithProton++;
+	 TVector3 momentum(StdHepP4[ProtonRegister][0],StdHepP4[ProtonRegister][1],StdHepP4[ProtonRegister][2]);
+         hTotalProtonEnergy->Fill(StdHepP4[ProtonRegister][3]*1000);
+	 hTotalProtonAngle->Fill(momentum.Theta());
+
+      } //<--- Close if statement for events with protons
+
+
       nProtons = 0;
 
    } //<--- Close jentry for loop
