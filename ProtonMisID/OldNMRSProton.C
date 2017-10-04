@@ -12,20 +12,37 @@
 //---       Histograms      ---|
 //-----------------------------|
 TH1D *hTotalProtonEnergy = new TH1D("hTotalProtonEnergy", "The Energies of all of the Proton Events", 50, 0, 2500);
-TH1D *hTotalProtonAngle = new TH1D("hTotalProtonAngle", "The Angles of all of the Proton Events", 50, 0, 1.1*PI);
+TH1D *hTotalProtonAngle = new TH1D("hTotalProtonAngle", "The Angles of all of the Proton Events", 50, 0, PI);
 //-----------------------------|
 
 
 //-----------------------------|
 //---  Constant Parameters  ---|
 //-----------------------------|
-int protonpdg = 2212;
+int protonpdg = 2212; //Proton particle data group id number
+double m_p = 938.272; //Proton mass in MeV
+double m_e = 0.511; //Electron mass in MeV
+int Z_i = 26; //Atomic number for Iron
+double A_i = 55.845; //Atomic mass for Iron
+int Z_c = 12; //Atomic number for Carbon
+double A_c = 12.011; //Atomic mass for Carbon
+int Z_s = 14; //Atomic number for Silicon
+double A_s = 28.085; //Atomic mass for Silicon
 //-----------------------------|
 
 
 //=============================|
 //=== Bethe-Bloch Functions ===|
 //=============================|
+double BetheBlochCarbon(double p)
+{
+   
+   double f = p;
+   return f;
+
+} //<--- Close Bethe-Bloch on Carbon function
+
+
 double BetheBlochSteel(double p)
 {
    
@@ -33,6 +50,28 @@ double BetheBlochSteel(double p)
    return f;
 
 } //<--- Close Bethe-Bloch on Steel function
+//=============================|
+
+
+//=============================|
+//===     MPV Functions     ===|
+//=============================|
+double MPVCarbon(double p)
+{
+   
+   double f = p;
+   return f;
+
+} //<--- Close MPV on Carbon function
+
+
+double MPVSteel(double p)
+{
+   
+   double f = p;
+   return f;
+
+} //<--- Close MPV on Steel function
 //=============================|
 
 
@@ -113,9 +152,19 @@ void OldNMRSProton::Loop()
       {
 
          nEventsWithProton++;
-	 TVector3 momentum(StdHepP4[ProtonRegister][0],StdHepP4[ProtonRegister][1],StdHepP4[ProtonRegister][2]);
+
+	 TVector3 momentum(StdHepP4[ProtonRegister][0],StdHepP4[ProtonRegister][1],StdHepP4[ProtonRegister][2]); //Initial Proton Momentum
+	 TVector3 direction(momentum.X()/momentum.Mag(),momentum.Y()/momentum.Mag(),momentum.Z()/momentum.Mag()); //Unit vector of Proton Momentum (direction Proton is going)
+	 TVector3 position(Xpos,Ypos,Zpos); //Initial Proton Position
+
          hTotalProtonEnergy->Fill(StdHepP4[ProtonRegister][3]*1000);
 	 hTotalProtonAngle->Fill(momentum.Theta());
+         
+	 double ProtonEnergy = StdHepP4[ProtonRegister][3]; //Initial Proton Energy
+	 Double_t m_i = momentum.Mag(); //Initial Proton Momentum
+
+	 double ProtonTimeZ1 = (1.7 - position.Z())/momentum.Z();
+         
 
       } //<--- Close if statement for events with protons
 
