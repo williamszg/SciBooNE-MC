@@ -28,6 +28,26 @@ int Z_c = 12; //Atomic number for Carbon
 double A_c = 12.011; //Atomic mass for Carbon
 int Z_s = 14; //Atomic number for Silicon
 double A_s = 28.085; //Atomic mass for Silicon
+
+double SBx_0 = 0; //SciBar x initial in meters
+double SBx_f = 3.0; //SciBar x final in meters
+double SBy_0 = 0; //SciBar y initial in meters
+double SBy_f = 3.0; //SciBar y final in meters
+double SBz_0 = 0; //SciBar z initial in meters
+double SBz_f = 1.7; //SciBar z final in meters
+
+double SteelThickness = .0508; //Steel Layer Thickness of MRD in meters
+double ScintThickness = .006; //Scint Layer Thicnkess of MRD in meters
+double DownstreamMRDFace = 0.55; //Location of MRD Downstream from SciBar in meters
+
+double MRDx_0 = 0.2; //MRD x initial in meters
+double MRDx_f = 2.8; //MRD x final in meters
+double MRDy_0 = 0.2; //MRD y initial in meters
+double MRDy_f = 2.4; //MRD y final in meters
+double MRDz_0 = 0; //MRD z initial in meters
+double MRDz_f = 1.402; //MRD z final in meters
+
+double dEnergyLossECdTheta = 91; //Energy loss to EC in 91 MeV/cos(theta)
 //-----------------------------|
 
 
@@ -92,6 +112,9 @@ void OldNMRSProton::Loop()
    int nEventsWithProton = 0;
    int nProtons = 0;
    int ProtonRegister = 99;
+
+   int nMRDFace = 0;
+   int nMRDBack = 0;
    //----------------------------------------|
 
    for (Long64_t jentry=0; jentry<nentries; jentry++)
@@ -163,8 +186,44 @@ void OldNMRSProton::Loop()
 	 double ProtonEnergy = StdHepP4[ProtonRegister][3]; //Initial Proton Energy
 	 Double_t m_i = momentum.Mag(); //Initial Proton Momentum
 
-	 double ProtonTimeZ1 = (1.7 - position.Z())/momentum.Z();
-         
+	 double ProtonTimeZSBEnd = (SBz_f - position.Z())/momentum.Z();
+	 double ProtonTimeZMRDFace = (SBz_f + DownstreamMRDFace - position.Z())/momentum.Z();
+	 double ProtonTimeZMRDBack = (SBz_f + DownstreamMRDFace + MRDz_f - position.Z())/momentum.Z();
+
+         double DeltaXMRDFace = momentum.X()*ProtonTimeZMRDFace;
+	 double DeltaYMRDFace = momentum.Y()*ProtonTimeZMRDFace;
+
+	 double DeltaXMRDBack = momentum.X()*ProtonTimeZMRDBack;
+	 double DeltaYMRDBack = momentum.Y()*ProtonTimeZMRDBack;
+
+	 double XposMRDFace = DeltaXMRDFace + position.X();
+	 double YposMRDFace = DeltaYMRDFace + position.Y();
+	 
+	 double XposMRDBack = DeltaXMRDBack + position.X();
+	 double YposMRDBack = DeltaYMRDBack + position.Y();
+
+	 if ((XposMRDFace >= MRDx_0) && (XposMRDFace <= MRDx_f) && (YposMRDFace >= MRDy_0) && (YposMRDFace <= MRDy_f)) 
+	 {
+		 
+            nMRDFace++;
+
+            double DeltaXSBEnd = momentum.X()*ProtonTimeZSBEnd;
+	    double DeltaYSBEnd = momentum.Y()*ProtonTimeZSBEnd;
+
+	    double XposSBEnd = DeltaXSBEnd + position.X();
+	    double YposSBEnd = DeltaYSBEnd + position.Y();
+
+	    double LengthThroughSciBar = sqrt((DeltaXSBEnd*DeltaXSBEnd) + (DeltaYSBEnd*DeltaYSBEnd) + ((SBz_f - position.Z())*(SBz_f - position.Z())));
+	 
+	 } //<--- Close if statement for making it to the front face of the MRD
+
+
+	 if ((XposMRDBack >= MRDx_0) && (XposMRDBack <= MRDx_f) && (YposMRDBack >= MRDy_0) && (YposMRDBack <= MRDy_f)) 
+	 {
+		 
+            nMRDBack++;
+	 
+	 } //<--- Close if statement for making it out the back of the MRD
 
       } //<--- Close if statement for events with protons
 
@@ -175,6 +234,8 @@ void OldNMRSProton::Loop()
 
 
    std::cout<<"Number of Events with at least a single proton in final state = "<<nEventsWithProton<<std::endl;
+   std::cout<<"Number of Protons that are pointed at the MRD = "<<nMRDFace<<std::endl;
+   std::cout<<"Number of Protons that could go out the back of the MRD = "<<nMRDBack<<std::endl;
 
 } //<--- Close void loop
 //===========================================|
