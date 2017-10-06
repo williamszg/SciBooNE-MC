@@ -12,13 +12,16 @@
 //---       Histograms      ---|
 //-----------------------------|
 TH1D *hTotalProtonEnergy = new TH1D("hTotalProtonEnergy", "The Energies of all of the Proton Events", 50, 0, 2500);
-TH1D *hTotalProtonAngle = new TH1D("hTotalProtonAngle", "The Angles of all of the Proton Events", 50, 0, PI);
+TH1D *hTotalProtonAngle = new TH1D("hTotalProtonAngle", "The Angles of all of the Proton Events", 60, 0, 180);
 
 TH1D *hProtonEnergyAfterSciBar = new TH1D("hProtonEnergyAfterSciBar", "The Energies of the Protons After Traversing SciBar", 50, 0, 2500);
-TH1D *hProtonAngleAfterSciBar = new TH1D("hProtonAngleAfterSciBar", "The Angles of the Protons After Traversing SciBar", 50, 0, PI);
+TH1D *hProtonAngleAfterSciBar = new TH1D("hProtonAngleAfterSciBar", "The Angles of the Protons After Traversing SciBar", 60, 0, 180);
 
 TH1D *hProtonEnergyAfterEC = new TH1D("hProtonEnergyAfterEC", "The Energies of the Protons After Traversing the EC", 50, 0, 2500);
-TH1D *hProtonAngleAfterEC = new TH1D("hProtonAngleAfterEC", "The Angles of the Protons After Traversing the EC", 50, 0, PI);
+TH1D *hProtonAngleAfterEC = new TH1D("hProtonAngleAfterEC", "The Angles of the Protons After Traversing the EC", 60, 0, 180);
+
+TH1D *hEnergyCheck = new TH1D("hEnergyCheck", "Checking the Energy After 1 Scint Layer and 0 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck = new TH1D("hAngleCheck", "Checking the Angle After 1 Scint Layer and 0 Steel Layers of the MRD", 60, 0, 180);
 //-----------------------------|
 
 
@@ -26,6 +29,7 @@ TH1D *hProtonAngleAfterEC = new TH1D("hProtonAngleAfterEC", "The Angles of the P
 //---  Constant Parameters  ---|
 //-----------------------------|
 int protonpdg = 2212; //Proton particle data group id number
+double m_p = 938.272; //Proton mass in MeV
 
 double SBx_0 = 0; //SciBar x initial in meters
 double SBx_f = 3.0; //SciBar x final in meters
@@ -35,7 +39,8 @@ double SBz_0 = 0; //SciBar z initial in meters
 double SBz_f = 1.7; //SciBar z final in meters
 
 double SteelThickness = .0508; //Steel Layer Thickness of MRD in meters
-double ScintThickness = .006; //Scint Layer Thicnkess of MRD in meters
+double ScintThickness = .006; //Scint Layer Thickness of MRD in meters
+double AirThickness = .06385; //Air Layer Thickness of MRD in meters
 double DownstreamMRDFace = 0.55; //Location of MRD Downstream from SciBar in meters
 
 double MRDx_0 = 0.2; //MRD x initial in meters
@@ -71,7 +76,7 @@ double MPVCarbon(double x)
    double j = 0.2;
    double zeta = (K/2)*(Z/A)*width*rho;
 
-   double MPV = (zeta*(M_proton*M_proton/x/x+1)*(log((2*m_e/I)*(x*x/M_proton/M_proton))+log(zeta/I*(M_proton*M_proton/x/x+1))+0.2-(1/(M_proton*M_proton/x/x+1))-((x<M_proton*exp(0.2*log(10)))*0+(M_proton*exp(0.2*log(10))<=x && x<M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar+a*pow(x1-log(x/M_proton)/log(10),3.))+(x>=M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar)))/(width*rho)) *1.396;
+   double MPV = (zeta*(M_proton*M_proton/x/x+1)*(log((2*m_e/I)*(x*x/M_proton/M_proton))+log(zeta/I*(M_proton*M_proton/x/x+1))+0.2-(1/(M_proton*M_proton/x/x+1))-((x<M_proton*exp(0.2*log(10)))*0+(M_proton*exp(0.2*log(10))<=x && x<M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar+a*pow(x1-log(x/M_proton)/log(10),3.))+(x>=M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar)))/(width*rho)) * rho;
    return MPV;
 
 } //<--- Close MPV on Carbon function
@@ -96,7 +101,7 @@ double MPVSteel(double x)
    double j = 0.2;
    double zeta = (K/2)*(Z/A)*width*rho;
 
-   double MPV = (zeta*(M_proton*M_proton/x/x+1)*(log((2*m_e/I)*(x*x/M_proton/M_proton))+log(zeta/I*(M_proton*M_proton/x/x+1))+0.2-(1/(M_proton*M_proton/x/x+1))-((x<M_proton*exp(0.2*log(10)))*0+(M_proton*exp(0.2*log(10))<=x && x<M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar+a*pow(x1-log(x/M_proton)/log(10),3.))+(x>=M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar)))/(width*rho)) *1.396;
+   double MPV = (zeta*(M_proton*M_proton/x/x+1)*(log((2*m_e/I)*(x*x/M_proton/M_proton))+log(zeta/I*(M_proton*M_proton/x/x+1))+0.2-(1/(M_proton*M_proton/x/x+1))-((x<M_proton*exp(0.2*log(10)))*0+(M_proton*exp(0.2*log(10))<=x && x<M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar+a*pow(x1-log(x/M_proton)/log(10),3.))+(x>=M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar)))/(width*rho)) * rho;
    return MPV;
 
 } //<--- Close MPV on Steel function
@@ -152,7 +157,7 @@ void OldNMRSProton::Loop()
       for (int npart=0; npart<StdHepN; npart++)
       {
 
-         if (StdHepPdg[npart] == protonpdg && StdHepStatus[npart] == 1) 
+         if (StdHepPdg[npart] == protonpdg && StdHepStatus[npart] == 1 && StdHepP4[npart][2] > 0) 
 	 {
 
             nProtons++;
@@ -169,7 +174,6 @@ void OldNMRSProton::Loop()
 	    {
    
                double Check = StdHepP4[ProtonRegister][2] - StdHepP4[npart][2];
-	       //std::cout<<"Check = "<<Check<<std::endl;
 	       if (Check <= 0) {ProtonRegister = npart;}
 
 	    } //<--- Close finding most boosted proton of event if statement
@@ -181,7 +185,7 @@ void OldNMRSProton::Loop()
       } //<--- Close loop over particles in event
 
 
-      if (nProtons > 0) 
+      if (nProtons > 0 && StdHepP4[ProtonRegister][2] > 0) 
       {
 
          nEventsWithProton++;
@@ -191,7 +195,7 @@ void OldNMRSProton::Loop()
 	 TVector3 position(Xpos,Ypos,Zpos); //Initial Proton Position
 
          hTotalProtonEnergy->Fill(StdHepP4[ProtonRegister][3]*1000);
-	 hTotalProtonAngle->Fill(momentum.Theta());
+	 hTotalProtonAngle->Fill(momentum.Theta()*180/PI);
          
 	 double ProtonEnergy = 1000*StdHepP4[ProtonRegister][3]; //Initial Proton Energy
 	 Double_t m_i = momentum.Mag(); //Initial Proton Momentum
@@ -231,7 +235,7 @@ void OldNMRSProton::Loop()
 	    {
 
 	       hProtonEnergyAfterSciBar->Fill(EnergyAfterSciBar);
-	       hProtonAngleAfterSciBar->Fill(momentum.Theta());
+	       hProtonAngleAfterSciBar->Fill(momentum.Theta()*180/PI);
 	       nOutSciBar++;
 
 	       double EnergyAfterEC = EnergyAfterSciBar - dEnergyLossECdTheta*cos(momentum.Theta());
@@ -239,8 +243,30 @@ void OldNMRSProton::Loop()
 	       {
 
                   hProtonEnergyAfterEC->Fill(EnergyAfterEC);
-		  hProtonAngleAfterEC->Fill(momentum.Theta());
+		  hProtonAngleAfterEC->Fill(momentum.Theta()*180/PI);
 		  nOutEC++;
+
+		  double MomMag = sqrt(EnergyAfterEC*EnergyAfterEC - m_p*m_p);
+		  TVector3 ProtonMomentum(MomMag*direction.X(),MomMag*direction.Y(),MomMag*direction.Z());
+		  TVector3 MRDFacePosition(XposMRDFace,YposMRDFace,SBz_f+DownstreamMRDFace);
+
+		  double rangeScint = ScintThickness/cos(momentum.Theta());
+		  double rangeSteel = SteelThickness/cos(momentum.Theta());
+		  double rangeAir = AirThickness/cos(momentum.Theta());
+
+		  TVector3 DeltaScint(rangeScint*direction.X(),rangeScint*direction.Y(),rangeScint*direction.Z());
+		  TVector3 DeltaSteel(rangeSteel*direction.X(),rangeSteel*direction.Y(),rangeSteel*direction.Z());
+		  TVector3 DeltaAir(rangeAir*direction.X(),rangeAir*direction.Y(),rangeAir*direction.Z());
+
+		  double EnergyAfter1Scint0Steel = EnergyAfterEC - MPVCarbon(ProtonMomentum.Mag())*100*rangeScint;
+		  if (EnergyAfter1Scint0Steel>0) 
+		  {
+
+                     hEnergyCheck->Fill(EnergyAfter1Scint0Steel);
+		     hAngleCheck->Fill(momentum.Theta()*180/PI);
+
+		  } //<--- Close if statement for nonzero energy after 1 Scint 0 Steel
+
 
 	       } //<--- Close if statement for nonzero energy after EC
 
@@ -257,6 +283,7 @@ void OldNMRSProton::Loop()
             nMRDBack++;
 	 
 	 } //<--- Close if statement for making it out the back of the MRD
+
 
       } //<--- Close if statement for events with protons
 
