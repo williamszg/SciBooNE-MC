@@ -185,7 +185,7 @@ void OldNMRSProton::Loop()
       } //<--- Close loop over particles in event
 
 
-      if (nProtons > 0 && StdHepP4[ProtonRegister][2] > 0) 
+      if (nProtons > 0 && StdHepP4[ProtonRegister][2] > 0 && StdHepP4[ProtonRegister][3]*1000 > m_p) 
       {
 
          nEventsWithProton++;
@@ -231,7 +231,7 @@ void OldNMRSProton::Loop()
 
 	    double EnergyAfterSciBar = ProtonEnergy - LengthThroughSciBar*MPVCarbon(1000*momentum.Mag())*100;
 
-	    if (EnergyAfterSciBar > 0) 
+	    if (EnergyAfterSciBar > m_p) 
 	    {
 
 	       hProtonEnergyAfterSciBar->Fill(EnergyAfterSciBar);
@@ -239,7 +239,7 @@ void OldNMRSProton::Loop()
 	       nOutSciBar++;
 
 	       double EnergyAfterEC = EnergyAfterSciBar - dEnergyLossECdTheta*cos(momentum.Theta());
-	       if (EnergyAfterEC > 0)
+	       if (EnergyAfterEC > m_p)
 	       {
 
                   hProtonEnergyAfterEC->Fill(EnergyAfterEC);
@@ -259,7 +259,7 @@ void OldNMRSProton::Loop()
 		  TVector3 DeltaAir(rangeAir*direction.X(),rangeAir*direction.Y(),rangeAir*direction.Z());
 
 		  double EnergyAfter1Scint0Steel = EnergyAfterEC - MPVCarbon(ProtonMomentum.Mag())*100*rangeScint;
-		  if (EnergyAfter1Scint0Steel>0) 
+		  if (EnergyAfter1Scint0Steel > m_p) 
 		  {
 
                      hEnergyCheck->Fill(EnergyAfter1Scint0Steel);
