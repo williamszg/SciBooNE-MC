@@ -13,6 +13,12 @@
 //-----------------------------|
 TH1D *hTotalProtonEnergy = new TH1D("hTotalProtonEnergy", "The Energies of all of the Proton Events", 50, 0, 2500);
 TH1D *hTotalProtonAngle = new TH1D("hTotalProtonAngle", "The Angles of all of the Proton Events", 50, 0, PI);
+
+TH1D *hProtonEnergyAfterSciBar = new TH1D("hProtonEnergyAfterSciBar", "The Energies of the Protons After Traversing SciBar", 50, 0, 2500);
+TH1D *hProtonAngleAfterSciBar = new TH1D("hProtonAngleAfterSciBar", "The Angles of the Protons After Traversing SciBar", 50, 0, PI);
+
+TH1D *hProtonEnergyAfterEC = new TH1D("hProtonEnergyAfterEC", "The Energies of the Protons After Traversing the EC", 50, 0, 2500);
+TH1D *hProtonAngleAfterEC = new TH1D("hProtonAngleAfterEC", "The Angles of the Protons After Traversing the EC", 50, 0, PI);
 //-----------------------------|
 
 
@@ -20,14 +26,6 @@ TH1D *hTotalProtonAngle = new TH1D("hTotalProtonAngle", "The Angles of all of th
 //---  Constant Parameters  ---|
 //-----------------------------|
 int protonpdg = 2212; //Proton particle data group id number
-double m_p = 938.272; //Proton mass in MeV
-double m_e = 0.511; //Electron mass in MeV
-int Z_i = 26; //Atomic number for Iron
-double A_i = 55.845; //Atomic mass for Iron
-int Z_c = 12; //Atomic number for Carbon
-double A_c = 12.011; //Atomic mass for Carbon
-int Z_s = 14; //Atomic number for Silicon
-double A_s = 28.085; //Atomic mass for Silicon
 
 double SBx_0 = 0; //SciBar x initial in meters
 double SBx_f = 3.0; //SciBar x final in meters
@@ -52,44 +50,54 @@ double dEnergyLossECdTheta = 91; //Energy loss to EC in 91 MeV/cos(theta)
 
 
 //=============================|
-//=== Bethe-Bloch Functions ===|
-//=============================|
-double BetheBlochCarbon(double p)
-{
-   
-   double f = p;
-   return f;
-
-} //<--- Close Bethe-Bloch on Carbon function
-
-
-double BetheBlochSteel(double p)
-{
-   
-   double f = p;
-   return f;
-
-} //<--- Close Bethe-Bloch on Steel function
-//=============================|
-
-
-//=============================|
 //===     MPV Functions     ===|
 //=============================|
-double MPVCarbon(double p)
+double MPVCarbon(double x)
 {
    
-   double f = p;
-   return f;
+   double x0 = 0.2;
+   double x1 = 3.0;
+   double Cbar = 5.2146;
+   double a = 0.19559;
+   double k = 3.0;
+   double K = 0.307075;
+   double Z = 6;
+   double A = 12.011;
+   double m_e = 0.511;
+   double M_proton = 938.272;
+   double I = 79.1e-6;
+   double width = 0.6;
+   double rho = 2.265;
+   double j = 0.2;
+   double zeta = (K/2)*(Z/A)*width*rho;
+
+   double MPV = (zeta*(M_proton*M_proton/x/x+1)*(log((2*m_e/I)*(x*x/M_proton/M_proton))+log(zeta/I*(M_proton*M_proton/x/x+1))+0.2-(1/(M_proton*M_proton/x/x+1))-((x<M_proton*exp(0.2*log(10)))*0+(M_proton*exp(0.2*log(10))<=x && x<M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar+a*pow(x1-log(x/M_proton)/log(10),3.))+(x>=M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar)))/(width*rho)) *1.396;
+   return MPV;
 
 } //<--- Close MPV on Carbon function
 
 
-double MPVSteel(double p)
+double MPVSteel(double x)
 {
    
-   double f = p;
-   return f;
+   double x0 = 0.2;
+   double x1 = 3.0;
+   double Cbar = 5.2146;
+   double a = 0.19559;
+   double k = 3.0;
+   double K = 0.307075;
+   double Z = 26;
+   double A = 55.845;
+   double m_e = 0.511;
+   double M_proton = 938.272;
+   double I = 286e-6;
+   double width = 5.08;
+   double rho = 7.87;
+   double j = 0.2;
+   double zeta = (K/2)*(Z/A)*width*rho;
+
+   double MPV = (zeta*(M_proton*M_proton/x/x+1)*(log((2*m_e/I)*(x*x/M_proton/M_proton))+log(zeta/I*(M_proton*M_proton/x/x+1))+0.2-(1/(M_proton*M_proton/x/x+1))-((x<M_proton*exp(0.2*log(10)))*0+(M_proton*exp(0.2*log(10))<=x && x<M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar+a*pow(x1-log(x/M_proton)/log(10),3.))+(x>=M_proton*exp(3.0*log(10)))*(2*log(x/M_proton)-Cbar)))/(width*rho)) *1.396;
+   return MPV;
 
 } //<--- Close MPV on Steel function
 //=============================|
@@ -115,6 +123,8 @@ void OldNMRSProton::Loop()
 
    int nMRDFace = 0;
    int nMRDBack = 0;
+   int nOutSciBar = 0;
+   int nOutEC = 0;
    //----------------------------------------|
 
    for (Long64_t jentry=0; jentry<nentries; jentry++)
@@ -183,7 +193,7 @@ void OldNMRSProton::Loop()
          hTotalProtonEnergy->Fill(StdHepP4[ProtonRegister][3]*1000);
 	 hTotalProtonAngle->Fill(momentum.Theta());
          
-	 double ProtonEnergy = StdHepP4[ProtonRegister][3]; //Initial Proton Energy
+	 double ProtonEnergy = 1000*StdHepP4[ProtonRegister][3]; //Initial Proton Energy
 	 Double_t m_i = momentum.Mag(); //Initial Proton Momentum
 
 	 double ProtonTimeZSBEnd = (SBz_f - position.Z())/momentum.Z();
@@ -214,7 +224,30 @@ void OldNMRSProton::Loop()
 	    double YposSBEnd = DeltaYSBEnd + position.Y();
 
 	    double LengthThroughSciBar = sqrt((DeltaXSBEnd*DeltaXSBEnd) + (DeltaYSBEnd*DeltaYSBEnd) + ((SBz_f - position.Z())*(SBz_f - position.Z())));
+
+	    double EnergyAfterSciBar = ProtonEnergy - LengthThroughSciBar*MPVCarbon(1000*momentum.Mag())*100;
+
+	    if (EnergyAfterSciBar > 0) 
+	    {
+
+	       hProtonEnergyAfterSciBar->Fill(EnergyAfterSciBar);
+	       hProtonAngleAfterSciBar->Fill(momentum.Theta());
+	       nOutSciBar++;
+
+	       double EnergyAfterEC = EnergyAfterSciBar - dEnergyLossECdTheta*cos(momentum.Theta());
+	       if (EnergyAfterEC > 0)
+	       {
+
+                  hProtonEnergyAfterEC->Fill(EnergyAfterEC);
+		  hProtonAngleAfterEC->Fill(momentum.Theta());
+		  nOutEC++;
+
+	       } //<--- Close if statement for nonzero energy after EC
+
+
+	    } //<--- Close if statement for nonzero energy after scibar
 	 
+
 	 } //<--- Close if statement for making it to the front face of the MRD
 
 
@@ -236,6 +269,9 @@ void OldNMRSProton::Loop()
    std::cout<<"Number of Events with at least a single proton in final state = "<<nEventsWithProton<<std::endl;
    std::cout<<"Number of Protons that are pointed at the MRD = "<<nMRDFace<<std::endl;
    std::cout<<"Number of Protons that could go out the back of the MRD = "<<nMRDBack<<std::endl;
+   std::cout<<"|------------------------------------------------------------------|"<<std::endl;
+   std::cout<<"Number of Protons that exit SciBar with nonzero energy = "<<nOutSciBar<<std::endl;
+   std::cout<<"Number of Protons that exit EC with nonzero energy = "<<nOutEC<<std::endl;
 
 } //<--- Close void loop
 //===========================================|
