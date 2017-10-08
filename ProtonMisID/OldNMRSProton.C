@@ -20,8 +20,53 @@ TH1D *hProtonAngleAfterSciBar = new TH1D("hProtonAngleAfterSciBar", "The Angles 
 TH1D *hProtonEnergyAfterEC = new TH1D("hProtonEnergyAfterEC", "The Energies of the Protons After Traversing the EC", 50, 0, 2500);
 TH1D *hProtonAngleAfterEC = new TH1D("hProtonAngleAfterEC", "The Angles of the Protons After Traversing the EC", 60, 0, 180);
 
-TH1D *hEnergyCheck = new TH1D("hEnergyCheck", "Checking the Energy After 1 Scint Layer and 0 Steel Layers of the MRD", 50, 0, 2500);
-TH1D *hAngleCheck = new TH1D("hAngleCheck", "Checking the Angle After 1 Scint Layer and 0 Steel Layers of the MRD", 60, 0, 180);
+TH1D *hEnergyCheck1Scint0Steel = new TH1D("hEnergyCheck1Scint0Steel", "Checking the Energy After 1 Scint Layer and 0 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck1Scint0Steel = new TH1D("hAngleCheck1Scint0Steel", "Checking the Angle After 1 Scint Layer and 0 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck1Scint1Steel = new TH1D("hEnergyCheck1Scint1Steel", "Checking the Energy After 1 Scint Layer and 1 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck1Scint1Steel = new TH1D("hAngleCheck1Scint1Steel", "Checking the Angle After 1 Scint Layer and 1 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck2Scint1Steel = new TH1D("hEnergyCheck2Scint1Steel", "Checking the Energy After 2 Scint Layer and 1 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck2Scint1Steel = new TH1D("hAngleCheck2Scint1Steel", "Checking the Angle After 2 Scint Layer and 1 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck2Scint2Steel = new TH1D("hEnergyCheck2Scint2Steel", "Checking the Energy After 2 Scint Layer and 2 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck2Scint2Steel = new TH1D("hAngleCheck2Scint2Steel", "Checking the Angle After 2 Scint Layer and 2 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck3Scint2Steel = new TH1D("hEnergyCheck3Scint2Steel", "Checking the Energy After 3 Scint Layer and 2 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck3Scint2Steel = new TH1D("hAngleCheck3Scint2Steel", "Checking the Angle After 3 Scint Layer and 2 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck3Scint3Steel = new TH1D("hEnergyCheck3Scint3Steel", "Checking the Energy After 3 Scint Layer and 3 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck3Scint3Steel = new TH1D("hAngleCheck3Scint3Steel", "Checking the Angle After 3 Scint Layer and 3 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck4Scint3Steel = new TH1D("hEnergyCheck4Scint3Steel", "Checking the Energy After 4 Scint Layer and 3 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck4Scint3Steel = new TH1D("hAngleCheck4Scint3Steel", "Checking the Angle After 4 Scint Layer and 3 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck4Scint4Steel = new TH1D("hEnergyCheck4Scint4Steel", "Checking the Energy After 4 Scint Layer and 4 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck4Scint4Steel = new TH1D("hAngleCheck4Scint4Steel", "Checking the Angle After 4 Scint Layer and 4 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck5Scint4Steel = new TH1D("hEnergyCheck5Scint4Steel", "Checking the Energy After 5 Scint Layer and 4 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck5Scint4Steel = new TH1D("hAngleCheck5Scint4Steel", "Checking the Angle After 5 Scint Layer and 4 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck5Scint5Steel = new TH1D("hEnergyCheck5Scint5Steel", "Checking the Energy After 5 Scint Layer and 5 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck5Scint5Steel = new TH1D("hAngleCheck5Scint5Steel", "Checking the Angle After 5 Scint Layer and 5 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck6Scint5Steel = new TH1D("hEnergyCheck6Scint5Steel", "Checking the Energy After 6 Scint Layer and 5 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck6Scint5Steel = new TH1D("hAngleCheck6Scint5Steel", "Checking the Angle After 6 Scint Layer and 5 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck6Scint6Steel = new TH1D("hEnergyCheck6Scint6Steel", "Checking the Energy After 6 Scint Layer and 6 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck6Scint6Steel = new TH1D("hAngleCheck6Scint6Steel", "Checking the Angle After 6 Scint Layer and 6 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck7Scint6Steel = new TH1D("hEnergyCheck7Scint6Steel", "Checking the Energy After 7 Scint Layer and 6 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck7Scint6Steel = new TH1D("hAngleCheck7Scint6Steel", "Checking the Angle After 7 Scint Layer and 6 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck7Scint7Steel = new TH1D("hEnergyCheck7Scint7Steel", "Checking the Energy After 7 Scint Layer and 7 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck7Scint7Steel = new TH1D("hAngleCheck7Scint7Steel", "Checking the Angle After 7 Scint Layer and 7 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck8Scint7Steel = new TH1D("hEnergyCheck8Scint7Steel", "Checking the Energy After 8 Scint Layer and 7 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck8Scint7Steel = new TH1D("hAngleCheck8Scint7Steel", "Checking the Angle After 8 Scint Layer and 7 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyCheck8Scint8Steel = new TH1D("hEnergyCheck8Scint8Steel", "Checking the Energy After 8 Scint Layer and 8 Steel Layers of the MRD", 50, 0, 2500);
+TH1D *hAngleCheck8Scint8Steel = new TH1D("hAngleCheck8Scint8Steel", "Checking the Angle After 8 Scint Layer and 8 Steel Layers of the MRD", 60, 0, 180);
 //-----------------------------|
 
 
@@ -250,6 +295,8 @@ void OldNMRSProton::Loop()
 		  TVector3 ProtonMomentum(MomMag*direction.X(),MomMag*direction.Y(),MomMag*direction.Z());
 		  TVector3 MRDFacePosition(XposMRDFace,YposMRDFace,SBz_f+DownstreamMRDFace);
 
+		  TVector3 WorkingPosition(MRDFacePosition.X(),MRDFacePosition.Y(),MRDFacePosition.Z());
+
 		  double rangeScint = ScintThickness/cos(momentum.Theta());
 		  double rangeSteel = SteelThickness/cos(momentum.Theta());
 		  double rangeAir = AirThickness/cos(momentum.Theta());
@@ -259,11 +306,211 @@ void OldNMRSProton::Loop()
 		  TVector3 DeltaAir(rangeAir*direction.X(),rangeAir*direction.Y(),rangeAir*direction.Z());
 
 		  double EnergyAfter1Scint0Steel = EnergyAfterEC - MPVCarbon(ProtonMomentum.Mag())*100*rangeScint;
-		  if (EnergyAfter1Scint0Steel > m_p) 
+
+		  WorkingPosition.SetX(MRDFacePosition.X() + 1*DeltaScint.X() + 0*DeltaSteel.X() + 0*DeltaAir.X());
+		  WorkingPosition.SetY(MRDFacePosition.Y() + 1*DeltaScint.Y() + 0*DeltaSteel.Y() + 0*DeltaAir.Y());
+		  WorkingPosition.SetZ(MRDFacePosition.Z() + 1*DeltaScint.Z() + 0*DeltaSteel.Z() + 0*DeltaAir.Z());
+
+		  if ((EnergyAfter1Scint0Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
 		  {
 
-                     hEnergyCheck->Fill(EnergyAfter1Scint0Steel);
-		     hAngleCheck->Fill(momentum.Theta()*180/PI);
+                     hEnergyCheck1Scint0Steel->Fill(EnergyAfter1Scint0Steel);
+		     hAngleCheck1Scint0Steel->Fill(momentum.Theta()*180/PI);
+
+		     MomMag = sqrt(EnergyAfter1Scint0Steel*EnergyAfter1Scint0Steel - m_p*m_p);
+
+		     double EnergyAfter1Scint1Steel = EnergyAfter1Scint0Steel - MPVSteel(MomMag)*100*rangeSteel - MPVCarbon(MomMag)*100*rangeSteel;
+
+		     WorkingPosition.SetX(MRDFacePosition.X() + 1*DeltaScint.X() + 1*DeltaSteel.X() + 0*DeltaAir.X());
+		     WorkingPosition.SetY(MRDFacePosition.Y() + 1*DeltaScint.Y() + 1*DeltaSteel.Y() + 0*DeltaAir.Y());
+		     WorkingPosition.SetZ(MRDFacePosition.Z() + 1*DeltaScint.Z() + 1*DeltaSteel.Z() + 0*DeltaAir.Z());
+
+		     if ((EnergyAfter1Scint1Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+		     {
+
+                        hEnergyCheck1Scint1Steel->Fill(EnergyAfter1Scint1Steel);
+			hAngleCheck1Scint1Steel->Fill(momentum.Theta()*180/PI);
+
+		        MomMag = sqrt(EnergyAfter1Scint1Steel*EnergyAfter1Scint1Steel - m_p*m_p);
+
+		        double EnergyAfter2Scint1Steel = EnergyAfter1Scint1Steel - MPVCarbon(MomMag)*100*rangeScint;
+
+		        WorkingPosition.SetX(MRDFacePosition.X() + 2*DeltaScint.X() + 1*DeltaSteel.X() + 0*DeltaAir.X());
+		        WorkingPosition.SetY(MRDFacePosition.Y() + 2*DeltaScint.Y() + 1*DeltaSteel.Y() + 0*DeltaAir.Y());
+		        WorkingPosition.SetZ(MRDFacePosition.Z() + 2*DeltaScint.Z() + 1*DeltaSteel.Z() + 0*DeltaAir.Z());
+
+		        if ((EnergyAfter2Scint1Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
+			{
+
+                           hEnergyCheck2Scint1Steel->Fill(EnergyAfter2Scint1Steel);
+			   hAngleCheck2Scint1Steel->Fill(momentum.Theta()*180/PI);
+
+		           MomMag = sqrt(EnergyAfter2Scint1Steel*EnergyAfter2Scint1Steel - m_p*m_p);
+
+		           double EnergyAfter2Scint2Steel = EnergyAfter2Scint1Steel - MPVSteel(MomMag)*100*rangeSteel - MPVCarbon(MomMag)*100*rangeSteel;
+
+		           WorkingPosition.SetX(MRDFacePosition.X() + 2*DeltaScint.X() + 2*DeltaSteel.X() + 1*DeltaAir.X());
+		           WorkingPosition.SetY(MRDFacePosition.Y() + 2*DeltaScint.Y() + 2*DeltaSteel.Y() + 1*DeltaAir.Y());
+		           WorkingPosition.SetZ(MRDFacePosition.Z() + 2*DeltaScint.Z() + 2*DeltaSteel.Z() + 1*DeltaAir.Z());
+
+		           if ((EnergyAfter2Scint2Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
+			   {
+
+                              hEnergyCheck2Scint2Steel->Fill(EnergyAfter2Scint2Steel);
+			      hAngleCheck2Scint2Steel->Fill(momentum.Theta()*180/PI);
+
+		              MomMag = sqrt(EnergyAfter2Scint2Steel*EnergyAfter2Scint2Steel - m_p*m_p);
+
+		              double EnergyAfter3Scint2Steel = EnergyAfter2Scint2Steel - MPVCarbon(MomMag)*100*rangeScint;
+
+		              WorkingPosition.SetX(MRDFacePosition.X() + 3*DeltaScint.X() + 2*DeltaSteel.X() + 1*DeltaAir.X());
+		              WorkingPosition.SetY(MRDFacePosition.Y() + 3*DeltaScint.Y() + 2*DeltaSteel.Y() + 1*DeltaAir.Y());
+		              WorkingPosition.SetZ(MRDFacePosition.Z() + 3*DeltaScint.Z() + 2*DeltaSteel.Z() + 1*DeltaAir.Z());
+
+		              if ((EnergyAfter3Scint2Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
+			      {
+
+                                 hEnergyCheck3Scint2Steel->Fill(EnergyAfter3Scint2Steel);
+			         hAngleCheck3Scint2Steel->Fill(momentum.Theta()*180/PI);
+
+		                 MomMag = sqrt(EnergyAfter3Scint2Steel*EnergyAfter3Scint2Steel - m_p*m_p);
+
+		                 double EnergyAfter3Scint3Steel = EnergyAfter3Scint2Steel - MPVSteel(MomMag)*100*rangeSteel - MPVCarbon(MomMag)*100*rangeSteel;
+
+		                 WorkingPosition.SetX(MRDFacePosition.X() + 3*DeltaScint.X() + 3*DeltaSteel.X() + 2*DeltaAir.X());
+		                 WorkingPosition.SetY(MRDFacePosition.Y() + 3*DeltaScint.Y() + 3*DeltaSteel.Y() + 2*DeltaAir.Y());
+		                 WorkingPosition.SetZ(MRDFacePosition.Z() + 3*DeltaScint.Z() + 3*DeltaSteel.Z() + 2*DeltaAir.Z());
+
+		                 if ((EnergyAfter3Scint3Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
+			         {
+
+                                    hEnergyCheck3Scint3Steel->Fill(EnergyAfter3Scint3Steel);
+			            hAngleCheck3Scint3Steel->Fill(momentum.Theta()*180/PI);
+
+		                    MomMag = sqrt(EnergyAfter3Scint3Steel*EnergyAfter3Scint3Steel - m_p*m_p);
+
+		                    double EnergyAfter4Scint3Steel = EnergyAfter3Scint3Steel - MPVCarbon(MomMag)*100*rangeScint;
+
+		                    WorkingPosition.SetX(MRDFacePosition.X() + 4*DeltaScint.X() + 3*DeltaSteel.X() + 2*DeltaAir.X());
+		                    WorkingPosition.SetY(MRDFacePosition.Y() + 4*DeltaScint.Y() + 3*DeltaSteel.Y() + 2*DeltaAir.Y());
+		                    WorkingPosition.SetZ(MRDFacePosition.Z() + 4*DeltaScint.Z() + 3*DeltaSteel.Z() + 2*DeltaAir.Z());
+
+		                    if ((EnergyAfter4Scint3Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
+			            {
+
+                                       hEnergyCheck4Scint3Steel->Fill(EnergyAfter4Scint3Steel);
+			               hAngleCheck4Scint3Steel->Fill(momentum.Theta()*180/PI);
+
+		                       MomMag = sqrt(EnergyAfter4Scint3Steel*EnergyAfter4Scint3Steel - m_p*m_p);
+
+		                       double EnergyAfter4Scint4Steel = EnergyAfter4Scint3Steel - MPVSteel(MomMag)*100*rangeSteel - MPVCarbon(MomMag)*100*rangeSteel;
+
+		                       WorkingPosition.SetX(MRDFacePosition.X() + 4*DeltaScint.X() + 4*DeltaSteel.X() + 3*DeltaAir.X());
+		                       WorkingPosition.SetY(MRDFacePosition.Y() + 4*DeltaScint.Y() + 4*DeltaSteel.Y() + 3*DeltaAir.Y());
+		                       WorkingPosition.SetZ(MRDFacePosition.Z() + 4*DeltaScint.Z() + 4*DeltaSteel.Z() + 3*DeltaAir.Z());
+
+		                       if ((EnergyAfter4Scint4Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
+			               {
+
+                                          hEnergyCheck4Scint4Steel->Fill(EnergyAfter4Scint4Steel);
+			                  hAngleCheck4Scint4Steel->Fill(momentum.Theta()*180/PI);
+
+		                          MomMag = sqrt(EnergyAfter4Scint4Steel*EnergyAfter4Scint4Steel - m_p*m_p);
+
+		                          double EnergyAfter5Scint4Steel = EnergyAfter4Scint4Steel - MPVCarbon(MomMag)*100*rangeScint;
+
+		                          WorkingPosition.SetX(MRDFacePosition.X() + 5*DeltaScint.X() + 4*DeltaSteel.X() + 3*DeltaAir.X());
+		                          WorkingPosition.SetY(MRDFacePosition.Y() + 5*DeltaScint.Y() + 4*DeltaSteel.Y() + 3*DeltaAir.Y());
+		                          WorkingPosition.SetZ(MRDFacePosition.Z() + 5*DeltaScint.Z() + 4*DeltaSteel.Z() + 3*DeltaAir.Z());
+
+		                          if ((EnergyAfter5Scint4Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
+			                  {
+
+                                             hEnergyCheck5Scint4Steel->Fill(EnergyAfter5Scint4Steel);
+			                     hAngleCheck5Scint4Steel->Fill(momentum.Theta()*180/PI);
+
+		                             MomMag = sqrt(EnergyAfter5Scint4Steel*EnergyAfter5Scint4Steel - m_p*m_p);
+
+		                             double EnergyAfter5Scint5Steel = EnergyAfter5Scint4Steel - MPVCarbon(MomMag)*100*rangeSteel - MPVSteel(MomMag)*100*rangeSteel;
+
+		                             WorkingPosition.SetX(MRDFacePosition.X() + 5*DeltaScint.X() + 5*DeltaSteel.X() + 4*DeltaAir.X());
+		                             WorkingPosition.SetY(MRDFacePosition.Y() + 5*DeltaScint.Y() + 5*DeltaSteel.Y() + 4*DeltaAir.Y());
+		                             WorkingPosition.SetZ(MRDFacePosition.Z() + 5*DeltaScint.Z() + 5*DeltaSteel.Z() + 4*DeltaAir.Z());
+
+		                             if ((EnergyAfter5Scint5Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
+			                     {
+
+                                                hEnergyCheck5Scint5Steel->Fill(EnergyAfter5Scint5Steel);
+			                        hAngleCheck5Scint5Steel->Fill(momentum.Theta()*180/PI);
+
+		                                MomMag = sqrt(EnergyAfter5Scint5Steel*EnergyAfter5Scint5Steel - m_p*m_p);
+
+		                                double EnergyAfter6Scint5Steel = EnergyAfter5Scint5Steel - MPVCarbon(MomMag)*100*rangeScint;// - MPVSteel(MomMag)*100*rangeSteel;
+
+		                                WorkingPosition.SetX(MRDFacePosition.X() + 6*DeltaScint.X() + 5*DeltaSteel.X() + 4*DeltaAir.X());
+		                                WorkingPosition.SetY(MRDFacePosition.Y() + 6*DeltaScint.Y() + 5*DeltaSteel.Y() + 4*DeltaAir.Y());
+		                                WorkingPosition.SetZ(MRDFacePosition.Z() + 6*DeltaScint.Z() + 5*DeltaSteel.Z() + 4*DeltaAir.Z());
+
+		                                if ((EnergyAfter6Scint5Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
+			                        {
+
+                                                   hEnergyCheck6Scint5Steel->Fill(EnergyAfter6Scint5Steel);
+			                           hAngleCheck6Scint5Steel->Fill(momentum.Theta()*180/PI);
+
+		                                   MomMag = sqrt(EnergyAfter6Scint5Steel*EnergyAfter6Scint5Steel - m_p*m_p);
+
+		                                   double EnergyAfter6Scint6Steel = EnergyAfter6Scint5Steel - MPVCarbon(MomMag)*100*rangeSteel - MPVSteel(MomMag)*100*rangeSteel;
+
+		                                   WorkingPosition.SetX(MRDFacePosition.X() + 6*DeltaScint.X() + 6*DeltaSteel.X() + 5*DeltaAir.X());
+		                                   WorkingPosition.SetY(MRDFacePosition.Y() + 6*DeltaScint.Y() + 6*DeltaSteel.Y() + 5*DeltaAir.Y());
+		                                   WorkingPosition.SetZ(MRDFacePosition.Z() + 6*DeltaScint.Z() + 6*DeltaSteel.Z() + 5*DeltaAir.Z());
+
+		                                   if ((EnergyAfter6Scint6Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
+			                           {
+
+                                                      hEnergyCheck6Scint6Steel->Fill(EnergyAfter6Scint6Steel);
+			                              hAngleCheck6Scint6Steel->Fill(momentum.Theta()*180/PI);
+
+		                                      MomMag = sqrt(EnergyAfter6Scint6Steel*EnergyAfter6Scint6Steel - m_p*m_p);
+
+		                                      double EnergyAfter7Scint6Steel = EnergyAfter6Scint6Steel - MPVCarbon(MomMag)*100*rangeScint;// - MPVSteel(MomMag)*100*rangeSteel;
+
+		                                      WorkingPosition.SetX(MRDFacePosition.X() + 7*DeltaScint.X() + 6*DeltaSteel.X() + 5*DeltaAir.X());
+		                                      WorkingPosition.SetY(MRDFacePosition.Y() + 7*DeltaScint.Y() + 6*DeltaSteel.Y() + 5*DeltaAir.Y());
+		                                      WorkingPosition.SetZ(MRDFacePosition.Z() + 7*DeltaScint.Z() + 6*DeltaSteel.Z() + 5*DeltaAir.Z());
+
+			                           } //<---Close if statement for nonzero energy after 6 Scint 6 Steel
+
+
+			                        } //<---Close if statement for nonzero energy after 6 Scint 5 Steel
+
+
+			                     } //<---Close if statement for nonzero energy after 5 Scint 5 Steel
+
+
+			                  } //<---Close if statement for nonzero energy after 5 Scint 4 Steel
+
+
+			               } //<---Close if statement for nonzero energy after 4 Scint 4 Steel
+
+
+			            } //<---Close if statement for nonzero energy after 4 Scint 3 Steel
+
+
+			         } //<---Close if statement for nonzero energy after 3 Scint 3 Steel
+
+
+			      } //<---Close if statement for nonzero energy after 3 Scint 2 Steel
+
+
+			   } //<---Close if statement for nonzero energy after 2 Scint 2 Steel
+
+
+			} //<---Close if statement for nonzero energy after 2 Scint 1 Steel
+
+
+		     } //<--- Close if statement for nonzero energy after 1 Scint 1 Steel
+
 
 		  } //<--- Close if statement for nonzero energy after 1 Scint 0 Steel
 
