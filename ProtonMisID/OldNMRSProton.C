@@ -96,18 +96,23 @@ TH1D *hEnergyCheck13Scint12Steel = new TH1D("hEnergyCheck13Scint12Steel", "Check
 TH1D *hAngleCheck13Scint12Steel = new TH1D("hAngleCheck13Scint12Steel", "Checking the Angle After 13 Scint Layer and 12 Steel Layers of the MRD", 60, 0, 180);
 
 TH1D *hEnergyTMMRD = new TH1D("hEnergyTMMRD", "Initial Energies of the Total Protons That Made it to the MRD", 50, 0, 2500);
+TH1D *hMomentumTMMRD = new TH1D("hMomentumTMMRD", "Initial Momentums of the Total Protons That Made it to the MRD", 50, 0, 2500);
 TH1D *hAngleTMMRD = new TH1D("hAngleTMMRD", "Initial Angles of the Total Protons That Made it to the MRD", 60, 0, 180);
 
 TH1D *hEnergySNS = new TH1D("hEnergySNS", "Initial Energies of the Protons That Qualify as Stopped and Not-Stopped", 50, 0, 2500);
+TH1D *hMomentumSNS = new TH1D("hMomentumSNS", "Initial Momentums of the Protons That Qualify as Stopped and Not-Stopped", 50, 0, 2500);
 TH1D *hAngleSNS = new TH1D("hAngleSNS", "Initial Angles of the Protons That Qualify as Stopped and Not-Stopped", 60, 0, 180);
 
 TH1D *hEnergyStopped = new TH1D("hEnergyStopped", "Initial Energies of the Stopped Protons", 50, 0, 2500);
+TH1D *hMomentumStopped = new TH1D("hMomentumStopped", "Initial Momentums of the Stopped Protons", 50, 0, 2500);
 TH1D *hAngleStopped = new TH1D("hAngleStopped", "Initial Angles of the Stopped Protons", 60, 0, 180);
 
 TH1D *hEnergyNotStopped = new TH1D("hEnergyNotStopped", "Initial Energies of the Not-Stopped Protons", 50, 0, 2500);
+TH1D *hMomentumNotStopped = new TH1D("hMomentumNotStopped", "Initial Momentums of the Not-Stopped Protons", 50, 0, 2500);
 TH1D *hAngleNotStopped = new TH1D("hAngleNotStopped", "Initial Angles of the Not-Stopped Protons", 60, 0, 180);
 
 TH1D *hEnergyOutSide = new TH1D("hEnergyOutSide", "Initial Energies of the Out the Side Protons", 50, 0, 2500);
+TH1D *hMomentumOutSide = new TH1D("hMomentumOutSide", "Initial Momentums of the Out the Side Protons", 50, 0, 2500);
 TH1D *hAngleOutSide = new TH1D("hAngleOutSide", "Initial Angles of the Out the Side Protons", 60, 0, 180);
 //-----------------------------|
 
@@ -364,6 +369,7 @@ void OldNMRSProton::Loop()
 
 	             nMadeMRD++;
                      hEnergyTMMRD->Fill(ProtonEnergy);
+		     hMomentumTMMRD->Fill(momentum.Mag()*1000);
 		     hAngleTMMRD->Fill(momentum.Theta()*180/PI);
 
 		  }
@@ -373,8 +379,10 @@ void OldNMRSProton::Loop()
 
 		     nStopped++;
 		     hEnergySNS->Fill(ProtonEnergy);
+		     hMomentumSNS->Fill(momentum.Mag()*1000);
 		     hAngleSNS->Fill(momentum.Theta()*180/PI);
 		     hEnergyStopped->Fill(ProtonEnergy);
+		     hMomentumStopped->Fill(momentum.Mag()*1000);
 		     hAngleStopped->Fill(momentum.Theta()*180/PI);
 
 		  }
@@ -387,7 +395,7 @@ void OldNMRSProton::Loop()
 
 		     MomMag = sqrt(EnergyAfter1Scint0Steel*EnergyAfter1Scint0Steel - m_p*m_p);
 
-		     double EnergyAfter1Scint1Steel = EnergyAfter1Scint0Steel - MPVSteel(MomMag)*100*rangeSteel - MPVCarbon(MomMag)*100*rangeSteel;
+		     double EnergyAfter1Scint1Steel = EnergyAfter1Scint0Steel - MPVSteel(MomMag)*100*rangeSteel;// - MPVCarbon(MomMag)*100*rangeSteel;
 
 		     WorkingPosition.SetX(MRDFacePosition.X() + 1*DeltaScint.X() + 1*DeltaSteel.X() + 0*DeltaAir.X());
 		     WorkingPosition.SetY(MRDFacePosition.Y() + 1*DeltaScint.Y() + 1*DeltaSteel.Y() + 0*DeltaAir.Y());
@@ -397,6 +405,9 @@ void OldNMRSProton::Loop()
 		     {
 
 		        nOutSide++;
+                        hEnergyOutSide->Fill(ProtonEnergy);
+                        hMomentumOutSide->Fill(momentum.Mag()*1000);
+                        hAngleOutSide->Fill(momentum.Theta()*180/PI);
 
 		     }
 
@@ -405,8 +416,10 @@ void OldNMRSProton::Loop()
 
 		        nStopped++;
 		        hEnergySNS->Fill(ProtonEnergy);
+			hMomentumSNS->Fill(momentum.Mag()*1000);
 		        hAngleSNS->Fill(momentum.Theta()*180/PI);
 		        hEnergyStopped->Fill(ProtonEnergy);
+			hMomentumStopped->Fill(momentum.Mag()*1000);
 		        hAngleStopped->Fill(momentum.Theta()*180/PI);
 		     
 		     }
@@ -429,6 +442,9 @@ void OldNMRSProton::Loop()
 			{
 
 		           nOutSide++;
+                           hEnergyOutSide->Fill(ProtonEnergy);
+                           hMomentumOutSide->Fill(momentum.Mag()*1000);
+                           hAngleOutSide->Fill(momentum.Theta()*180/PI);
 
 			}
 
@@ -437,8 +453,10 @@ void OldNMRSProton::Loop()
 
 			   nStopped++;
 		           hEnergySNS->Fill(ProtonEnergy);
+			   hMomentumSNS->Fill(momentum.Mag()*1000);
 		           hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           hEnergyStopped->Fill(ProtonEnergy);
+			   hMomentumStopped->Fill(momentum.Mag()*1000);
 		           hAngleStopped->Fill(momentum.Theta()*180/PI);
 
 			}
@@ -451,7 +469,7 @@ void OldNMRSProton::Loop()
 
 		           MomMag = sqrt(EnergyAfter2Scint1Steel*EnergyAfter2Scint1Steel - m_p*m_p);
 
-		           double EnergyAfter2Scint2Steel = EnergyAfter2Scint1Steel - MPVSteel(MomMag)*100*rangeSteel - MPVCarbon(MomMag)*100*rangeSteel;
+		           double EnergyAfter2Scint2Steel = EnergyAfter2Scint1Steel - MPVSteel(MomMag)*100*rangeSteel;// - MPVCarbon(MomMag)*100*rangeSteel;
 
 		           WorkingPosition.SetX(MRDFacePosition.X() + 2*DeltaScint.X() + 2*DeltaSteel.X() + 1*DeltaAir.X());
 		           WorkingPosition.SetY(MRDFacePosition.Y() + 2*DeltaScint.Y() + 2*DeltaSteel.Y() + 1*DeltaAir.Y());
@@ -461,6 +479,9 @@ void OldNMRSProton::Loop()
 			   {
 
 			      nOutSide++;
+                              hEnergyOutSide->Fill(ProtonEnergy);
+                              hMomentumOutSide->Fill(momentum.Mag()*1000);
+                              hAngleOutSide->Fill(momentum.Theta()*180/PI);
 
 			   }
 
@@ -469,8 +490,10 @@ void OldNMRSProton::Loop()
 
 			      nStopped++;
 		              hEnergySNS->Fill(ProtonEnergy);
+			      hMomentumSNS->Fill(momentum.Mag()*1000);
 		              hAngleSNS->Fill(momentum.Theta()*180/PI);
 		              hEnergyStopped->Fill(ProtonEnergy);
+			      hMomentumStopped->Fill(momentum.Mag()*1000);
 		              hAngleStopped->Fill(momentum.Theta()*180/PI);
 
 			   }
@@ -493,6 +516,9 @@ void OldNMRSProton::Loop()
 			      {
 
 			         nOutSide++;
+                                 hEnergyOutSide->Fill(ProtonEnergy);
+                                 hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                 hAngleOutSide->Fill(momentum.Theta()*180/PI);
 
 			      }
 
@@ -501,8 +527,10 @@ void OldNMRSProton::Loop()
 
 			         nStopped++;
 		                 hEnergySNS->Fill(ProtonEnergy);
+			         hMomentumSNS->Fill(momentum.Mag()*1000);
 		                 hAngleSNS->Fill(momentum.Theta()*180/PI);
 		                 hEnergyStopped->Fill(ProtonEnergy);
+			         hMomentumStopped->Fill(momentum.Mag()*1000);
 		                 hAngleStopped->Fill(momentum.Theta()*180/PI);
 
 			      }
@@ -515,7 +543,7 @@ void OldNMRSProton::Loop()
 
 		                 MomMag = sqrt(EnergyAfter3Scint2Steel*EnergyAfter3Scint2Steel - m_p*m_p);
 
-		                 double EnergyAfter3Scint3Steel = EnergyAfter3Scint2Steel - MPVSteel(MomMag)*100*rangeSteel - MPVCarbon(MomMag)*100*rangeSteel;
+		                 double EnergyAfter3Scint3Steel = EnergyAfter3Scint2Steel - MPVSteel(MomMag)*100*rangeSteel;// - MPVCarbon(MomMag)*100*rangeSteel;
 
 		                 WorkingPosition.SetX(MRDFacePosition.X() + 3*DeltaScint.X() + 3*DeltaSteel.X() + 2*DeltaAir.X());
 		                 WorkingPosition.SetY(MRDFacePosition.Y() + 3*DeltaScint.Y() + 3*DeltaSteel.Y() + 2*DeltaAir.Y());
@@ -525,6 +553,9 @@ void OldNMRSProton::Loop()
 				 {
 
 			            nOutSide++;
+                                    hEnergyOutSide->Fill(ProtonEnergy);
+                                    hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                    hAngleOutSide->Fill(momentum.Theta()*180/PI);
 				 
 				 }
 
@@ -533,8 +564,10 @@ void OldNMRSProton::Loop()
 					 
 				    nStopped++;
 		                    hEnergySNS->Fill(ProtonEnergy);
+			            hMomentumSNS->Fill(momentum.Mag()*1000);
 		                    hAngleSNS->Fill(momentum.Theta()*180/PI);
 		                    hEnergyStopped->Fill(ProtonEnergy);
+			            hMomentumStopped->Fill(momentum.Mag()*1000);
 		                    hAngleStopped->Fill(momentum.Theta()*180/PI);
 				 
 				 }
@@ -557,6 +590,9 @@ void OldNMRSProton::Loop()
 				    {
 					    
 				       nOutSide++;
+                                       hEnergyOutSide->Fill(ProtonEnergy);
+                                       hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                       hAngleOutSide->Fill(momentum.Theta()*180/PI);
 				    
 				    }
 
@@ -565,8 +601,10 @@ void OldNMRSProton::Loop()
 					    
 				       nStopped++;
 		                       hEnergySNS->Fill(ProtonEnergy);
+			               hMomentumSNS->Fill(momentum.Mag()*1000);
 		     		       hAngleSNS->Fill(momentum.Theta()*180/PI);
 		     		       hEnergyStopped->Fill(ProtonEnergy);
+			               hMomentumStopped->Fill(momentum.Mag()*1000);
 		     		       hAngleStopped->Fill(momentum.Theta()*180/PI);
 				    
 				    }
@@ -579,7 +617,7 @@ void OldNMRSProton::Loop()
 
 		                       MomMag = sqrt(EnergyAfter4Scint3Steel*EnergyAfter4Scint3Steel - m_p*m_p);
 
-		                       double EnergyAfter4Scint4Steel = EnergyAfter4Scint3Steel - MPVSteel(MomMag)*100*rangeSteel - MPVCarbon(MomMag)*100*rangeSteel;
+		                       double EnergyAfter4Scint4Steel = EnergyAfter4Scint3Steel - MPVSteel(MomMag)*100*rangeSteel;// - MPVCarbon(MomMag)*100*rangeSteel;
 
 		                       WorkingPosition.SetX(MRDFacePosition.X() + 4*DeltaScint.X() + 4*DeltaSteel.X() + 3*DeltaAir.X());
 		                       WorkingPosition.SetY(MRDFacePosition.Y() + 4*DeltaScint.Y() + 4*DeltaSteel.Y() + 3*DeltaAir.Y());
@@ -589,6 +627,9 @@ void OldNMRSProton::Loop()
 				       {
 					       
 				          nOutSide++;
+                                          hEnergyOutSide->Fill(ProtonEnergy);
+                                          hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                          hAngleOutSide->Fill(momentum.Theta()*180/PI);
 				       
 				       }
 
@@ -597,8 +638,10 @@ void OldNMRSProton::Loop()
 					       
 			  	          nStopped++;
 		        		  hEnergySNS->Fill(ProtonEnergy);
+			                  hMomentumSNS->Fill(momentum.Mag()*1000);
 		     			  hAngleSNS->Fill(momentum.Theta()*180/PI);
 		     			  hEnergyStopped->Fill(ProtonEnergy);
+			                  hMomentumStopped->Fill(momentum.Mag()*1000);
 		     			  hAngleStopped->Fill(momentum.Theta()*180/PI);
 				       
 				       }
@@ -621,6 +664,9 @@ void OldNMRSProton::Loop()
 					  {
 						  
 				  	     nOutSide++;
+                                             hEnergyOutSide->Fill(ProtonEnergy);
+                                             hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                             hAngleOutSide->Fill(momentum.Theta()*180/PI);
 					  
 					  }
 
@@ -629,8 +675,10 @@ void OldNMRSProton::Loop()
 						  
 			     	             nStopped++;
 		                             hEnergySNS->Fill(ProtonEnergy);
+			                     hMomentumSNS->Fill(momentum.Mag()*1000);
 		           		     hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           		     hEnergyStopped->Fill(ProtonEnergy);
+			                     hMomentumStopped->Fill(momentum.Mag()*1000);
 		          		     hAngleStopped->Fill(momentum.Theta()*180/PI);
 					  
 					  }
@@ -643,7 +691,7 @@ void OldNMRSProton::Loop()
 
 		                             MomMag = sqrt(EnergyAfter5Scint4Steel*EnergyAfter5Scint4Steel - m_p*m_p);
 
-		                             double EnergyAfter5Scint5Steel = EnergyAfter5Scint4Steel - MPVCarbon(MomMag)*100*rangeSteel - MPVSteel(MomMag)*100*rangeSteel;
+		                             double EnergyAfter5Scint5Steel = EnergyAfter5Scint4Steel - MPVSteel(MomMag)*100*rangeSteel;
 
 		                             WorkingPosition.SetX(MRDFacePosition.X() + 5*DeltaScint.X() + 5*DeltaSteel.X() + 4*DeltaAir.X());
 		                             WorkingPosition.SetY(MRDFacePosition.Y() + 5*DeltaScint.Y() + 5*DeltaSteel.Y() + 4*DeltaAir.Y());
@@ -653,6 +701,9 @@ void OldNMRSProton::Loop()
 					     {
 						     
 					        nOutSide++;
+                                                hEnergyOutSide->Fill(ProtonEnergy);
+                                                hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                hAngleOutSide->Fill(momentum.Theta()*180/PI);
 					     
 					     }
 
@@ -661,8 +712,10 @@ void OldNMRSProton::Loop()
 						     
 				 	        nStopped++;
 		           			hEnergySNS->Fill(ProtonEnergy);
+			                        hMomentumSNS->Fill(momentum.Mag()*1000);
 		           			hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           			hEnergyStopped->Fill(ProtonEnergy);
+			                        hMomentumStopped->Fill(momentum.Mag()*1000);
 		           			hAngleStopped->Fill(momentum.Theta()*180/PI);
 					     
 					     }
@@ -685,6 +738,9 @@ void OldNMRSProton::Loop()
 						{
 							
 						   nOutSide++;
+                                                   hEnergyOutSide->Fill(ProtonEnergy);
+                                                   hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                   hAngleOutSide->Fill(momentum.Theta()*180/PI);
 						
 						}
 
@@ -693,8 +749,10 @@ void OldNMRSProton::Loop()
 							
 						   nStopped++;
 		           			   hEnergySNS->Fill(ProtonEnergy);
+			                           hMomentumSNS->Fill(momentum.Mag()*1000);
 		           			   hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           			   hEnergyStopped->Fill(ProtonEnergy);
+			                           hMomentumStopped->Fill(momentum.Mag()*1000);
 		           			   hAngleStopped->Fill(momentum.Theta()*180/PI);
 						
 						}
@@ -707,7 +765,7 @@ void OldNMRSProton::Loop()
 
 		                                   MomMag = sqrt(EnergyAfter6Scint5Steel*EnergyAfter6Scint5Steel - m_p*m_p);
 
-		                                   double EnergyAfter6Scint6Steel = EnergyAfter6Scint5Steel - MPVCarbon(MomMag)*100*rangeSteel - MPVSteel(MomMag)*100*rangeSteel;
+		                                   double EnergyAfter6Scint6Steel = EnergyAfter6Scint5Steel - MPVSteel(MomMag)*100*rangeSteel;
 
 		                                   WorkingPosition.SetX(MRDFacePosition.X() + 6*DeltaScint.X() + 6*DeltaSteel.X() + 5*DeltaAir.X());
 		                                   WorkingPosition.SetY(MRDFacePosition.Y() + 6*DeltaScint.Y() + 6*DeltaSteel.Y() + 5*DeltaAir.Y());
@@ -717,6 +775,9 @@ void OldNMRSProton::Loop()
 						   {
 							   
 						      nOutSide++;
+                                                      hEnergyOutSide->Fill(ProtonEnergy);
+                                                      hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                      hAngleOutSide->Fill(momentum.Theta()*180/PI);
 						   
 						   }
 
@@ -725,8 +786,10 @@ void OldNMRSProton::Loop()
 							   
 						      nStopped++;
 		           			      hEnergySNS->Fill(ProtonEnergy);
+			                              hMomentumSNS->Fill(momentum.Mag()*1000);
 		           			      hAngleSNS->Fill(momentum.Theta()*180/PI);
 		          			      hEnergyStopped->Fill(ProtonEnergy);
+			                              hMomentumStopped->Fill(momentum.Mag()*1000);
 		          			      hAngleStopped->Fill(momentum.Theta()*180/PI);
 						   
 						   }
@@ -749,6 +812,9 @@ void OldNMRSProton::Loop()
 						      {
 							      
 						         nOutSide++;
+                                                         hEnergyOutSide->Fill(ProtonEnergy);
+                                                         hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                         hAngleOutSide->Fill(momentum.Theta()*180/PI);
 						      
 						      }
 
@@ -757,8 +823,10 @@ void OldNMRSProton::Loop()
 							      
 						         nStopped++;
 		           				 hEnergySNS->Fill(ProtonEnergy);
+			                                 hMomentumSNS->Fill(momentum.Mag()*1000);
 		           				 hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           				 hEnergyStopped->Fill(ProtonEnergy);
+			                                 hMomentumStopped->Fill(momentum.Mag()*1000);
 		          				 hAngleStopped->Fill(momentum.Theta()*180/PI);
 						      
 						      }
@@ -771,7 +839,7 @@ void OldNMRSProton::Loop()
 
 		                                         MomMag = sqrt(EnergyAfter7Scint6Steel*EnergyAfter7Scint6Steel - m_p*m_p);
 
-		                                         double EnergyAfter7Scint7Steel = EnergyAfter7Scint6Steel - MPVCarbon(MomMag)*100*rangeSteel - MPVSteel(MomMag)*100*rangeSteel;
+		                                         double EnergyAfter7Scint7Steel = EnergyAfter7Scint6Steel - MPVSteel(MomMag)*100*rangeSteel;
 
 		                                         WorkingPosition.SetX(MRDFacePosition.X() + 7*DeltaScint.X() + 7*DeltaSteel.X() + 6*DeltaAir.X());
 		                                         WorkingPosition.SetY(MRDFacePosition.Y() + 7*DeltaScint.Y() + 7*DeltaSteel.Y() + 6*DeltaAir.Y());
@@ -781,6 +849,9 @@ void OldNMRSProton::Loop()
 							 {
 								 
 							    nOutSide++;
+                                                            hEnergyOutSide->Fill(ProtonEnergy);
+                                                            hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                            hAngleOutSide->Fill(momentum.Theta()*180/PI);
 							 
 							 }
 
@@ -789,8 +860,10 @@ void OldNMRSProton::Loop()
 								 
 							    nStopped++;
 		           				    hEnergySNS->Fill(ProtonEnergy);
+			                                    hMomentumSNS->Fill(momentum.Mag()*1000);
 		           				    hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           				    hEnergyStopped->Fill(ProtonEnergy);
+			                                    hMomentumStopped->Fill(momentum.Mag()*1000);
 		           				    hAngleStopped->Fill(momentum.Theta()*180/PI);
 							 
 							 }
@@ -813,6 +886,9 @@ void OldNMRSProton::Loop()
 							    {
 								    
 							       nOutSide++;
+                                                               hEnergyOutSide->Fill(ProtonEnergy);
+                                                               hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                               hAngleOutSide->Fill(momentum.Theta()*180/PI);
 							    
 							    }
 
@@ -821,8 +897,10 @@ void OldNMRSProton::Loop()
 								   
 							       nStopped++;
 		           				       hEnergySNS->Fill(ProtonEnergy);
+			                                       hMomentumSNS->Fill(momentum.Mag()*1000);
 		           				       hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           				       hEnergyStopped->Fill(ProtonEnergy);
+			                                       hMomentumStopped->Fill(momentum.Mag()*1000);
 		           				       hAngleStopped->Fill(momentum.Theta()*180/PI);
 							    
 							    }
@@ -835,7 +913,7 @@ void OldNMRSProton::Loop()
 
 		                                               MomMag = sqrt(EnergyAfter8Scint7Steel*EnergyAfter8Scint7Steel - m_p*m_p);
 
-		                                               double EnergyAfter8Scint8Steel = EnergyAfter8Scint7Steel - MPVCarbon(MomMag)*100*rangeSteel - MPVSteel(MomMag)*100*rangeSteel;
+		                                               double EnergyAfter8Scint8Steel = EnergyAfter8Scint7Steel - MPVSteel(MomMag)*100*rangeSteel;
 
 		                                               WorkingPosition.SetX(MRDFacePosition.X() + 8*DeltaScint.X() + 8*DeltaSteel.X() + 7*DeltaAir.X());
 		                                               WorkingPosition.SetY(MRDFacePosition.Y() + 8*DeltaScint.Y() + 8*DeltaSteel.Y() + 7*DeltaAir.Y());
@@ -845,6 +923,9 @@ void OldNMRSProton::Loop()
 							       {
 								       
 							          nOutSide++;
+                                                                  hEnergyOutSide->Fill(ProtonEnergy);
+                                                                  hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                                  hAngleOutSide->Fill(momentum.Theta()*180/PI);
 							       
 							       }
 
@@ -853,8 +934,10 @@ void OldNMRSProton::Loop()
 								       
 							          nStopped++;
 		           					  hEnergySNS->Fill(ProtonEnergy);
+			                                          hMomentumSNS->Fill(momentum.Mag()*1000);
 		           					  hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           					  hEnergyStopped->Fill(ProtonEnergy);
+			                                          hMomentumStopped->Fill(momentum.Mag()*1000);
 		         					  hAngleStopped->Fill(momentum.Theta()*180/PI);
 							       
 							       }
@@ -877,6 +960,9 @@ void OldNMRSProton::Loop()
 								  {
 									  
 								     nOutSide++;
+                                                                     hEnergyOutSide->Fill(ProtonEnergy);
+                                                                     hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                                     hAngleOutSide->Fill(momentum.Theta()*180/PI);
 								  
 								  }
 
@@ -885,8 +971,10 @@ void OldNMRSProton::Loop()
 									  
 								     nStopped++;
 		           					     hEnergySNS->Fill(ProtonEnergy);
+			                                             hMomentumSNS->Fill(momentum.Mag()*1000);
 		           					     hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           					     hEnergyStopped->Fill(ProtonEnergy);
+			                                             hMomentumStopped->Fill(momentum.Mag()*1000);
 		           					     hAngleStopped->Fill(momentum.Theta()*180/PI);
 								  
 								  }
@@ -899,7 +987,7 @@ void OldNMRSProton::Loop()
 
 		                                                     MomMag = sqrt(EnergyAfter9Scint8Steel*EnergyAfter9Scint8Steel - m_p*m_p);
 
-		                                                     double EnergyAfter9Scint9Steel = EnergyAfter9Scint8Steel - MPVCarbon(MomMag)*100*rangeSteel - MPVSteel(MomMag)*100*rangeSteel;
+		                                                     double EnergyAfter9Scint9Steel = EnergyAfter9Scint8Steel - MPVSteel(MomMag)*100*rangeSteel;
 
 		                                                     WorkingPosition.SetX(MRDFacePosition.X() + 9*DeltaScint.X() + 9*DeltaSteel.X() + 8*DeltaAir.X());
 		                                                     WorkingPosition.SetY(MRDFacePosition.Y() + 9*DeltaScint.Y() + 9*DeltaSteel.Y() + 8*DeltaAir.Y());
@@ -909,6 +997,9 @@ void OldNMRSProton::Loop()
 								     {
 									     
 								        nOutSide++;
+                                                                        hEnergyOutSide->Fill(ProtonEnergy);
+                                                                        hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                                        hAngleOutSide->Fill(momentum.Theta()*180/PI);
 								     
 								     }
 
@@ -917,8 +1008,10 @@ void OldNMRSProton::Loop()
 									     
 							  	        nStopped++;
 		           						hEnergySNS->Fill(ProtonEnergy);
+			                                                hMomentumSNS->Fill(momentum.Mag()*1000);
 		           						hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           						hEnergyStopped->Fill(ProtonEnergy);
+			                                                hMomentumStopped->Fill(momentum.Mag()*1000);
 		           						hAngleStopped->Fill(momentum.Theta()*180/PI);
 								     
 								     }
@@ -941,6 +1034,9 @@ void OldNMRSProton::Loop()
 									{
 										
 									   nOutSide++;
+                                                                           hEnergyOutSide->Fill(ProtonEnergy);
+                                                                           hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                                           hAngleOutSide->Fill(momentum.Theta()*180/PI);
 									
 									}
 
@@ -949,8 +1045,10 @@ void OldNMRSProton::Loop()
 										
 									   nStopped++;
 		           						   hEnergySNS->Fill(ProtonEnergy);
+			                                                   hMomentumSNS->Fill(momentum.Mag()*1000);
 		           						   hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           						   hEnergyStopped->Fill(ProtonEnergy);
+			                                                   hMomentumStopped->Fill(momentum.Mag()*1000);
 		           						   hAngleStopped->Fill(momentum.Theta()*180/PI);
 									
 									}
@@ -963,7 +1061,7 @@ void OldNMRSProton::Loop()
 
 		                                                           MomMag = sqrt(EnergyAfter10Scint9Steel*EnergyAfter10Scint9Steel - m_p*m_p);
 
-		                                                           double EnergyAfter10Scint10Steel = EnergyAfter10Scint9Steel - MPVCarbon(MomMag)*100*rangeSteel - MPVSteel(MomMag)*100*rangeSteel;
+		                                                           double EnergyAfter10Scint10Steel = EnergyAfter10Scint9Steel - MPVSteel(MomMag)*100*rangeSteel;
 
 		                                                           WorkingPosition.SetX(MRDFacePosition.X() + 10*DeltaScint.X() + 10*DeltaSteel.X() + 9*DeltaAir.X());
 		                                                           WorkingPosition.SetY(MRDFacePosition.Y() + 10*DeltaScint.Y() + 10*DeltaSteel.Y() + 9*DeltaAir.Y());
@@ -973,6 +1071,9 @@ void OldNMRSProton::Loop()
 									   {
 										   
 									      nOutSide++;
+                                                                              hEnergyOutSide->Fill(ProtonEnergy);
+                                                                              hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                                              hAngleOutSide->Fill(momentum.Theta()*180/PI);
 									   
 									   }
 
@@ -981,8 +1082,10 @@ void OldNMRSProton::Loop()
 										   
 									      nStopped++;
 		           						      hEnergySNS->Fill(ProtonEnergy);
+			                                                      hMomentumSNS->Fill(momentum.Mag()*1000);
 		           						      hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           						      hEnergyStopped->Fill(ProtonEnergy);
+			                                                      hMomentumStopped->Fill(momentum.Mag()*1000);
 		           						      hAngleStopped->Fill(momentum.Theta()*180/PI);
 									   
 									   }
@@ -1005,6 +1108,9 @@ void OldNMRSProton::Loop()
 									      {
 										      
 									         nOutSide++;
+                                                                                 hEnergyOutSide->Fill(ProtonEnergy);
+                                                                                 hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                                                 hAngleOutSide->Fill(momentum.Theta()*180/PI);
 									      
 									      }
 
@@ -1013,8 +1119,10 @@ void OldNMRSProton::Loop()
 										      
 									         nStopped++;
 		           							 hEnergySNS->Fill(ProtonEnergy);
+			                                                         hMomentumSNS->Fill(momentum.Mag()*1000);
 		           							 hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           							 hEnergyStopped->Fill(ProtonEnergy);
+			                                                         hMomentumStopped->Fill(momentum.Mag()*1000);
 		           							 hAngleStopped->Fill(momentum.Theta()*180/PI);
 									      
 									      }
@@ -1027,7 +1135,7 @@ void OldNMRSProton::Loop()
 
 		                                                                 MomMag = sqrt(EnergyAfter11Scint10Steel*EnergyAfter11Scint10Steel - m_p*m_p);
 
-		                                                                 double EnergyAfter11Scint11Steel = EnergyAfter11Scint10Steel - MPVCarbon(MomMag)*100*rangeSteel - MPVSteel(MomMag)*100*rangeSteel;
+		                                                                 double EnergyAfter11Scint11Steel = EnergyAfter11Scint10Steel - MPVSteel(MomMag)*100*rangeSteel;
 
 		                                                                 WorkingPosition.SetX(MRDFacePosition.X() + 11*DeltaScint.X() + 11*DeltaSteel.X() + 10*DeltaAir.X());
 		                                                                 WorkingPosition.SetY(MRDFacePosition.Y() + 11*DeltaScint.Y() + 11*DeltaSteel.Y() + 10*DeltaAir.Y());
@@ -1037,6 +1145,9 @@ void OldNMRSProton::Loop()
 										 {
 											 
 									 	    nOutSide++;
+                                                                                    hEnergyOutSide->Fill(ProtonEnergy);
+                                                                                    hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                                                    hAngleOutSide->Fill(momentum.Theta()*180/PI);
 										 
 										 }
 
@@ -1045,8 +1156,10 @@ void OldNMRSProton::Loop()
 											 
 										    nStopped++;
 		           							    hEnergySNS->Fill(ProtonEnergy);
+			                                                            hMomentumSNS->Fill(momentum.Mag()*1000);
 		           							    hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           							    hEnergyStopped->Fill(ProtonEnergy);
+			                                                            hMomentumStopped->Fill(momentum.Mag()*1000);
 		           							    hAngleStopped->Fill(momentum.Theta()*180/PI);
 										 
 										 }
@@ -1069,6 +1182,9 @@ void OldNMRSProton::Loop()
 										    {
 											    
 										       nOutSide++;
+                                                                                       hEnergyOutSide->Fill(ProtonEnergy);
+                                                                                       hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                                                       hAngleOutSide->Fill(momentum.Theta()*180/PI);
 										    
 										    }
 
@@ -1077,8 +1193,10 @@ void OldNMRSProton::Loop()
 											    
 										       nStopped++;
 		           							       hEnergySNS->Fill(ProtonEnergy);
+			                                                               hMomentumSNS->Fill(momentum.Mag()*1000);
 		           							       hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           							       hEnergyStopped->Fill(ProtonEnergy);
+			                                                               hMomentumStopped->Fill(momentum.Mag()*1000);
 		           							       hAngleStopped->Fill(momentum.Theta()*180/PI);
 										    
 										    }
@@ -1091,7 +1209,7 @@ void OldNMRSProton::Loop()
 
 		                                                                       MomMag = sqrt(EnergyAfter12Scint11Steel*EnergyAfter12Scint11Steel - m_p*m_p);
 
-		                                                                       double EnergyAfter12Scint12Steel = EnergyAfter12Scint11Steel - MPVCarbon(MomMag)*100*rangeSteel - MPVSteel(MomMag)*100*rangeSteel;
+		                                                                       double EnergyAfter12Scint12Steel = EnergyAfter12Scint11Steel - MPVSteel(MomMag)*100*rangeSteel;
 
 		                                                                       WorkingPosition.SetX(MRDFacePosition.X() + 12*DeltaScint.X() + 12*DeltaSteel.X() + 11*DeltaAir.X());
 		                                                                       WorkingPosition.SetY(MRDFacePosition.Y() + 12*DeltaScint.Y() + 12*DeltaSteel.Y() + 11*DeltaAir.Y());
@@ -1101,6 +1219,9 @@ void OldNMRSProton::Loop()
 										       {
 											       
 										          nOutSide++;
+                                                                                          hEnergyOutSide->Fill(ProtonEnergy);
+                                                                                          hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                                                          hAngleOutSide->Fill(momentum.Theta()*180/PI);
 										       
 										       }
 
@@ -1109,8 +1230,10 @@ void OldNMRSProton::Loop()
 											       
 										          nStopped++;
 		           								  hEnergySNS->Fill(ProtonEnergy);
+			                                                                  hMomentumSNS->Fill(momentum.Mag()*1000);
 		           								  hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           								  hEnergyStopped->Fill(ProtonEnergy);
+			                                                                  hMomentumStopped->Fill(momentum.Mag()*1000);
 		           								  hAngleStopped->Fill(momentum.Theta()*180/PI);
 										       
 										       }
@@ -1133,6 +1256,9 @@ void OldNMRSProton::Loop()
 											  {
 												  
 											     nOutSide++;
+                                                                                             hEnergyOutSide->Fill(ProtonEnergy);
+                                                                                             hMomentumOutSide->Fill(momentum.Mag()*1000);
+                                                                                             hAngleOutSide->Fill(momentum.Theta()*180/PI);
 											  
 											  }
 
@@ -1141,8 +1267,10 @@ void OldNMRSProton::Loop()
 												  
 											     nStopped++;
 		           								     hEnergySNS->Fill(ProtonEnergy);
+			                                                                     hMomentumSNS->Fill(momentum.Mag()*1000);
 		           								     hAngleSNS->Fill(momentum.Theta()*180/PI);
 		           								     hEnergyStopped->Fill(ProtonEnergy);
+			                                                                     hMomentumStopped->Fill(momentum.Mag()*1000);
 		           								     hAngleStopped->Fill(momentum.Theta()*180/PI);
 											  
 											  }
@@ -1154,8 +1282,10 @@ void OldNMRSProton::Loop()
                                                                                              hEnergyCheck13Scint12Steel->Fill(EnergyAfter13Scint12Steel);
 			                                                                     hAngleCheck13Scint12Steel->Fill(momentum.Theta()*180/PI);
 											     hEnergySNS->Fill(ProtonEnergy);
+			                                                                     hMomentumSNS->Fill(momentum.Mag()*1000);
 											     hAngleSNS->Fill(momentum.Theta()*180/PI);
 											     hEnergyNotStopped->Fill(ProtonEnergy);
+			                                                                     hMomentumNotStopped->Fill(momentum.Mag()*1000);
 											     hAngleNotStopped->Fill(momentum.Theta()*180/PI);
 
 			                                                                  } //<---Close if statement for nonzero energy after 13 Scint 12 Steel
