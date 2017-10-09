@@ -94,6 +94,21 @@ TH1D *hAngleCheck12Scint12Steel = new TH1D("hAngleCheck12Scint12Steel", "Checkin
 
 TH1D *hEnergyCheck13Scint12Steel = new TH1D("hEnergyCheck13Scint12Steel", "Checking the Energy After 13 Scint Layer and 12 Steel Layers of the MRD", 50, 0, 2500);
 TH1D *hAngleCheck13Scint12Steel = new TH1D("hAngleCheck13Scint12Steel", "Checking the Angle After 13 Scint Layer and 12 Steel Layers of the MRD", 60, 0, 180);
+
+TH1D *hEnergyTMMRD = new TH1D("hEnergyTMMRD", "Initial Energies of the Total Protons That Made it to the MRD", 50, 0, 2500);
+TH1D *hAngleTMMRD = new TH1D("hAngleTMMRD", "Initial Angles of the Total Protons That Made it to the MRD", 60, 0, 180);
+
+TH1D *hEnergySNS = new TH1D("hEnergySNS", "Initial Energies of the Protons That Qualify as Stopped and Not-Stopped", 50, 0, 2500);
+TH1D *hAngleSNS = new TH1D("hAngleSNS", "Initial Angles of the Protons That Qualify as Stopped and Not-Stopped", 60, 0, 180);
+
+TH1D *hEnergyStopped = new TH1D("hEnergyStopped", "Initial Energies of the Stopped Protons", 50, 0, 2500);
+TH1D *hAngleStopped = new TH1D("hAngleStopped", "Initial Angles of the Stopped Protons", 60, 0, 180);
+
+TH1D *hEnergyNotStopped = new TH1D("hEnergyNotStopped", "Initial Energies of the Not-Stopped Protons", 50, 0, 2500);
+TH1D *hAngleNotStopped = new TH1D("hAngleNotStopped", "Initial Angles of the Not-Stopped Protons", 60, 0, 180);
+
+TH1D *hEnergyOutSide = new TH1D("hEnergyOutSide", "Initial Energies of the Out the Side Protons", 50, 0, 2500);
+TH1D *hAngleOutSide = new TH1D("hAngleOutSide", "Initial Angles of the Out the Side Protons", 60, 0, 180);
 //-----------------------------|
 
 
@@ -344,9 +359,25 @@ void OldNMRSProton::Loop()
 		  WorkingPosition.SetY(MRDFacePosition.Y() + 1*DeltaScint.Y() + 0*DeltaSteel.Y() + 0*DeltaAir.Y());
 		  WorkingPosition.SetZ(MRDFacePosition.Z() + 1*DeltaScint.Z() + 0*DeltaSteel.Z() + 0*DeltaAir.Z());
 
-		  if ((MRDx_f > MRDFacePosition.X() > MRDx_0) && (MRDy_f > MRDFacePosition.Y() > MRDy_0)) {nMadeMRD++;}
+		  if ((MRDx_f > MRDFacePosition.X() > MRDx_0) && (MRDy_f > MRDFacePosition.Y() > MRDy_0)) 
+		  {
 
-		  if ((EnergyAfter1Scint0Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+	             nMadeMRD++;
+                     hEnergyTMMRD->Fill(ProtonEnergy);
+		     hAngleTMMRD->Fill(momentum.Theta()*180/PI);
+
+		  }
+
+		  if ((EnergyAfter1Scint0Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+		  {
+
+		     nStopped++;
+		     hEnergySNS->Fill(ProtonEnergy);
+		     hAngleSNS->Fill(momentum.Theta()*180/PI);
+		     hEnergyStopped->Fill(ProtonEnergy);
+		     hAngleStopped->Fill(momentum.Theta()*180/PI);
+
+		  }
 
 		  if ((EnergyAfter1Scint0Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
 		  {
@@ -362,8 +393,23 @@ void OldNMRSProton::Loop()
 		     WorkingPosition.SetY(MRDFacePosition.Y() + 1*DeltaScint.Y() + 1*DeltaSteel.Y() + 0*DeltaAir.Y());
 		     WorkingPosition.SetZ(MRDFacePosition.Z() + 1*DeltaScint.Z() + 1*DeltaSteel.Z() + 0*DeltaAir.Z());
 
-		     if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter1Scint1Steel > m_p)) {nOutSide++;}
-		     if ((EnergyAfter1Scint1Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		     if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter1Scint1Steel > m_p)) 
+		     {
+
+		        nOutSide++;
+
+		     }
+
+		     if ((EnergyAfter1Scint1Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+		     {
+
+		        nStopped++;
+		        hEnergySNS->Fill(ProtonEnergy);
+		        hAngleSNS->Fill(momentum.Theta()*180/PI);
+		        hEnergyStopped->Fill(ProtonEnergy);
+		        hAngleStopped->Fill(momentum.Theta()*180/PI);
+		     
+		     }
 
 		     if ((EnergyAfter1Scint1Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
 		     {
@@ -379,8 +425,23 @@ void OldNMRSProton::Loop()
 		        WorkingPosition.SetY(MRDFacePosition.Y() + 2*DeltaScint.Y() + 1*DeltaSteel.Y() + 0*DeltaAir.Y());
 		        WorkingPosition.SetZ(MRDFacePosition.Z() + 2*DeltaScint.Z() + 1*DeltaSteel.Z() + 0*DeltaAir.Z());
 
-		        if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter2Scint1Steel > m_p)) {nOutSide++;}
-		        if ((EnergyAfter2Scint1Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		        if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter2Scint1Steel > m_p)) 
+			{
+
+		           nOutSide++;
+
+			}
+
+		        if ((EnergyAfter2Scint1Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+			{
+
+			   nStopped++;
+		           hEnergySNS->Fill(ProtonEnergy);
+		           hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           hEnergyStopped->Fill(ProtonEnergy);
+		           hAngleStopped->Fill(momentum.Theta()*180/PI);
+
+			}
 
 		        if ((EnergyAfter2Scint1Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			{
@@ -396,8 +457,23 @@ void OldNMRSProton::Loop()
 		           WorkingPosition.SetY(MRDFacePosition.Y() + 2*DeltaScint.Y() + 2*DeltaSteel.Y() + 1*DeltaAir.Y());
 		           WorkingPosition.SetZ(MRDFacePosition.Z() + 2*DeltaScint.Z() + 2*DeltaSteel.Z() + 1*DeltaAir.Z());
 
-		           if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter2Scint2Steel > m_p)) {nOutSide++;}
-		           if ((EnergyAfter2Scint2Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		           if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter2Scint2Steel > m_p)) 
+			   {
+
+			      nOutSide++;
+
+			   }
+
+		           if ((EnergyAfter2Scint2Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+			   {
+
+			      nStopped++;
+		              hEnergySNS->Fill(ProtonEnergy);
+		              hAngleSNS->Fill(momentum.Theta()*180/PI);
+		              hEnergyStopped->Fill(ProtonEnergy);
+		              hAngleStopped->Fill(momentum.Theta()*180/PI);
+
+			   }
 
 		           if ((EnergyAfter2Scint2Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			   {
@@ -413,8 +489,23 @@ void OldNMRSProton::Loop()
 		              WorkingPosition.SetY(MRDFacePosition.Y() + 3*DeltaScint.Y() + 2*DeltaSteel.Y() + 1*DeltaAir.Y());
 		              WorkingPosition.SetZ(MRDFacePosition.Z() + 3*DeltaScint.Z() + 2*DeltaSteel.Z() + 1*DeltaAir.Z());
 
-		              if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter3Scint2Steel > m_p)) {nOutSide++;}
-		              if ((EnergyAfter3Scint2Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		              if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter3Scint2Steel > m_p)) 
+			      {
+
+			         nOutSide++;
+
+			      }
+
+		              if ((EnergyAfter3Scint2Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+			      {
+
+			         nStopped++;
+		                 hEnergySNS->Fill(ProtonEnergy);
+		                 hAngleSNS->Fill(momentum.Theta()*180/PI);
+		                 hEnergyStopped->Fill(ProtonEnergy);
+		                 hAngleStopped->Fill(momentum.Theta()*180/PI);
+
+			      }
 
 		              if ((EnergyAfter3Scint2Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			      {
@@ -430,8 +521,23 @@ void OldNMRSProton::Loop()
 		                 WorkingPosition.SetY(MRDFacePosition.Y() + 3*DeltaScint.Y() + 3*DeltaSteel.Y() + 2*DeltaAir.Y());
 		                 WorkingPosition.SetZ(MRDFacePosition.Z() + 3*DeltaScint.Z() + 3*DeltaSteel.Z() + 2*DeltaAir.Z());
 
-		                 if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter3Scint3Steel > m_p)) {nOutSide++;}
-		                 if ((EnergyAfter3Scint3Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                 if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter3Scint3Steel > m_p)) 
+				 {
+
+			            nOutSide++;
+				 
+				 }
+
+		                 if ((EnergyAfter3Scint3Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+				 {
+					 
+				    nStopped++;
+		                    hEnergySNS->Fill(ProtonEnergy);
+		                    hAngleSNS->Fill(momentum.Theta()*180/PI);
+		                    hEnergyStopped->Fill(ProtonEnergy);
+		                    hAngleStopped->Fill(momentum.Theta()*180/PI);
+				 
+				 }
 
 		                 if ((EnergyAfter3Scint3Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			         {
@@ -447,8 +553,23 @@ void OldNMRSProton::Loop()
 		                    WorkingPosition.SetY(MRDFacePosition.Y() + 4*DeltaScint.Y() + 3*DeltaSteel.Y() + 2*DeltaAir.Y());
 		                    WorkingPosition.SetZ(MRDFacePosition.Z() + 4*DeltaScint.Z() + 3*DeltaSteel.Z() + 2*DeltaAir.Z());
 
-		                    if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter4Scint3Steel > m_p)) {nOutSide++;}
-		                    if ((EnergyAfter4Scint3Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                    if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter4Scint3Steel > m_p)) 
+				    {
+					    
+				       nOutSide++;
+				    
+				    }
+
+		                    if ((EnergyAfter4Scint3Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+				    {
+					    
+				       nStopped++;
+		                       hEnergySNS->Fill(ProtonEnergy);
+		     		       hAngleSNS->Fill(momentum.Theta()*180/PI);
+		     		       hEnergyStopped->Fill(ProtonEnergy);
+		     		       hAngleStopped->Fill(momentum.Theta()*180/PI);
+				    
+				    }
 
 		                    if ((EnergyAfter4Scint3Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			            {
@@ -464,8 +585,23 @@ void OldNMRSProton::Loop()
 		                       WorkingPosition.SetY(MRDFacePosition.Y() + 4*DeltaScint.Y() + 4*DeltaSteel.Y() + 3*DeltaAir.Y());
 		                       WorkingPosition.SetZ(MRDFacePosition.Z() + 4*DeltaScint.Z() + 4*DeltaSteel.Z() + 3*DeltaAir.Z());
 
-		                       if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter4Scint4Steel > m_p)) {nOutSide++;}
-		                       if ((EnergyAfter4Scint4Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                       if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter4Scint4Steel > m_p)) 
+				       {
+					       
+				          nOutSide++;
+				       
+				       }
+
+		                       if ((EnergyAfter4Scint4Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+				       {
+					       
+			  	          nStopped++;
+		        		  hEnergySNS->Fill(ProtonEnergy);
+		     			  hAngleSNS->Fill(momentum.Theta()*180/PI);
+		     			  hEnergyStopped->Fill(ProtonEnergy);
+		     			  hAngleStopped->Fill(momentum.Theta()*180/PI);
+				       
+				       }
 
 		                       if ((EnergyAfter4Scint4Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			               {
@@ -481,8 +617,23 @@ void OldNMRSProton::Loop()
 		                          WorkingPosition.SetY(MRDFacePosition.Y() + 5*DeltaScint.Y() + 4*DeltaSteel.Y() + 3*DeltaAir.Y());
 		                          WorkingPosition.SetZ(MRDFacePosition.Z() + 5*DeltaScint.Z() + 4*DeltaSteel.Z() + 3*DeltaAir.Z());
 
-		                          if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter5Scint4Steel > m_p)) {nOutSide++;}
-		                          if ((EnergyAfter5Scint4Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                          if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter5Scint4Steel > m_p)) 
+					  {
+						  
+				  	     nOutSide++;
+					  
+					  }
+
+		                          if ((EnergyAfter5Scint4Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+					  {
+						  
+			     	             nStopped++;
+		                             hEnergySNS->Fill(ProtonEnergy);
+		           		     hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           		     hEnergyStopped->Fill(ProtonEnergy);
+		          		     hAngleStopped->Fill(momentum.Theta()*180/PI);
+					  
+					  }
 
 		                          if ((EnergyAfter5Scint4Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                  {
@@ -498,8 +649,23 @@ void OldNMRSProton::Loop()
 		                             WorkingPosition.SetY(MRDFacePosition.Y() + 5*DeltaScint.Y() + 5*DeltaSteel.Y() + 4*DeltaAir.Y());
 		                             WorkingPosition.SetZ(MRDFacePosition.Z() + 5*DeltaScint.Z() + 5*DeltaSteel.Z() + 4*DeltaAir.Z());
 
-		                             if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter5Scint5Steel > m_p)) {nOutSide++;}
-		                             if ((EnergyAfter5Scint5Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                             if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter5Scint5Steel > m_p)) 
+					     {
+						     
+					        nOutSide++;
+					     
+					     }
+
+		                             if ((EnergyAfter5Scint5Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+					     {
+						     
+				 	        nStopped++;
+		           			hEnergySNS->Fill(ProtonEnergy);
+		           			hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           			hEnergyStopped->Fill(ProtonEnergy);
+		           			hAngleStopped->Fill(momentum.Theta()*180/PI);
+					     
+					     }
 
 		                             if ((EnergyAfter5Scint5Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                     {
@@ -515,8 +681,23 @@ void OldNMRSProton::Loop()
 		                                WorkingPosition.SetY(MRDFacePosition.Y() + 6*DeltaScint.Y() + 5*DeltaSteel.Y() + 4*DeltaAir.Y());
 		                                WorkingPosition.SetZ(MRDFacePosition.Z() + 6*DeltaScint.Z() + 5*DeltaSteel.Z() + 4*DeltaAir.Z());
 
-		                                if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter6Scint5Steel > m_p)) {nOutSide++;}
-		                                if ((EnergyAfter6Scint5Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter6Scint5Steel > m_p)) 
+						{
+							
+						   nOutSide++;
+						
+						}
+
+		                                if ((EnergyAfter6Scint5Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+						{
+							
+						   nStopped++;
+		           			   hEnergySNS->Fill(ProtonEnergy);
+		           			   hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           			   hEnergyStopped->Fill(ProtonEnergy);
+		           			   hAngleStopped->Fill(momentum.Theta()*180/PI);
+						
+						}
 
 		                                if ((EnergyAfter6Scint5Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                        {
@@ -532,8 +713,23 @@ void OldNMRSProton::Loop()
 		                                   WorkingPosition.SetY(MRDFacePosition.Y() + 6*DeltaScint.Y() + 6*DeltaSteel.Y() + 5*DeltaAir.Y());
 		                                   WorkingPosition.SetZ(MRDFacePosition.Z() + 6*DeltaScint.Z() + 6*DeltaSteel.Z() + 5*DeltaAir.Z());
 
-		                                   if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter6Scint6Steel > m_p)) {nOutSide++;}
-		                                   if ((EnergyAfter6Scint6Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                   if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter6Scint6Steel > m_p)) 
+						   {
+							   
+						      nOutSide++;
+						   
+						   }
+
+		                                   if ((EnergyAfter6Scint6Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+						   {
+							   
+						      nStopped++;
+		           			      hEnergySNS->Fill(ProtonEnergy);
+		           			      hAngleSNS->Fill(momentum.Theta()*180/PI);
+		          			      hEnergyStopped->Fill(ProtonEnergy);
+		          			      hAngleStopped->Fill(momentum.Theta()*180/PI);
+						   
+						   }
 
 		                                   if ((EnergyAfter6Scint6Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                           {
@@ -549,8 +745,23 @@ void OldNMRSProton::Loop()
 		                                      WorkingPosition.SetY(MRDFacePosition.Y() + 7*DeltaScint.Y() + 6*DeltaSteel.Y() + 5*DeltaAir.Y());
 		                                      WorkingPosition.SetZ(MRDFacePosition.Z() + 7*DeltaScint.Z() + 6*DeltaSteel.Z() + 5*DeltaAir.Z());
 
-		                                      if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter7Scint6Steel > m_p)) {nOutSide++;}
-		                                      if ((EnergyAfter7Scint6Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                      if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter7Scint6Steel > m_p)) 
+						      {
+							      
+						         nOutSide++;
+						      
+						      }
+
+		                                      if ((EnergyAfter7Scint6Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+						      {
+							      
+						         nStopped++;
+		           				 hEnergySNS->Fill(ProtonEnergy);
+		           				 hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           				 hEnergyStopped->Fill(ProtonEnergy);
+		          				 hAngleStopped->Fill(momentum.Theta()*180/PI);
+						      
+						      }
 
 		                                      if ((EnergyAfter7Scint6Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                              {
@@ -566,8 +777,23 @@ void OldNMRSProton::Loop()
 		                                         WorkingPosition.SetY(MRDFacePosition.Y() + 7*DeltaScint.Y() + 7*DeltaSteel.Y() + 6*DeltaAir.Y());
 		                                         WorkingPosition.SetZ(MRDFacePosition.Z() + 7*DeltaScint.Z() + 7*DeltaSteel.Z() + 6*DeltaAir.Z());
 
-		                                         if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter7Scint7Steel > m_p)) {nOutSide++;}
-		                                         if ((EnergyAfter7Scint7Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                         if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter7Scint7Steel > m_p)) 
+							 {
+								 
+							    nOutSide++;
+							 
+							 }
+
+		                                         if ((EnergyAfter7Scint7Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+							 {
+								 
+							    nStopped++;
+		           				    hEnergySNS->Fill(ProtonEnergy);
+		           				    hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           				    hEnergyStopped->Fill(ProtonEnergy);
+		           				    hAngleStopped->Fill(momentum.Theta()*180/PI);
+							 
+							 }
 
 		                                         if ((EnergyAfter7Scint7Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                 {
@@ -583,8 +809,23 @@ void OldNMRSProton::Loop()
 		                                            WorkingPosition.SetY(MRDFacePosition.Y() + 8*DeltaScint.Y() + 7*DeltaSteel.Y() + 6*DeltaAir.Y());
 		                                            WorkingPosition.SetZ(MRDFacePosition.Z() + 8*DeltaScint.Z() + 7*DeltaSteel.Z() + 6*DeltaAir.Z());
 
-		                                            if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter8Scint7Steel > m_p)) {nOutSide++;}
-		                                            if ((EnergyAfter8Scint7Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                            if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter8Scint7Steel > m_p)) 
+							    {
+								    
+							       nOutSide++;
+							    
+							    }
+
+		                                            if ((EnergyAfter8Scint7Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+							    {
+								   
+							       nStopped++;
+		           				       hEnergySNS->Fill(ProtonEnergy);
+		           				       hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           				       hEnergyStopped->Fill(ProtonEnergy);
+		           				       hAngleStopped->Fill(momentum.Theta()*180/PI);
+							    
+							    }
 
 		                                            if ((EnergyAfter8Scint7Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                    {
@@ -600,8 +841,23 @@ void OldNMRSProton::Loop()
 		                                               WorkingPosition.SetY(MRDFacePosition.Y() + 8*DeltaScint.Y() + 8*DeltaSteel.Y() + 7*DeltaAir.Y());
 		                                               WorkingPosition.SetZ(MRDFacePosition.Z() + 8*DeltaScint.Z() + 8*DeltaSteel.Z() + 7*DeltaAir.Z());
 
-		                                               if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter8Scint8Steel > m_p)) {nOutSide++;}
-		                                               if ((EnergyAfter8Scint8Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                               if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter8Scint8Steel > m_p)) 
+							       {
+								       
+							          nOutSide++;
+							       
+							       }
+
+		                                               if ((EnergyAfter8Scint8Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+							       {
+								       
+							          nStopped++;
+		           					  hEnergySNS->Fill(ProtonEnergy);
+		           					  hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           					  hEnergyStopped->Fill(ProtonEnergy);
+		         					  hAngleStopped->Fill(momentum.Theta()*180/PI);
+							       
+							       }
 
 		                                               if ((EnergyAfter8Scint8Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                       {
@@ -617,8 +873,23 @@ void OldNMRSProton::Loop()
 		                                                  WorkingPosition.SetY(MRDFacePosition.Y() + 9*DeltaScint.Y() + 8*DeltaSteel.Y() + 7*DeltaAir.Y());
 		                                                  WorkingPosition.SetZ(MRDFacePosition.Z() + 9*DeltaScint.Z() + 8*DeltaSteel.Z() + 7*DeltaAir.Z());
 
-		                                                  if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter9Scint8Steel > m_p)) {nOutSide++;}
-		                                                  if ((EnergyAfter9Scint8Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                                  if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter9Scint8Steel > m_p)) 
+								  {
+									  
+								     nOutSide++;
+								  
+								  }
+
+		                                                  if ((EnergyAfter9Scint8Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+								  {
+									  
+								     nStopped++;
+		           					     hEnergySNS->Fill(ProtonEnergy);
+		           					     hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           					     hEnergyStopped->Fill(ProtonEnergy);
+		           					     hAngleStopped->Fill(momentum.Theta()*180/PI);
+								  
+								  }
 
 		                                                  if ((EnergyAfter9Scint8Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                          {
@@ -634,8 +905,23 @@ void OldNMRSProton::Loop()
 		                                                     WorkingPosition.SetY(MRDFacePosition.Y() + 9*DeltaScint.Y() + 9*DeltaSteel.Y() + 8*DeltaAir.Y());
 		                                                     WorkingPosition.SetZ(MRDFacePosition.Z() + 9*DeltaScint.Z() + 9*DeltaSteel.Z() + 8*DeltaAir.Z());
 
-		                                                     if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter9Scint9Steel > m_p)) {nOutSide++;}
-		                                                     if ((EnergyAfter9Scint9Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                                     if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter9Scint9Steel > m_p)) 
+								     {
+									     
+								        nOutSide++;
+								     
+								     }
+
+		                                                     if ((EnergyAfter9Scint9Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+								     {
+									     
+							  	        nStopped++;
+		           						hEnergySNS->Fill(ProtonEnergy);
+		           						hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           						hEnergyStopped->Fill(ProtonEnergy);
+		           						hAngleStopped->Fill(momentum.Theta()*180/PI);
+								     
+								     }
 
 		                                                     if ((EnergyAfter9Scint9Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                             {
@@ -651,8 +937,23 @@ void OldNMRSProton::Loop()
 		                                                        WorkingPosition.SetY(MRDFacePosition.Y() + 10*DeltaScint.Y() + 9*DeltaSteel.Y() + 8*DeltaAir.Y());
 		                                                        WorkingPosition.SetZ(MRDFacePosition.Z() + 10*DeltaScint.Z() + 9*DeltaSteel.Z() + 8*DeltaAir.Z());
 
-		                                                        if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter10Scint9Steel > m_p)) {nOutSide++;}
-		                                                        if ((EnergyAfter10Scint9Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                                        if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter10Scint9Steel > m_p)) 
+									{
+										
+									   nOutSide++;
+									
+									}
+
+		                                                        if ((EnergyAfter10Scint9Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+									{
+										
+									   nStopped++;
+		           						   hEnergySNS->Fill(ProtonEnergy);
+		           						   hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           						   hEnergyStopped->Fill(ProtonEnergy);
+		           						   hAngleStopped->Fill(momentum.Theta()*180/PI);
+									
+									}
 
 		                                                        if ((EnergyAfter10Scint9Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                                {
@@ -668,8 +969,23 @@ void OldNMRSProton::Loop()
 		                                                           WorkingPosition.SetY(MRDFacePosition.Y() + 10*DeltaScint.Y() + 10*DeltaSteel.Y() + 9*DeltaAir.Y());
 		                                                           WorkingPosition.SetZ(MRDFacePosition.Z() + 10*DeltaScint.Z() + 10*DeltaSteel.Z() + 9*DeltaAir.Z());
 
-		                                                           if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter10Scint10Steel > m_p)) {nOutSide++;}
-		                                                           if ((EnergyAfter10Scint10Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                                           if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter10Scint10Steel > m_p)) 
+									   {
+										   
+									      nOutSide++;
+									   
+									   }
+
+		                                                           if ((EnergyAfter10Scint10Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+									   {
+										   
+									      nStopped++;
+		           						      hEnergySNS->Fill(ProtonEnergy);
+		           						      hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           						      hEnergyStopped->Fill(ProtonEnergy);
+		           						      hAngleStopped->Fill(momentum.Theta()*180/PI);
+									   
+									   }
 
 		                                                           if ((EnergyAfter10Scint10Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                                   {
@@ -685,8 +1001,23 @@ void OldNMRSProton::Loop()
 		                                                              WorkingPosition.SetY(MRDFacePosition.Y() + 11*DeltaScint.Y() + 10*DeltaSteel.Y() + 9*DeltaAir.Y());
 		                                                              WorkingPosition.SetZ(MRDFacePosition.Z() + 11*DeltaScint.Z() + 10*DeltaSteel.Z() + 9*DeltaAir.Z());
 
-		                                                              if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter11Scint10Steel > m_p)) {nOutSide++;}
-		                                                              if ((EnergyAfter11Scint10Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                                              if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter11Scint10Steel > m_p)) 
+									      {
+										      
+									         nOutSide++;
+									      
+									      }
+
+		                                                              if ((EnergyAfter11Scint10Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+									      {
+										      
+									         nStopped++;
+		           							 hEnergySNS->Fill(ProtonEnergy);
+		           							 hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           							 hEnergyStopped->Fill(ProtonEnergy);
+		           							 hAngleStopped->Fill(momentum.Theta()*180/PI);
+									      
+									      }
 
 		                                                              if ((EnergyAfter11Scint10Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                                      {
@@ -702,8 +1033,23 @@ void OldNMRSProton::Loop()
 		                                                                 WorkingPosition.SetY(MRDFacePosition.Y() + 11*DeltaScint.Y() + 11*DeltaSteel.Y() + 10*DeltaAir.Y());
 		                                                                 WorkingPosition.SetZ(MRDFacePosition.Z() + 11*DeltaScint.Z() + 11*DeltaSteel.Z() + 10*DeltaAir.Z());
 
-		                                                                 if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter11Scint11Steel > m_p)) {nOutSide++;}
-		                                                                 if ((EnergyAfter11Scint11Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                                                 if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter11Scint11Steel > m_p)) 
+										 {
+											 
+									 	    nOutSide++;
+										 
+										 }
+
+		                                                                 if ((EnergyAfter11Scint11Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+										 {
+											 
+										    nStopped++;
+		           							    hEnergySNS->Fill(ProtonEnergy);
+		           							    hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           							    hEnergyStopped->Fill(ProtonEnergy);
+		           							    hAngleStopped->Fill(momentum.Theta()*180/PI);
+										 
+										 }
 
 		                                                                 if ((EnergyAfter11Scint11Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                                         {
@@ -719,8 +1065,23 @@ void OldNMRSProton::Loop()
 		                                                                    WorkingPosition.SetY(MRDFacePosition.Y() + 12*DeltaScint.Y() + 11*DeltaSteel.Y() + 10*DeltaAir.Y());
 		                                                                    WorkingPosition.SetZ(MRDFacePosition.Z() + 12*DeltaScint.Z() + 11*DeltaSteel.Z() + 10*DeltaAir.Z());
 
-		                                                                    if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter12Scint11Steel > m_p)) {nOutSide++;}
-		                                                                    if ((EnergyAfter12Scint11Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                                                    if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter12Scint11Steel > m_p)) 
+										    {
+											    
+										       nOutSide++;
+										    
+										    }
+
+		                                                                    if ((EnergyAfter12Scint11Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+										    {
+											    
+										       nStopped++;
+		           							       hEnergySNS->Fill(ProtonEnergy);
+		           							       hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           							       hEnergyStopped->Fill(ProtonEnergy);
+		           							       hAngleStopped->Fill(momentum.Theta()*180/PI);
+										    
+										    }
 
 		                                                                    if ((EnergyAfter12Scint11Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                                            {
@@ -736,8 +1097,23 @@ void OldNMRSProton::Loop()
 		                                                                       WorkingPosition.SetY(MRDFacePosition.Y() + 12*DeltaScint.Y() + 12*DeltaSteel.Y() + 11*DeltaAir.Y());
 		                                                                       WorkingPosition.SetZ(MRDFacePosition.Z() + 12*DeltaScint.Z() + 12*DeltaSteel.Z() + 11*DeltaAir.Z());
 
-		                                                                       if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter12Scint12Steel > m_p)) {nOutSide++;}
-		                                                                       if ((EnergyAfter12Scint12Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                                                       if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter12Scint12Steel > m_p)) 
+										       {
+											       
+										          nOutSide++;
+										       
+										       }
+
+		                                                                       if ((EnergyAfter12Scint12Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+										       {
+											       
+										          nStopped++;
+		           								  hEnergySNS->Fill(ProtonEnergy);
+		           								  hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           								  hEnergyStopped->Fill(ProtonEnergy);
+		           								  hAngleStopped->Fill(momentum.Theta()*180/PI);
+										       
+										       }
 
 		                                                                       if ((EnergyAfter12Scint12Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                                               {
@@ -753,8 +1129,23 @@ void OldNMRSProton::Loop()
 		                                                                          WorkingPosition.SetY(MRDFacePosition.Y() + 13*DeltaScint.Y() + 12*DeltaSteel.Y() + 11*DeltaAir.Y());
 		                                                                          WorkingPosition.SetZ(MRDFacePosition.Z() + 13*DeltaScint.Z() + 12*DeltaSteel.Z() + 11*DeltaAir.Z());
 
-		                                                                          if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter13Scint12Steel > m_p)) {nOutSide++;}
-		                                                                          if ((EnergyAfter13Scint12Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) {nStopped++;}
+		                                                                          if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter13Scint12Steel > m_p)) 
+											  {
+												  
+											     nOutSide++;
+											  
+											  }
+
+		                                                                          if ((EnergyAfter13Scint12Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+											  {
+												  
+											     nStopped++;
+		           								     hEnergySNS->Fill(ProtonEnergy);
+		           								     hAngleSNS->Fill(momentum.Theta()*180/PI);
+		           								     hEnergyStopped->Fill(ProtonEnergy);
+		           								     hAngleStopped->Fill(momentum.Theta()*180/PI);
+											  
+											  }
 
 		                                                                          if ((EnergyAfter13Scint12Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			                                                                  {
@@ -762,6 +1153,10 @@ void OldNMRSProton::Loop()
 											     nNotStopped++;
                                                                                              hEnergyCheck13Scint12Steel->Fill(EnergyAfter13Scint12Steel);
 			                                                                     hAngleCheck13Scint12Steel->Fill(momentum.Theta()*180/PI);
+											     hEnergySNS->Fill(ProtonEnergy);
+											     hAngleSNS->Fill(momentum.Theta()*180/PI);
+											     hEnergyNotStopped->Fill(ProtonEnergy);
+											     hAngleNotStopped->Fill(momentum.Theta()*180/PI);
 
 			                                                                  } //<---Close if statement for nonzero energy after 13 Scint 12 Steel
 
