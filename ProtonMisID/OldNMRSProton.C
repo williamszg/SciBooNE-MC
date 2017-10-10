@@ -116,8 +116,8 @@ TH1D *hEnergyOutSide = new TH1D("hEnergyOutSide", "Initial Energies of the Out t
 TH1D *hMomentumOutSide = new TH1D("hMomentumOutSide", "Initial Momentums of the Out the Side Protons", 50, 0, 2500);
 TH1D *hAngleOutSide = new TH1D("hAngleOutSide", "Initial Angles of the Out the Side Protons", 60, 0, 180);
 
-TH2D *hTotalProton2D = new TH2D("hTotalProton2D", "Total 2D Histogram of Angle and Momentum for All Protons", 36, 0, 180, 20, 0, 4500);
-TH2D *hSNSProton2D = new TH2D("hSNSProton2D", "2D Histogram of Angle and Momentum for Stopped and Not-Stopped Protons", 36, 0, 180, 20, 0, 4500);
+TH2D *hTotalProton2D = new TH2D("hTotalProton2D", "Total 2D Histogram of Angle and Momentum for All Protons", 36, 0, 180, 45, 0, 4500);
+TH2D *hSNSProton2D = new TH2D("hSNSProton2D", "2D Histogram of Angle and Momentum for Stopped and Not-Stopped Protons", 36, 0, 180, 45, 0, 4500);
 //-----------------------------|
 
 
