@@ -12,6 +12,7 @@
 //---       Histograms      ---|
 //-----------------------------|
 TH1D *hTotalProtonEnergy = new TH1D("hTotalProtonEnergy", "The Energies of all of the Proton Events", 50, 0, 2500);
+TH1D *hTotalProtonMomentum = new TH1D("hTotalProtonMomentum", "The Momentums of all of the Proton Events", 50, 0, 2500);
 TH1D *hTotalProtonAngle = new TH1D("hTotalProtonAngle", "The Angles of all of the Proton Events", 60, 0, 180);
 
 TH1D *hProtonEnergyAfterSciBar = new TH1D("hProtonEnergyAfterSciBar", "The Energies of the Protons After Traversing SciBar", 50, 0, 2500);
@@ -295,6 +296,7 @@ void OldNMRSProton::Loop()
 	 TVector3 position(Xpos,Ypos,Zpos); //Initial Proton Position
 
          hTotalProtonEnergy->Fill(StdHepP4[ProtonRegister][3]*1000);
+	 hTotalProtonMomentum->Fill(momentum.Mag()*1000);
 	 hTotalProtonAngle->Fill(momentum.Theta()*180/PI);
 	 hTotalProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
          
@@ -1430,6 +1432,42 @@ void OldNMRSProton::Loop()
    std::cout<<"Number that stopped in the MRD = "<<nStopped<<std::endl;
    std::cout<<"Number that did not stop in the MRD = "<<nNotStopped<<std::endl;
    std::cout<<"Number that exited the side of the MRD = "<<nOutSide<<std::endl;
+
+
+   //---------------------------------|
+   //--- Saving Histograms to File ---|
+   //---------------------------------|
+   TFile *TProtonInfo = new TFile("../ROOTFILES/protonORS.root", "CREATE");
+
+   hTotalProton2D->Write("Total2D");
+   hTotalProtonEnergy->Write("TotalE");
+   hTotalProtonMomentum->Write("TotalM");
+   hTotalProtonAngle->Write("TotalA");
+
+   hSNSProton2D->Write("SNS2D");
+   hEnergySNS->Write("SNSE");
+   hMomentumSNS->Write("SNSM");
+   hAngleSNS->Write("SNSA");
+
+   hEnergyTMMRD->Write("TMMRDE");
+   hMomentumTMMRD->Write("TMMRDM");
+   hAngleTMMRD->Write("TMMRDA");
+
+   hEnergyStopped->Write("StoppedE");
+   hMomentumStopped->Write("StoppedM");
+   hAngleStopped->Write("StoppedA");
+
+   hEnergyNotStopped->Write("NotStoppedE");
+   hMomentumNotStopped->Write("NotStoppedM");
+   hAngleNotStopped->Write("NotStoppedA");
+
+   hEnergyOutSide->Write("OutSideE");
+   hMomentumOutSide->Write("OutSideM");
+   hAngleOutSide->Write("OutSideA");
+
+   TProtonInfo->Write();
+   TProtonInfo->Close();
+   //---------------------------------|
 
 } //<--- Close void loop
 //===========================================|
