@@ -23,10 +23,18 @@ hSNSMomentumRS->Sumw2();
 hSNSAngleRS->Sumw2();
 
 //--- Defining the Ratio Histograms ---|
-TH2D *Ratio2DRS = new TH2D("Ratio2DRS", "2D Efficiencies", 36, 0, 180, 20, 0, 2000);
+TH2D *Ratio2DRS = new TH2D("Ratio2DRS", "2D Efficiencies", 36, 0, 180, 20, 0, 4500);
 TH1D *RatioEnergyRS = new TH1D("RatioEnergyRS", "Energy Efficiencies", 50, 0, 2500);
 TH1D *RatioMomentumRS = new TH1D("RatioMomentumRS", "Momentum Efficiencies", 50, 0, 2500);
 TH1D *RatioAngleRS = new TH1D("RatioAngleRS", "Angle Efficiencies", 60, 0, 180);
+
+//--- Formatting the Plot
+Ratio2DRS->GetXaxis()->SetTitle("Proton Angle (Degrees)");
+Ratio2DRS->GetXaxis()->CenterTitle();
+Ratio2DRS->GetYaxis()->SetTitle("Proton Momentum (MeV)");
+Ratio2DRS->GetYaxis()->CenterTitle();
+
+Ratio2DRS->Divide(hSNSProton2DRS, hTotalProton2DRS);
 //###############################################|
 
 
@@ -53,10 +61,18 @@ hSNSMomentumBS->Sumw2();
 hSNSAngleBS->Sumw2();
 
 //--- Defining the Ratio Histograms ---|
-TH2D *Ratio2DBS = new TH2D("Ratio2DBS", "2D Efficiencies", 36, 0, 180, 20, 0, 2000);
+TH2D *Ratio2DBS = new TH2D("Ratio2DBS", "2D Efficiencies", 36, 0, 180, 20, 0, 4500);
 TH1D *RatioEnergyBS = new TH1D("RatioEnergyBS", "Energy Efficiencies", 50, 0, 2500);
 TH1D *RatioMomentumBS = new TH1D("RatioMomentumBS", "Momentum Efficiencies", 50, 0, 2500);
 TH1D *RatioAngleBS = new TH1D("RatioAngleBS", "Angle Efficiencies", 60, 0, 180);
+
+//--- Formatting the Plot
+Ratio2DBS->GetXaxis()->SetTitle("Proton Angle (Degrees)");
+Ratio2DBS->GetXaxis()->CenterTitle();
+Ratio2DBS->GetYaxis()->SetTitle("Proton Momentum (MeV)");
+Ratio2DBS->GetYaxis()->CenterTitle();
+
+Ratio2DBS->Divide(hSNSProton2DBS, hTotalProton2DBS);
 //###############################################|
 
 
@@ -83,10 +99,18 @@ hSNSMomentumORS->Sumw2();
 hSNSAngleORS->Sumw2();
 
 //--- Defining the Ratio Histograms ---|
-TH2D *Ratio2DORS = new TH2D("Ratio2DORS", "2D Efficiencies", 36, 0, 180, 20, 0, 2000);
+TH2D *Ratio2DORS = new TH2D("Ratio2DORS", "2D Efficiencies", 36, 0, 180, 20, 0, 4500);
 TH1D *RatioEnergyORS = new TH1D("RatioEnergyORS", "Energy Efficiencies", 50, 0, 2500);
 TH1D *RatioMomentumORS = new TH1D("RatioMomentumORS", "Momentum Efficiencies", 50, 0, 2500);
 TH1D *RatioAngleORS = new TH1D("RatioAngleORS", "Angle Efficiencies", 60, 0, 180);
+
+//--- Formatting the Plot
+Ratio2DORS->GetXaxis()->SetTitle("Proton Angle (Degrees)");
+Ratio2DORS->GetXaxis()->CenterTitle();
+Ratio2DORS->GetYaxis()->SetTitle("Proton Momentum (MeV)");
+Ratio2DORS->GetYaxis()->CenterTitle();
+
+Ratio2DORS->Divide(hSNSProton2DORS, hTotalProton2DORS);
 //###############################################|
 
 }
