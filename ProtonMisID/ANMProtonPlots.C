@@ -3,7 +3,7 @@
 //###############################################|
 //###   Rein-Sehgal Files for Neutrino Mode   ###|
 //###############################################|
-TFile *f1 = new TFile("../ROOTFILES/protonRS.root");
+TFile *f1 = new TFile("../ROOTFILES/AprotonRS.root");
 
 TH2D *hTotalProton2DRS = (TH2D*)f1->Get("Total2D");
 TH1D *hTotalEnergyRS = (TH1D*)f1->Get("TotalE");
@@ -62,7 +62,7 @@ RatioAngleRS->Divide(hSNSAngleRS, hTotalAngleRS);
 //###############################################|
 //###  Berger-Sehgal Files for Neutrino Mode  ###|
 //###############################################|
-TFile *f2 = new TFile("../ROOTFILES/protonBS.root");
+TFile *f2 = new TFile("../ROOTFILES/AprotonBS.root");
 
 TH2D *hTotalProton2DBS = (TH2D*)f2->Get("Total2D");
 TH1D *hTotalEnergyBS = (TH1D*)f2->Get("TotalE");
@@ -117,69 +117,9 @@ RatioMomentumBS->Divide(hSNSMomentumBS, hTotalMomentumBS);
 RatioAngleBS->Divide(hSNSAngleBS, hTotalAngleBS);
 //###############################################|
 
-
-//###############################################|
-//### Old Rein-Sehgal Files for Neutrino Mode ###|
-//###############################################|
-TFile *f3 = new TFile("../ROOTFILES/protonORS.root");
-
-TH2D *hTotalProton2DORS = (TH2D*)f3->Get("Total2D");
-TH1D *hTotalEnergyORS = (TH1D*)f3->Get("TotalE");
-TH1D *hTotalMomentumORS = (TH1D*)f3->Get("TotalM");
-TH1D *hTotalAngleORS = (TH1D*)f3->Get("TotalA");
-
-TH2D *hSNSProton2DORS = (TH2D*)f3->Get("SNS2D");
-TH1D *hSNSEnergyORS = (TH1D*)f3->Get("SNSE");
-TH1D *hSNSMomentumORS = (TH1D*)f3->Get("SNSM");
-TH1D *hSNSAngleORS = (TH1D*)f3->Get("SNSA");
-
-hTotalEnergyORS->Sumw2();
-hTotalMomentumORS->Sumw2();
-hTotalAngleORS->Sumw2();
-hSNSEnergyORS->Sumw2();
-hSNSMomentumORS->Sumw2();
-hSNSAngleORS->Sumw2();
-
-//--- Defining the Ratio Histograms ---|
-TH2D *Ratio2DORS = new TH2D("Ratio2DORS", "2D Efficiencies", 36, 0, 180, 45, 0, 4500);
-TH1D *RatioEnergyORS = new TH1D("RatioEnergyORS", "Energy Efficiencies", 50, 0, 2500);
-TH1D *RatioMomentumORS = new TH1D("RatioMomentumORS", "Momentum Efficiencies", 50, 0, 2500);
-TH1D *RatioAngleORS = new TH1D("RatioAngleORS", "Angle Efficiencies", 60, 0, 180);
-
-//--- Formatting the Plot
-Ratio2DORS->GetXaxis()->SetTitle("Proton Angle (Degrees)");
-Ratio2DORS->GetXaxis()->CenterTitle();
-Ratio2DORS->GetYaxis()->SetTitle("Proton Momentum (MeV)");
-Ratio2DORS->GetYaxis()->CenterTitle();
-
-//--- Formatting the Plot
-RatioEnergyORS->GetXaxis()->SetTitle("Proton Energy (MeV)");
-RatioEnergyORS->GetXaxis()->CenterTitle();
-RatioEnergyORS->GetYaxis()->SetTitle("Efficiency");
-RatioEnergyORS->GetYaxis()->CenterTitle();
-
-//--- Formatting the Plot
-RatioMomentumORS->GetXaxis()->SetTitle("Proton Momentum (MeV)");
-RatioMomentumORS->GetXaxis()->CenterTitle();
-RatioMomentumORS->GetYaxis()->SetTitle("Efficiency");
-RatioMomentumORS->GetYaxis()->CenterTitle();
-
-//--- Formatting the Plot
-RatioAngleORS->GetXaxis()->SetTitle("Proton Angle (Degrees)");
-RatioAngleORS->GetXaxis()->CenterTitle();
-RatioAngleORS->GetYaxis()->SetTitle("Efficiency");
-RatioAngleORS->GetYaxis()->CenterTitle();
-
-Ratio2DORS->Divide(hSNSProton2DORS, hTotalProton2DORS);
-RatioEnergyRS->Divide(hSNSEnergyORS, hTotalEnergyORS);
-RatioMomentumRS->Divide(hSNSMomentumORS, hTotalMomentumORS);
-RatioAngleRS->Divide(hSNSAngleORS, hTotalAngleORS);
-//###############################################|
-
-TFile *TAcceptanceInfo = new TFile("../ROOTFILES/2DProtonAcceptancesNM.root", "RECREATE");
+TFile *TAcceptanceInfo = new TFile("../ROOTFILES/2DProtonAcceptancesANM.root", "RECREATE");
 
 Ratio2DRS->Write();
 Ratio2DBS->Write();
-Ratio2DORS->Write();
 
 }
