@@ -11,8 +11,8 @@
 //-----------------------------|
 //---       Histograms      ---|
 //-----------------------------|
-TH1D *hTotalProtonEnergy = new TH1D("hTotalProtonEnergy", "The Energies of all of the Proton Events", 50, 0, 2500);
-TH1D *hTotalProtonMomentum = new TH1D("hTotalProtonMomentum", "The Momentums of all of the Proton Events", 50, 0, 2500);
+TH1D *hTotalProtonEnergy = new TH1D("hTotalProtonEnergy", "The Energies of all of the Proton Events", 55, 0, 5500);
+TH1D *hTotalProtonMomentum = new TH1D("hTotalProtonMomentum", "The Momentums of all of the Proton Events", 55, 0, 5500);
 TH1D *hTotalProtonAngle = new TH1D("hTotalProtonAngle", "The Angles of all of the Proton Events", 60, 0, 180);
 
 TH1D *hProtonEnergyAfterSciBar = new TH1D("hProtonEnergyAfterSciBar", "The Energies of the Protons After Traversing SciBar", 50, 0, 2500);
@@ -96,28 +96,28 @@ TH1D *hAngleCheck12Scint12Steel = new TH1D("hAngleCheck12Scint12Steel", "Checkin
 TH1D *hEnergyCheck13Scint12Steel = new TH1D("hEnergyCheck13Scint12Steel", "Checking the Energy After 13 Scint Layer and 12 Steel Layers of the MRD", 50, 0, 2500);
 TH1D *hAngleCheck13Scint12Steel = new TH1D("hAngleCheck13Scint12Steel", "Checking the Angle After 13 Scint Layer and 12 Steel Layers of the MRD", 60, 0, 180);
 
-TH1D *hEnergyTMMRD = new TH1D("hEnergyTMMRD", "Initial Energies of the Total Protons That Made it to the MRD", 50, 0, 2500);
-TH1D *hMomentumTMMRD = new TH1D("hMomentumTMMRD", "Initial Momentums of the Total Protons That Made it to the MRD", 50, 0, 2500);
+TH1D *hEnergyTMMRD = new TH1D("hEnergyTMMRD", "Initial Energies of the Total Protons That Made it to the MRD", 55, 0, 5500);
+TH1D *hMomentumTMMRD = new TH1D("hMomentumTMMRD", "Initial Momentums of the Total Protons That Made it to the MRD", 55, 0, 5500);
 TH1D *hAngleTMMRD = new TH1D("hAngleTMMRD", "Initial Angles of the Total Protons That Made it to the MRD", 60, 0, 180);
 
-TH1D *hEnergySNS = new TH1D("hEnergySNS", "Initial Energies of the Protons That Qualify as Stopped and Not-Stopped", 50, 0, 2500);
-TH1D *hMomentumSNS = new TH1D("hMomentumSNS", "Initial Momentums of the Protons That Qualify as Stopped and Not-Stopped", 50, 0, 2500);
+TH1D *hEnergySNS = new TH1D("hEnergySNS", "Initial Energies of the Protons That Qualify as Stopped and Not-Stopped", 55, 0, 5500);
+TH1D *hMomentumSNS = new TH1D("hMomentumSNS", "Initial Momentums of the Protons That Qualify as Stopped and Not-Stopped", 55, 0, 5500);
 TH1D *hAngleSNS = new TH1D("hAngleSNS", "Initial Angles of the Protons That Qualify as Stopped and Not-Stopped", 60, 0, 180);
 
-TH1D *hEnergyStopped = new TH1D("hEnergyStopped", "Initial Energies of the Stopped Protons", 50, 0, 2500);
-TH1D *hMomentumStopped = new TH1D("hMomentumStopped", "Initial Momentums of the Stopped Protons", 50, 0, 2500);
+TH1D *hEnergyStopped = new TH1D("hEnergyStopped", "Initial Energies of the Stopped Protons", 55, 0, 5500);
+TH1D *hMomentumStopped = new TH1D("hMomentumStopped", "Initial Momentums of the Stopped Protons", 55, 0, 5500);
 TH1D *hAngleStopped = new TH1D("hAngleStopped", "Initial Angles of the Stopped Protons", 60, 0, 180);
 
-TH1D *hEnergyNotStopped = new TH1D("hEnergyNotStopped", "Initial Energies of the Not-Stopped Protons", 50, 0, 2500);
-TH1D *hMomentumNotStopped = new TH1D("hMomentumNotStopped", "Initial Momentums of the Not-Stopped Protons", 50, 0, 2500);
+TH1D *hEnergyNotStopped = new TH1D("hEnergyNotStopped", "Initial Energies of the Not-Stopped Protons", 55, 0, 5500);
+TH1D *hMomentumNotStopped = new TH1D("hMomentumNotStopped", "Initial Momentums of the Not-Stopped Protons", 55, 0, 5500);
 TH1D *hAngleNotStopped = new TH1D("hAngleNotStopped", "Initial Angles of the Not-Stopped Protons", 60, 0, 180);
 
-TH1D *hEnergyOutSide = new TH1D("hEnergyOutSide", "Initial Energies of the Out the Side Protons", 50, 0, 2500);
-TH1D *hMomentumOutSide = new TH1D("hMomentumOutSide", "Initial Momentums of the Out the Side Protons", 50, 0, 2500);
+TH1D *hEnergyOutSide = new TH1D("hEnergyOutSide", "Initial Energies of the Out the Side Protons", 55, 0, 5500);
+TH1D *hMomentumOutSide = new TH1D("hMomentumOutSide", "Initial Momentums of the Out the Side Protons", 55, 0, 5500);
 TH1D *hAngleOutSide = new TH1D("hAngleOutSide", "Initial Angles of the Out the Side Protons", 60, 0, 180);
 
-TH2D *hTotalProton2D = new TH2D("hTotalProton2D", "Total 2D Histogram of Angle and Momentum for All Protons", 36, 0, 180, 45, 0, 6000);
-TH2D *hSNSProton2D = new TH2D("hSNSProton2D", "2D Histogram of Angle and Momentum for Stopped and Not-Stopped Protons", 36, 0, 180, 45, 0, 6000);
+TH2D *hTotalProton2D = new TH2D("hTotalProton2D", "Total 2D Histogram of Angle and Momentum for All Protons", 36, 0, 180, 55, 0, 5500);
+TH2D *hSNSProton2D = new TH2D("hSNSProton2D", "2D Histogram of Angle and Momentum for Stopped and Not-Stopped Protons", 36, 0, 180, 55, 0, 5500);
 //-----------------------------|
 
 
@@ -258,7 +258,7 @@ void OldNMRSProton::Loop()
       for (int npart=0; npart<StdHepN; npart++)
       {
 
-         if (StdHepPdg[npart] == protonpdg && StdHepStatus[npart] == 1 && StdHepP4[npart][2] > 0) 
+         if ((StdHepPdg[npart] == protonpdg || StdHepPdg[npart] == -protonpdg) && StdHepStatus[npart] == 1 && StdHepP4[npart][2] > 0) 
 	 {
 
             nProtons++;
