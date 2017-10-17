@@ -171,9 +171,9 @@ RatioAngleORS->GetYaxis()->SetTitle("Efficiency");
 RatioAngleORS->GetYaxis()->CenterTitle();
 
 Ratio2DORS->Divide(hSNSProton2DORS, hTotalProton2DORS);
-RatioEnergyRS->Divide(hSNSEnergyORS, hTotalEnergyORS);
-RatioMomentumRS->Divide(hSNSMomentumORS, hTotalMomentumORS);
-RatioAngleRS->Divide(hSNSAngleORS, hTotalAngleORS);
+RatioEnergyORS->Divide(hSNSEnergyORS, hTotalEnergyORS);
+RatioMomentumORS->Divide(hSNSMomentumORS, hTotalMomentumORS);
+RatioAngleORS->Divide(hSNSAngleORS, hTotalAngleORS);
 //###############################################|
 
 TFile *TAcceptanceInfo = new TFile("../ROOTFILES/2DProtonAcceptancesNM.root", "RECREATE");

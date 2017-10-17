@@ -370,7 +370,7 @@ void NewNMBSProton::Loop()
 		  WorkingPosition.SetY(MRDFacePosition.Y() + 1*DeltaScint.Y() + 0*DeltaSteel.Y() + 0*DeltaAir.Y());
 		  WorkingPosition.SetZ(MRDFacePosition.Z() + 1*DeltaScint.Z() + 0*DeltaSteel.Z() + 0*DeltaAir.Z());
 
-		  if ((MRDx_f > MRDFacePosition.X() > MRDx_0) && (MRDy_f > MRDFacePosition.Y() > MRDy_0)) 
+		  /*if ((MRDx_f > MRDFacePosition.X() > MRDx_0) && (MRDy_f > MRDFacePosition.Y() > MRDy_0)) 
 		  {
 
 	             nMadeMRD++;
@@ -378,9 +378,9 @@ void NewNMBSProton::Loop()
 		     hMomentumTMMRD->Fill(momentum.Mag()*1000);
 		     hAngleTMMRD->Fill(momentum.Theta()*180/PI);
 
-		  }
+		  }*/
 
-		  if ((EnergyAfter1Scint0Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+		  /*if ((EnergyAfter1Scint0Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
 		  {
 
 		     nStopped++;
@@ -392,7 +392,7 @@ void NewNMBSProton::Loop()
 		     hAngleStopped->Fill(momentum.Theta()*180/PI);
 		     hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
 
-		  }
+		  }*/
 
 		  if ((EnergyAfter1Scint0Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
 		  {
@@ -408,7 +408,7 @@ void NewNMBSProton::Loop()
 		     WorkingPosition.SetY(MRDFacePosition.Y() + 1*DeltaScint.Y() + 1*DeltaSteel.Y() + 0*DeltaAir.Y());
 		     WorkingPosition.SetZ(MRDFacePosition.Z() + 1*DeltaScint.Z() + 1*DeltaSteel.Z() + 0*DeltaAir.Z());
 
-		     if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter1Scint1Steel > m_p)) 
+		     /*if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter1Scint1Steel > m_p)) 
 		     {
 
 		        nOutSide++;
@@ -416,9 +416,9 @@ void NewNMBSProton::Loop()
                         hMomentumOutSide->Fill(momentum.Mag()*1000);
                         hAngleOutSide->Fill(momentum.Theta()*180/PI);
 
-		     }
+		     }*/
 
-		     if ((EnergyAfter1Scint1Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+		     /*if ((EnergyAfter1Scint1Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
 		     {
 
 		        nStopped++;
@@ -430,7 +430,7 @@ void NewNMBSProton::Loop()
 		        hAngleStopped->Fill(momentum.Theta()*180/PI);
 			hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
 		     
-		     }
+		     }*/
 
 		     if ((EnergyAfter1Scint1Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
 		     {
@@ -446,7 +446,7 @@ void NewNMBSProton::Loop()
 		        WorkingPosition.SetY(MRDFacePosition.Y() + 2*DeltaScint.Y() + 1*DeltaSteel.Y() + 0*DeltaAir.Y());
 		        WorkingPosition.SetZ(MRDFacePosition.Z() + 2*DeltaScint.Z() + 1*DeltaSteel.Z() + 0*DeltaAir.Z());
 
-		        if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter2Scint1Steel > m_p)) 
+		        /*if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter2Scint1Steel > m_p)) 
 			{
 
 		           nOutSide++;
@@ -454,9 +454,9 @@ void NewNMBSProton::Loop()
                            hMomentumOutSide->Fill(momentum.Mag()*1000);
                            hAngleOutSide->Fill(momentum.Theta()*180/PI);
 
-			}
+			}*/
 
-		        if ((EnergyAfter2Scint1Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+		        /*if ((EnergyAfter2Scint1Steel <= m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
 			{
 
 			   nStopped++;
@@ -468,7 +468,7 @@ void NewNMBSProton::Loop()
 		           hAngleStopped->Fill(momentum.Theta()*180/PI);
 			   hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
 
-			}
+			}*/
 
 		        if ((EnergyAfter2Scint1Steel > m_p) && (MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0))
 			{
@@ -484,6 +484,16 @@ void NewNMBSProton::Loop()
 		           WorkingPosition.SetY(MRDFacePosition.Y() + 2*DeltaScint.Y() + 2*DeltaSteel.Y() + 1*DeltaAir.Y());
 		           WorkingPosition.SetZ(MRDFacePosition.Z() + 2*DeltaScint.Z() + 2*DeltaSteel.Z() + 1*DeltaAir.Z());
 
+		           if ((MRDx_f > WorkingPosition.X() > MRDx_0) && (MRDy_f > WorkingPosition.Y() > MRDy_0)) 
+		           {
+
+	                      nMadeMRD++;
+                              hEnergyTMMRD->Fill(ProtonEnergy);
+		              hMomentumTMMRD->Fill(momentum.Mag()*1000);
+		              hAngleTMMRD->Fill(momentum.Theta()*180/PI);
+
+		           }
+
 		           if (((WorkingPosition.X() > MRDx_f) || (WorkingPosition.X() < MRDx_0) || (WorkingPosition.Y() > MRDy_f) || (WorkingPosition.Y() < MRDy_0)) && (EnergyAfter2Scint2Steel > m_p)) 
 			   {
 
@@ -491,6 +501,7 @@ void NewNMBSProton::Loop()
                               hEnergyOutSide->Fill(ProtonEnergy);
                               hMomentumOutSide->Fill(momentum.Mag()*1000);
                               hAngleOutSide->Fill(momentum.Theta()*180/PI);
+			      continue;
 
 			   }
 
@@ -505,6 +516,7 @@ void NewNMBSProton::Loop()
 			      hMomentumStopped->Fill(momentum.Mag()*1000);
 		              hAngleStopped->Fill(momentum.Theta()*180/PI);
 			      hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+			      continue;
 
 			   }
 
@@ -529,6 +541,7 @@ void NewNMBSProton::Loop()
                                  hEnergyOutSide->Fill(ProtonEnergy);
                                  hMomentumOutSide->Fill(momentum.Mag()*1000);
                                  hAngleOutSide->Fill(momentum.Theta()*180/PI);
+				 continue;
 
 			      }
 
@@ -543,6 +556,7 @@ void NewNMBSProton::Loop()
 			         hMomentumStopped->Fill(momentum.Mag()*1000);
 		                 hAngleStopped->Fill(momentum.Theta()*180/PI);
 				 hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+				 continue;
 
 			      }
 
@@ -567,6 +581,7 @@ void NewNMBSProton::Loop()
                                     hEnergyOutSide->Fill(ProtonEnergy);
                                     hMomentumOutSide->Fill(momentum.Mag()*1000);
                                     hAngleOutSide->Fill(momentum.Theta()*180/PI);
+				    continue;
 				 
 				 }
 
@@ -581,6 +596,7 @@ void NewNMBSProton::Loop()
 			            hMomentumStopped->Fill(momentum.Mag()*1000);
 		                    hAngleStopped->Fill(momentum.Theta()*180/PI);
 				    hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+				    continue;
 				 
 				 }
 
@@ -605,6 +621,7 @@ void NewNMBSProton::Loop()
                                        hEnergyOutSide->Fill(ProtonEnergy);
                                        hMomentumOutSide->Fill(momentum.Mag()*1000);
                                        hAngleOutSide->Fill(momentum.Theta()*180/PI);
+				       continue;
 				    
 				    }
 
@@ -619,6 +636,7 @@ void NewNMBSProton::Loop()
 			               hMomentumStopped->Fill(momentum.Mag()*1000);
 		     		       hAngleStopped->Fill(momentum.Theta()*180/PI);
 				       hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+				       continue;
 				    
 				    }
 
@@ -643,6 +661,7 @@ void NewNMBSProton::Loop()
                                           hEnergyOutSide->Fill(ProtonEnergy);
                                           hMomentumOutSide->Fill(momentum.Mag()*1000);
                                           hAngleOutSide->Fill(momentum.Theta()*180/PI);
+					  continue;
 				       
 				       }
 
@@ -657,6 +676,7 @@ void NewNMBSProton::Loop()
 			                  hMomentumStopped->Fill(momentum.Mag()*1000);
 		     			  hAngleStopped->Fill(momentum.Theta()*180/PI);
 					  hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+					  continue;
 				       
 				       }
 
@@ -681,6 +701,7 @@ void NewNMBSProton::Loop()
                                              hEnergyOutSide->Fill(ProtonEnergy);
                                              hMomentumOutSide->Fill(momentum.Mag()*1000);
                                              hAngleOutSide->Fill(momentum.Theta()*180/PI);
+					     continue;
 					  
 					  }
 
@@ -695,6 +716,7 @@ void NewNMBSProton::Loop()
 			                     hMomentumStopped->Fill(momentum.Mag()*1000);
 		          		     hAngleStopped->Fill(momentum.Theta()*180/PI);
 					     hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+					     continue;
 					  
 					  }
 
@@ -719,6 +741,7 @@ void NewNMBSProton::Loop()
                                                 hEnergyOutSide->Fill(ProtonEnergy);
                                                 hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                 hAngleOutSide->Fill(momentum.Theta()*180/PI);
+						continue;
 					     
 					     }
 
@@ -733,6 +756,7 @@ void NewNMBSProton::Loop()
 			                        hMomentumStopped->Fill(momentum.Mag()*1000);
 		           			hAngleStopped->Fill(momentum.Theta()*180/PI);
 						hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+						continue;
 					     
 					     }
 
@@ -757,6 +781,7 @@ void NewNMBSProton::Loop()
                                                    hEnergyOutSide->Fill(ProtonEnergy);
                                                    hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                    hAngleOutSide->Fill(momentum.Theta()*180/PI);
+						   continue;
 						
 						}
 
@@ -771,6 +796,7 @@ void NewNMBSProton::Loop()
 			                           hMomentumStopped->Fill(momentum.Mag()*1000);
 		           			   hAngleStopped->Fill(momentum.Theta()*180/PI);
 						   hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+						   continue;
 						
 						}
 
@@ -795,6 +821,7 @@ void NewNMBSProton::Loop()
                                                       hEnergyOutSide->Fill(ProtonEnergy);
                                                       hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                       hAngleOutSide->Fill(momentum.Theta()*180/PI);
+						      continue;
 						   
 						   }
 
@@ -809,6 +836,7 @@ void NewNMBSProton::Loop()
 			                              hMomentumStopped->Fill(momentum.Mag()*1000);
 		          			      hAngleStopped->Fill(momentum.Theta()*180/PI);
 						      hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+						      continue;
 						   
 						   }
 
@@ -833,6 +861,7 @@ void NewNMBSProton::Loop()
                                                          hEnergyOutSide->Fill(ProtonEnergy);
                                                          hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                          hAngleOutSide->Fill(momentum.Theta()*180/PI);
+							 continue;
 						      
 						      }
 
@@ -847,6 +876,7 @@ void NewNMBSProton::Loop()
 			                                 hMomentumStopped->Fill(momentum.Mag()*1000);
 		          				 hAngleStopped->Fill(momentum.Theta()*180/PI);
 							 hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+							 continue;
 						      
 						      }
 
@@ -871,6 +901,7 @@ void NewNMBSProton::Loop()
                                                             hEnergyOutSide->Fill(ProtonEnergy);
                                                             hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                             hAngleOutSide->Fill(momentum.Theta()*180/PI);
+							    continue;
 							 
 							 }
 
@@ -885,6 +916,7 @@ void NewNMBSProton::Loop()
 			                                    hMomentumStopped->Fill(momentum.Mag()*1000);
 		           				    hAngleStopped->Fill(momentum.Theta()*180/PI);
 							    hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+							    continue;
 							 
 							 }
 
@@ -909,6 +941,7 @@ void NewNMBSProton::Loop()
                                                                hEnergyOutSide->Fill(ProtonEnergy);
                                                                hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                                hAngleOutSide->Fill(momentum.Theta()*180/PI);
+							       continue;
 							    
 							    }
 
@@ -923,6 +956,7 @@ void NewNMBSProton::Loop()
 			                                       hMomentumStopped->Fill(momentum.Mag()*1000);
 		           				       hAngleStopped->Fill(momentum.Theta()*180/PI);
 							       hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+							       continue;
 							    
 							    }
 
@@ -947,6 +981,7 @@ void NewNMBSProton::Loop()
                                                                   hEnergyOutSide->Fill(ProtonEnergy);
                                                                   hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                                   hAngleOutSide->Fill(momentum.Theta()*180/PI);
+								  continue;
 							       
 							       }
 
@@ -961,6 +996,7 @@ void NewNMBSProton::Loop()
 			                                          hMomentumStopped->Fill(momentum.Mag()*1000);
 		         					  hAngleStopped->Fill(momentum.Theta()*180/PI);
 								  hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+								  continue;
 							       
 							       }
 
@@ -985,6 +1021,7 @@ void NewNMBSProton::Loop()
                                                                      hEnergyOutSide->Fill(ProtonEnergy);
                                                                      hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                                      hAngleOutSide->Fill(momentum.Theta()*180/PI);
+								     continue;
 								  
 								  }
 
@@ -999,6 +1036,7 @@ void NewNMBSProton::Loop()
 			                                             hMomentumStopped->Fill(momentum.Mag()*1000);
 		           					     hAngleStopped->Fill(momentum.Theta()*180/PI);
 								     hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+								     continue;
 								  
 								  }
 
@@ -1023,6 +1061,7 @@ void NewNMBSProton::Loop()
                                                                         hEnergyOutSide->Fill(ProtonEnergy);
                                                                         hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                                         hAngleOutSide->Fill(momentum.Theta()*180/PI);
+									continue;
 								     
 								     }
 
@@ -1037,6 +1076,7 @@ void NewNMBSProton::Loop()
 			                                                hMomentumStopped->Fill(momentum.Mag()*1000);
 		           						hAngleStopped->Fill(momentum.Theta()*180/PI);
 									hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+									continue;
 								     
 								     }
 
@@ -1061,6 +1101,7 @@ void NewNMBSProton::Loop()
                                                                            hEnergyOutSide->Fill(ProtonEnergy);
                                                                            hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                                            hAngleOutSide->Fill(momentum.Theta()*180/PI);
+									   continue;
 									
 									}
 
@@ -1075,6 +1116,7 @@ void NewNMBSProton::Loop()
 			                                                   hMomentumStopped->Fill(momentum.Mag()*1000);
 		           						   hAngleStopped->Fill(momentum.Theta()*180/PI);
 									   hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+									   continue;
 									
 									}
 
@@ -1099,6 +1141,7 @@ void NewNMBSProton::Loop()
                                                                               hEnergyOutSide->Fill(ProtonEnergy);
                                                                               hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                                               hAngleOutSide->Fill(momentum.Theta()*180/PI);
+									      continue;
 									   
 									   }
 
@@ -1113,6 +1156,7 @@ void NewNMBSProton::Loop()
 			                                                      hMomentumStopped->Fill(momentum.Mag()*1000);
 		           						      hAngleStopped->Fill(momentum.Theta()*180/PI);
 									      hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+									      continue;
 									   
 									   }
 
@@ -1137,6 +1181,7 @@ void NewNMBSProton::Loop()
                                                                                  hEnergyOutSide->Fill(ProtonEnergy);
                                                                                  hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                                                  hAngleOutSide->Fill(momentum.Theta()*180/PI);
+										 continue;
 									      
 									      }
 
@@ -1151,6 +1196,7 @@ void NewNMBSProton::Loop()
 			                                                         hMomentumStopped->Fill(momentum.Mag()*1000);
 		           							 hAngleStopped->Fill(momentum.Theta()*180/PI);
 										 hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+										 continue;
 									      
 									      }
 
@@ -1175,6 +1221,7 @@ void NewNMBSProton::Loop()
                                                                                     hEnergyOutSide->Fill(ProtonEnergy);
                                                                                     hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                                                     hAngleOutSide->Fill(momentum.Theta()*180/PI);
+										    continue;
 										 
 										 }
 
@@ -1189,6 +1236,7 @@ void NewNMBSProton::Loop()
 			                                                            hMomentumStopped->Fill(momentum.Mag()*1000);
 		           							    hAngleStopped->Fill(momentum.Theta()*180/PI);
 										    hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+										    continue;
 										 
 										 }
 
@@ -1213,6 +1261,7 @@ void NewNMBSProton::Loop()
                                                                                        hEnergyOutSide->Fill(ProtonEnergy);
                                                                                        hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                                                        hAngleOutSide->Fill(momentum.Theta()*180/PI);
+										       continue;
 										    
 										    }
 
@@ -1227,6 +1276,7 @@ void NewNMBSProton::Loop()
 			                                                               hMomentumStopped->Fill(momentum.Mag()*1000);
 		           							       hAngleStopped->Fill(momentum.Theta()*180/PI);
 										       hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+										       continue;
 										    
 										    }
 
@@ -1251,6 +1301,7 @@ void NewNMBSProton::Loop()
                                                                                           hEnergyOutSide->Fill(ProtonEnergy);
                                                                                           hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                                                           hAngleOutSide->Fill(momentum.Theta()*180/PI);
+											  continue;
 										       
 										       }
 
@@ -1265,6 +1316,7 @@ void NewNMBSProton::Loop()
 			                                                                  hMomentumStopped->Fill(momentum.Mag()*1000);
 		           								  hAngleStopped->Fill(momentum.Theta()*180/PI);
 											  hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+											  continue;
 										       
 										       }
 
@@ -1289,6 +1341,7 @@ void NewNMBSProton::Loop()
                                                                                              hEnergyOutSide->Fill(ProtonEnergy);
                                                                                              hMomentumOutSide->Fill(momentum.Mag()*1000);
                                                                                              hAngleOutSide->Fill(momentum.Theta()*180/PI);
+											     continue;
 											  
 											  }
 
@@ -1303,6 +1356,7 @@ void NewNMBSProton::Loop()
 			                                                                     hMomentumStopped->Fill(momentum.Mag()*1000);
 		           								     hAngleStopped->Fill(momentum.Theta()*180/PI);
 											     hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+											     continue; 
 											  
 											  }
 
