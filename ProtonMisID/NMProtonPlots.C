@@ -10,7 +10,7 @@ TH1D *hTotalEnergyRS = (TH1D*)f1->Get("TotalE");
 TH1D *hTotalMomentumRS = (TH1D*)f1->Get("TotalM");
 TH1D *hTotalAngleRS = (TH1D*)f1->Get("TotalA");
 
-TH2D *hSNSProton2DRS = (TH2D*)f1->Get("SNS2D");
+TH2D *hSNSProton2DRS = (TH2D*)f1->Get("NS2D");
 TH1D *hSNSEnergyRS = (TH1D*)f1->Get("SNSE");
 TH1D *hSNSMomentumRS = (TH1D*)f1->Get("SNSM");
 TH1D *hSNSAngleRS = (TH1D*)f1->Get("SNSA");
@@ -69,7 +69,7 @@ TH1D *hTotalEnergyBS = (TH1D*)f2->Get("TotalE");
 TH1D *hTotalMomentumBS = (TH1D*)f2->Get("TotalM");
 TH1D *hTotalAngleBS = (TH1D*)f2->Get("TotalA");
 
-TH2D *hSNSProton2DBS = (TH2D*)f2->Get("SNS2D");
+TH2D *hSNSProton2DBS = (TH2D*)f2->Get("NS2D");
 TH1D *hSNSEnergyBS = (TH1D*)f2->Get("SNSE");
 TH1D *hSNSMomentumBS = (TH1D*)f2->Get("SNSM");
 TH1D *hSNSAngleBS = (TH1D*)f2->Get("SNSA");
@@ -128,7 +128,7 @@ TH1D *hTotalEnergyORS = (TH1D*)f3->Get("TotalE");
 TH1D *hTotalMomentumORS = (TH1D*)f3->Get("TotalM");
 TH1D *hTotalAngleORS = (TH1D*)f3->Get("TotalA");
 
-TH2D *hSNSProton2DORS = (TH2D*)f3->Get("SNS2D");
+TH2D *hSNSProton2DORS = (TH2D*)f3->Get("NS2D");
 TH1D *hSNSEnergyORS = (TH1D*)f3->Get("SNSE");
 TH1D *hSNSMomentumORS = (TH1D*)f3->Get("SNSM");
 TH1D *hSNSAngleORS = (TH1D*)f3->Get("SNSA");

@@ -118,6 +118,7 @@ TH1D *hAngleOutSide = new TH1D("hAngleOutSide", "Initial Angles of the Out the S
 
 TH2D *hTotalProton2D = new TH2D("hTotalProton2D", "Total 2D Histogram of Angle and Momentum for All Protons", 36, 0, 180, 55, 0, 5500);
 TH2D *hSNSProton2D = new TH2D("hSNSProton2D", "2D Histogram of Angle and Momentum for Stopped and Not-Stopped Protons", 36, 0, 180, 55, 0, 5500);
+TH2D *hNSProton2D = new TH2D("hNSProton2D", "2D Histogram of Angle and Momentum for Stopped and Not-Stopped Protons", 36, 0, 180, 55, 0, 5500);
 //-----------------------------|
 
 
@@ -1372,7 +1373,7 @@ void NewNMRSProton::Loop()
 											     hEnergyNotStopped->Fill(ProtonEnergy);
 			                                                                     hMomentumNotStopped->Fill(momentum.Mag()*1000);
 											     hAngleNotStopped->Fill(momentum.Theta()*180/PI);
-											     hSNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
+											     hNSProton2D->Fill(momentum.Theta()*180/PI, momentum.Mag()*1000);
 
 			                                                                  } //<---Close if statement for nonzero energy after 13 Scint 12 Steel
 
@@ -1502,6 +1503,8 @@ void NewNMRSProton::Loop()
    hEnergySNS->Write("SNSE");
    hMomentumSNS->Write("SNSM");
    hAngleSNS->Write("SNSA");
+
+   hNSProton2D->Write("NS2D");
 
    hEnergyTMMRD->Write("TMMRDE");
    hMomentumTMMRD->Write("TMMRDM");
